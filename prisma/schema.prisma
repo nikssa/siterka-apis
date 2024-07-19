@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+enum Role {
+  admin
+  moderator
+  parent
+  sitter
+}
+
+enum Gender {
+  man
+  female
+}
+
+enum Age {
+  EighteenToTwentyFive
+  TwentyFiveToForty
+  FortyToFiftyFive
+  FiftyFiveToSixtyFive
+  OverSixtyFive
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String    @unique
+  password  String    
+  role      Role      @default(sitter)
+  createdAt DateTime  @default(now())
+  active    Boolean   @default(false)
+  deleted   Boolean   @default(false)
+  post      Post?
+  profile   Profile?
+  photos    Photo[]
+}
+
+model Profile {
+  id        Int     @id @default(autoincrement())
+  firstName String
+  lastName  String
+  gender    Gender
+  bio       String?
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int     @unique
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String    @db.VarChar(255)
+  content   String?
+  photos    Photo[]  
+  photosId  Int       @unique
+  cell      Int
+  mail      String
+  age       Age
+
+  published Boolean   @default(false)
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int       @unique
+  
+}
+
+model Photo {
+  id        Int     @id @default(autoincrement())
+  url       String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int      @unique
+  post      Post?    @relation(fields: [id], references: [photosId])
+}

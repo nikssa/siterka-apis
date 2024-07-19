@@ -1,0 +1,72 @@
+// --field-background-color: #fff;
+
+.input-box {
+  margin-bottom: 15px;
+
+  .input {
+    background-color: var(--field-background-color);
+    border: 1px solid rgb(128, 128, 128);
+    border-radius: 4px;
+    position: relative;
+    padding: 15px 14px 10px;
+  }
+
+  label {
+    background-color: var(--field-background-color);
+    color: var(--heading-color);
+    line-height: 1;
+    // letter-spacing: 0.00938em;
+    padding: 0 5px;
+    display: block;
+    transform-origin: left top;
+
+    max-width: calc(133% - 55px);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transform: translate(10px, -1px) scale(0.8);
+    // transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    //   transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    //   max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    z-index: 1;
+    pointer-events: auto;
+    user-select: none;
+
+    span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: -6px;
+    }
+  }
+
+  input {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    width: 100%;
+  }
+
+  .input-line {
+    display: block;
+    height: 1.6rem;
+    line-height: 1;
+    padding: 4px 15px 0;
+    text-align: left;
+  }
+
+  &.error {
+    label {
+      color: red;
+    }
+
+    .input {
+      border-color: red;
+    }
+
+    .input-line {
+      color: red;
+    }
+  }
+}

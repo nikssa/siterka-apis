@@ -1,0 +1,13 @@
+button {
+  --height: 52.5px;
+  border-radius: calc(var(--height) * 0.5);
+  font-size: 1.6rem;
+  height: var(--height);
+  margin-top: 20px;
+  padding: 15px 25px;
+
+  &.primary {
+    background-color: #0a4226;
+    color: #fff;
+  }
+}
