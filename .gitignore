@@ -3,5 +3,5 @@ node_modules
 .env
 # Keep nextjs stuff out of version control
 .next
-
+# Keep vscode configuration out of version control
 .vscode
