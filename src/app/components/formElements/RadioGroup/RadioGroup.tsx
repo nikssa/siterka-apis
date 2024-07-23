@@ -1,22 +1,31 @@
 import './RadioGroup.scss';
 
-interface RadioGroupProps {
-  name: string;
+interface RadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  // name: string;
   label: string;
   options: string[];
+  error?: string;
 }
 
 const RadioGroup = (props: RadioGroupProps) => {
-  const { name, label, options } = props;
+  const { label, options, error, ...rest } = props;
   const radioButtons = options.map((option) => (
-    <div className='radio' key={option}>
-      <label htmlFor={option}>
-        <input type='radio' name={name} value={option} />
-        {option}
-      </label>
-    </div>
+    <label htmlFor={option} key={option}>
+      <input type='radio' id={option} name={label} value={option} {...rest} />
+      {option}
+    </label>
   ));
-  return radioButtons;
+  return (
+    <div className={`radio-group-box ${error ? 'error' : ''}`}>
+      <div className='radio-group'>
+        <div className='radio-group-label'>
+          <span>{label}</span>
+        </div>
+        {radioButtons}
+      </div>
+      <span className='input-line'>{error}</span>
+    </div>
+  );
 };
 
 export default RadioGroup;

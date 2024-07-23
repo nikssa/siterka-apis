@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 // import { Roboto } from 'next/font/google';
 import { Providers } from '../providers';
-import Header from '../components/common/Header';
-import Footer from '../components/common/Footer';
-
+import Header from '../components/common/Header/Header';
+import Footer from '../components/common/Footer/Footer';
 import '/src/app/globals.scss';
-
 // const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -19,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className='main-layout'>
       {/* <body className={roboto.className}> */}
       <body>
         <Providers>

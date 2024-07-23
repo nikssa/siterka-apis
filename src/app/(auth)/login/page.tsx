@@ -7,9 +7,10 @@ import Image from 'next/image';
 import RadioGroup from '../../components/formElements/RadioGroup/RadioGroup';
 import Button from '../../components/formElements/Button/Button';
 
-import Logo from '/public/siterka-logo-inverse.svg';
+import Logo from '/public/siterka-logo-2.svg';
 
 import './page.scss';
+import Link from 'next/link';
 
 const LoginPage = () => {
   const [vw, setVw] = useState(0);
@@ -76,12 +77,8 @@ const LoginPage = () => {
   return (
     <>
       <div className='login-page'>
-        <div className='illustration'>
-          <Image
-            className='login-image'
-            src={LoginIllustration}
-            alt='Siterka'
-          />
+        <div className='login-image'>
+          <Image src={LoginIllustration} alt='Siterka' layout='fill' />
         </div>
 
         <div className='login-wrapper'>
@@ -138,7 +135,7 @@ const LoginPage = () => {
                 required
                 value={registerData.email}
                 onChange={handleChange}
-                error='Email is not valid'
+                // error='Email is not valid'
               />
               <Input
                 label='Password'
@@ -148,7 +145,7 @@ const LoginPage = () => {
                 required
                 value={registerData.password}
                 onChange={handleChange}
-                error="Password and Confirm Password don't match"
+                // error="Password and Confirm Password don't match"
               />
               <Input
                 label='Confirm Password'
@@ -158,16 +155,21 @@ const LoginPage = () => {
                 required
                 value={registerData.confirmPassword}
                 onChange={handleChange}
-                error="Password and Confirm Password don't match"
+                // error="Password and Confirm Password don't match"
               />
               <RadioGroup
                 label='Role'
                 name='role'
                 options={['Parent', 'Sitter']}
+                // error='Please select a role'
               />
 
               <Button type='submit' />
             </form>
+
+            <div className='login-link'>
+              <Link href='/login'>Already have an account?</Link>
+            </div>
           </div>
         </div>
       </div>

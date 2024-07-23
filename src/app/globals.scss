@@ -1,6 +1,6 @@
 // NOTE: these fonts are for headers and/or siterka logo
-@import url('https://fonts.googleapis.com/css2?family=Port+Lligat+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rum+Raisin&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Port+Lligat+Sans&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Rum+Raisin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');
 // NOTE: this font is for the body text and other text
 // @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rum+Raisin&display=swap');
@@ -8,6 +8,8 @@
 
 :root {
   --logo-color: #0a4226;
+  --primary-color: #0a4226;
+  --secondary-color: #666;
   --foreground-color: #666;
   --background-color: #eee;
   --heading-color: #101010;
@@ -155,7 +157,31 @@ p {
   font-size: 1.4rem;
 }
 
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 label,
 input {
   font-size: 1.6rem;
+}
+
+.main-layout {
+  min-height: 100vh;
+  overflow-y: hidden;
+
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+
+  main {
+    padding: 20px;
+  }
 }
