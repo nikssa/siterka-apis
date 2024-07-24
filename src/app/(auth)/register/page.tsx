@@ -4,8 +4,12 @@ import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import Input from '../../components/formElements/TextField/TextField';
 import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
+import RadioGroup from '../../components/formElements/RadioGroup/RadioGroup';
 import Button from '../../components/formElements/Button/Button';
+
 import Logo from '/public/siterka-logo-2.svg';
+
+// import './page.scss';
 import Link from 'next/link';
 
 const LoginPage = () => {
@@ -84,10 +88,19 @@ const LoginPage = () => {
             </a>
           </div>
 
-          <div className='login-box'>
-            <h1>Login</h1>
-            <p>to gain full access to our user data.</p>
+          <div className='register-box'>
+            <h1>Create account</h1>
+            <p>and become user with full access to our user data.</p>
             <form action=''>
+              {/* <Input
+                label='Username'
+                name='username'
+                type='text'
+                placeholder='Username'
+                required
+                value={registerData.username}
+                onChange={handleChange}
+              /> */}
               <Input
                 label='Email'
                 name='email'
@@ -108,12 +121,28 @@ const LoginPage = () => {
                 onChange={handleChange}
                 // error="Password and Confirm Password don't match"
               />
+              <Input
+                label='Confirm Password'
+                name='confirmPassword'
+                type='password'
+                placeholder='Confirm Password'
+                required
+                value={registerData.confirmPassword}
+                onChange={handleChange}
+                // error="Password and Confirm Password don't match"
+              />
+              <RadioGroup
+                label='Role'
+                name='role'
+                options={['Parent', 'Sitter']}
+                // error='Please select a role'
+              />
 
               <p className='login-register-link'>
-                Don't have an account? <Link href='/register'>Join</Link>
+                Already have an account? <Link href='/login'>Sign in</Link>
               </p>
 
-              <Button label='Sign in' type='submit' />
+              <Button label='Join' type='submit' />
             </form>
           </div>
         </div>

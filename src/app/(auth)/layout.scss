@@ -1,3 +1,5 @@
+@import './../globals.scss';
+
 .logo {
   margin-bottom: 30px;
   height: auto;
@@ -7,19 +9,19 @@
 .login-page {
   display: flex;
   min-height: 100vh;
+  position: relative;
 
   .login-image {
     display: flex;
-    min-height: 100vh;
-    height: 100%;
+    height: 100vh;
     width: 100vw;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
     @media screen and (min-width: 992px) {
-      position: relative;
+      //   position: relative;
       width: 60vw;
     }
 
@@ -34,13 +36,13 @@
   }
 
   .login-wrapper {
-    background-color: rgba($color: #fefefe, $alpha: 0.7);
+    background-color: rgba($color: #fefefe, $alpha: 0.8);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 20px 40px;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     text-align: center;
     overflow-x: hidden;
@@ -49,17 +51,19 @@
     left: 0;
 
     @media screen and (min-width: 992px) {
-      justify-content: center;
+      //   justify-content: center;
+      margin-left: auto;
       position: relative;
       width: 40vw;
     }
 
-    .login-link {
-      margin-top: 15px;
+    .login-register-link {
+      margin-bottom: 25px;
     }
   }
 
-  .register-box {
+  .register-box,
+  .login-box {
     max-width: 400px;
     width: 100%;
   }
