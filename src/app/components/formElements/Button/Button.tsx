@@ -3,15 +3,16 @@ import './Button.scss';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   // children: React.ReactNode;
   //   type?: 'button' | 'submit' | 'reset';
+  label: string;
   primary?: boolean;
   disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
-  const { primary, disabled, ...rest } = props;
+  const { label, primary, disabled, ...rest } = props;
   return (
     <button className='primary' {...rest}>
-      Register
+      {label}
     </button>
   );
 };

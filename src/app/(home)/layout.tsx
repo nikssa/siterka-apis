@@ -3,8 +3,9 @@ import type { Metadata } from 'next';
 import { Providers } from '../providers';
 import Header from '../components/common/Header/Header';
 import Footer from '../components/common/Footer/Footer';
-import '/src/app/globals.scss';
 // const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'] });
+
+import './layout.scss';
 
 export const metadata: Metadata = {
   title: 'Siterka APIs',
