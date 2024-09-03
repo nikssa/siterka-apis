@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-// import { Roboto } from 'next/font/google';
 import { Providers } from '../providers';
 import Header from '../components/common/Header/Header';
 import Footer from '../components/common/Footer/Footer';
-// const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'] });
+import { ToastContainer } from 'react-toastify';
+
+import ViewportInfo from '../components/ViewportInfo';
 
 import './layout.scss';
 
@@ -19,10 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className='main-layout'>
-      {/* <body className={roboto.className}> */}
       <body>
         <Providers>
+          <ToastContainer
+            position='top-center'
+            autoClose={false}
+            hideProgressBar={false}
+            closeOnClick={true}
+            pauseOnHover={true}
+            draggable={true}
+            theme='light'
+          />
           <Header />
+          <ViewportInfo />
           <main>{children}</main>
           <Footer />
         </Providers>
