@@ -22,7 +22,6 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const body = await request.json();
-  console.log('body', body);
   const { id } = params;
   const user = await prisma.user.update({
     where: {
@@ -37,8 +36,6 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  // const body = await request.json();
-  // console.log('body', body);
   const { id } = params;
   const user = await prisma.user.delete({
     where: {

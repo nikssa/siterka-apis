@@ -4,20 +4,17 @@ import { NextRequest, NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 export async function GET() {
-  const profiles = await prisma.profile.findMany();
+  const profiles = await prisma.profile.findMany({ include: { user: true } });
   return NextResponse.json(profiles);
 }
-export async function POST(
-  request: NextRequest
-  //   { params }: { params: { userId: string } }
-) {
+export async function POST(request: NextRequest) {
   const body = await request.json();
-  console.log('body', body);
-  //   const { userId } = params;
-  const userId = Number(body.userId);
-  const bio = body.bio;
+  const { firstName, lastName, gender, bio, userId } = body;
   const profile = await prisma.profile.create({
     data: {
+      firstName,
+      lastName,
+      gender,
       bio,
       userId
     }

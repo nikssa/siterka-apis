@@ -1,75 +1,15 @@
-'use client';
-
-import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
-import Input from '../../components/formElements/TextField/TextField';
 import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
-import Button from '../../components/formElements/Button/Button';
 import Logo from '/public/siterka-logo-2.svg';
-import Link from 'next/link';
+import LoginForm from '@/app/components/forms/LoginForm';
+
+export const metadata = {
+  title: 'Login page | SITERKA',
+  description:
+    'Sign in to your account. You will gain full access to our users data.'
+};
 
 const LoginPage = () => {
-  const [vw, setVw] = useState(0);
-  const [vh, setVh] = useState(0);
-
-  useEffect(() => {
-    setVw(window.innerWidth);
-    setVh(window.innerHeight);
-  }, []);
-
-  console.log(vw * 0.6, vh);
-
-  const initialValue = {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    role: '',
-    acceptTerms: false
-  };
-
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('/api/users', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(registerData)
-  //     });
-  //     setRegisterData(initialValue);
-  //     // TODO toast success message
-  //   } catch (error) {
-  //     console.log(error);
-  //     // TODO toast error message
-  //   } finally {
-  //     // TODO mail confirmation
-  //   }
-  // };
-
-  type RegisterData = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    role: string;
-    acceptTerms: boolean;
-  };
-
-  const [registerData, setRegisterData] = useState<RegisterData>(initialValue);
-
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setRegisterData({ ...registerData, [name]: value });
-  };
-
-  console.log('registerData', registerData);
-
   return (
     <>
       <div className='login-page'>
@@ -85,36 +25,9 @@ const LoginPage = () => {
           </div>
 
           <div className='login-box'>
-            <h1>Login</h1>
-            <p>to gain full access to our user data.</p>
-            <form action=''>
-              <Input
-                label='Email'
-                name='email'
-                type='email'
-                placeholder='Email'
-                required
-                value={registerData.email}
-                onChange={handleChange}
-                // error='Email is not valid'
-              />
-              <Input
-                label='Password'
-                name='password'
-                type='password'
-                placeholder='Password'
-                required
-                value={registerData.password}
-                onChange={handleChange}
-                // error="Password and Confirm Password don't match"
-              />
-
-              <p className='login-register-link'>
-                Don't have an account? <Link href='/register'>Join</Link>
-              </p>
-
-              <Button label='Sign in' type='submit' />
-            </form>
+            <h1>Sign in</h1>
+            <p>to gain full access to our users data.</p>
+            <LoginForm />
           </div>
         </div>
       </div>

@@ -7,12 +7,29 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { userId: string } }
 ) {
-  console.log('request', request);
   const { userId } = params;
-  const user = await prisma.profile.findUnique({
+  const profile = await prisma.profile.findUnique({
     where: {
       userId: Number(userId)
+    },
+    include: {
+      user: true
     }
   });
-  return NextResponse.json(user);
+  return NextResponse.json(profile);
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { userId: string } }
+) {
+  const body = await request.json();
+  const { userId } = params;
+  const profile = await prisma.profile.update({
+    where: {
+      userId: Number(userId)
+    },
+    data: body
+  });
+  return NextResponse.json(profile);
 }

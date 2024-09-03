@@ -12,6 +12,22 @@ import Logo from '/public/siterka-logo-2.svg';
 // import './page.scss';
 import Link from 'next/link';
 
+enum Role {
+  Sitter = 'sitter',
+  Parent = 'parent',
+  Moderator = 'moderator',
+  Admin = 'admin'
+}
+
+type RegisterDataProps = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  role: Role;
+  acceptTerms: boolean;
+};
+
 const LoginPage = () => {
   const [vw, setVw] = useState(0);
   const [vh, setVh] = useState(0);
@@ -24,55 +40,61 @@ const LoginPage = () => {
   console.log(vw * 0.6, vh);
 
   const initialValue = {
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    role: '',
+    role: Role.Sitter,
     acceptTerms: false
   };
 
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('/api/users', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(registerData)
-  //     });
-  //     setRegisterData(initialValue);
-  //     // TODO toast success message
-  //   } catch (error) {
-  //     console.log(error);
-  //     // TODO toast error message
-  //   } finally {
-  //     // TODO mail confirmation
-  //   }
-  // };
+  const [registerData, setRegisterData] =
+    useState<RegisterDataProps>(initialValue);
 
-  type RegisterData = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    role: string;
-    acceptTerms: boolean;
-  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // e.preventDefault();
 
-  const [registerData, setRegisterData] = useState<RegisterData>(initialValue);
-
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+    console.log('checked', e.target.type);
+    console.log('event', e);
 
     const name = e.target.name;
-    const value = e.target.value;
+    const value =
+      e.target.type == 'checkbox' ? e.target.checked : e.target.value;
 
     setRegisterData({ ...registerData, [name]: value });
   };
 
-  console.log('registerData', registerData);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    // remove confirmPassword from the object 'registerData' and send it to the server
+    const { confirmPassword, ...data } = registerData;
+
+    console.log('data', data);
+    // debugger;
+
+    try {
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      setRegisterData(initialValue);
+      // TODO toast success message
+    } catch (error) {
+      console.log(error);
+      // TODO toast error message
+    } finally {
+      // TODO mail confirmation
+    }
+  };
+
+  // console.log('registerData', registerData);
+
+  useEffect(() => {
+    console.log('registerData', registerData);
+  }, [registerData]);
 
   return (
     <>
@@ -91,16 +113,16 @@ const LoginPage = () => {
           <div className='register-box'>
             <h1>Create account</h1>
             <p>and become user with full access to our user data.</p>
-            <form action=''>
-              {/* <Input
+            <form action='' onSubmit={handleSubmit}>
+              <Input
                 label='Username'
-                name='username'
+                name='name'
                 type='text'
                 placeholder='Username'
                 required
-                value={registerData.username}
+                value={registerData.name}
                 onChange={handleChange}
-              /> */}
+              />
               <Input
                 label='Email'
                 name='email'
@@ -134,9 +156,26 @@ const LoginPage = () => {
               <RadioGroup
                 label='Role'
                 name='role'
-                options={['Parent', 'Sitter']}
+                options={['parent', 'sitter']}
+                value={registerData.role}
+                onChange={handleChange}
                 // error='Please select a role'
               />
+
+              <input
+                style={{ marginRight: '10px' }}
+                type='checkbox'
+                name='acceptTerms'
+                id='acceptTerms'
+                // value={registerData.acceptTerms}
+                // checked={registerData.acceptTerms}
+                checked={registerData.acceptTerms}
+                onChange={handleChange}
+              />
+
+              <label htmlFor='acceptTerms'>
+                I accept the terms and conditions
+              </label>
 
               <p className='login-register-link'>
                 Already have an account? <Link href='/login'>Sign in</Link>

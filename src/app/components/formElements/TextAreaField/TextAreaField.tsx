@@ -1,9 +1,8 @@
-import './TextField.scss';
+import './TextAreaField.scss';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
-  isHidden?: boolean;
   // name: string;
   // type: string;
   // required?: boolean;
@@ -12,7 +11,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   // onChange: any;
 }
 
-const Input = (props: InputProps) => {
+const TextArea = (props: TextAreaProps) => {
   const {
     label,
     name,
@@ -22,17 +21,11 @@ const Input = (props: InputProps) => {
     value,
     error,
     onChange,
-    isHidden,
     ...rest
   } = props;
 
-  console.log('Input rendering...', rest);
-
   return (
-    <div
-      className={`input-box ${error ? 'error' : ''} ${
-        isHidden ? 'hidden' : ''
-      }`}>
+    <div className={`input-box ${error ? 'error' : ''}`}>
       <div className='input'>
         {label && (
           <label htmlFor={name}>
@@ -40,10 +33,10 @@ const Input = (props: InputProps) => {
           </label>
         )}
 
-        <input
+        <textarea
           id={name}
           name={name}
-          type={type}
+          rows={5}
           onChange={onChange}
           value={value}
           placeholder={placeholder}
@@ -56,4 +49,4 @@ const Input = (props: InputProps) => {
   );
 };
 
-export default Input;
+export default TextArea;
