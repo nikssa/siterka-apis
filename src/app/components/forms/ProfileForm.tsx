@@ -32,8 +32,6 @@ const ProfileForm = ({
   data: ProfileDataProps;
   userId: string;
 }) => {
-  console.log('userId', userId);
-
   const initialData = {
     firstName: '',
     lastName: '',
@@ -50,9 +48,6 @@ const ProfileForm = ({
       e.target instanceof HTMLInputElement ? e.target.checked : false;
     const inputValue = e.target.value;
     const value = e.target.type == 'checkbox' ? checked : inputValue;
-
-    console.log('name', name);
-    console.log('value', value);
 
     setProfileData({ ...profileData, [name]: value });
   };
@@ -82,7 +77,6 @@ const ProfileForm = ({
       });
       const profile = await res.json();
       if (res.status === 200) {
-        // console.log('Profile successfully saved', profile);
         toast.success('Profile successfully saved', {
           autoClose: 3000,
           transition: Slide
@@ -90,7 +84,6 @@ const ProfileForm = ({
       }
     } catch (error) {
       if (error instanceof Error) {
-        // console.log('Something went wrong...', error.message);
         // throw new Error(error.message);
         toast.error(`Something went wrong... ${error.message}`, {
           // position: 'top-center',
@@ -113,7 +106,7 @@ const ProfileForm = ({
   return (
     <form action='' onSubmit={handleSubmit}>
       <p>
-        Profile is created at: {profileCreated} and updated at: {profileUpdated}
+        Profile created: {profileCreated} | Profile updated: {profileUpdated}
       </p>
       <Input
         isHidden={true}

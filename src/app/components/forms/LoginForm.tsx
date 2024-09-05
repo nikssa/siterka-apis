@@ -55,8 +55,6 @@ const LoginForm = () => {
     setRegisterData({ ...registerData, [name]: value });
   };
 
-  console.log('registerData', registerData);
-
   return (
     <form action=''>
       <Input
@@ -64,27 +62,31 @@ const LoginForm = () => {
         name='email'
         type='email'
         placeholder='Email'
+        pattern='^[^@]+@[^@]+\.[^@]+$'
         required
         value={registerData.email}
         onChange={handleChange}
-        // error='Email is not valid'
+        error='Email is not in valid format.'
+        autoFocus={true}
       />
       <Input
         label='Password'
         name='password'
         type='password'
         placeholder='Password'
+        // pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$'
+        pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$'
         required
         value={registerData.password}
         onChange={handleChange}
-        // error="Password and Confirm Password don't match"
+        error='Must be between 8-20 characters long. At least one uppercase letter, one lowercase letter, and one number.'
       />
 
       <p className='forgot-password-link'>
         <Link href='/forgot-password'>Forgot password?</Link>
       </p>
 
-      <Button label='Sign in' type='submit' />
+      <Button className='primary' label='Sign in' type='submit' />
 
       <p className='login-register-link'>
         Don't have an account? <Link href='/register'>Join</Link>

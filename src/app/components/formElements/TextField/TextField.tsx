@@ -1,11 +1,15 @@
 import React from 'react';
+import { PrismaClient } from '@prisma/client';
 import './TextField.scss';
+
+const prisma = new PrismaClient();
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   blurred?: string;
   error?: string;
   isHidden?: boolean;
+  isUnique?: boolean;
 }
 
 const Input = (props: InputProps) => {
@@ -20,21 +24,39 @@ const Input = (props: InputProps) => {
     error,
     onChange,
     isHidden,
+    isUnique,
     ...rest
   } = props;
 
-  console.log('Input rendering...', rest);
-
   const [blurred, setBlurred] = React.useState('false');
+  const [exists, setExists] = React.useState(false);
 
   const handleFocused = () => {
     console.log('handleFocused');
     setBlurred('false');
+    setExists(false);
   };
 
-  const handleBlurred = () => {
-    console.log('handleBlurred');
+  const handleBlurred = async (e: React.FocusEvent<HTMLInputElement>) => {
+    console.log('handleBlurred', isUnique);
+
     setBlurred('true');
+
+    if (isUnique) {
+      const name = e.target.name;
+      const value = e.target.value;
+      try {
+        const res = await fetch(`/api/exists/${name}/${value}`);
+        const data = await res.json();
+        if (data) {
+          setExists(true);
+        } else {
+          setExists(false);
+        }
+      } catch (error) {
+        setExists(false);
+      }
+    }
   };
 
   return (
@@ -64,6 +86,11 @@ const Input = (props: InputProps) => {
         />
       </div>
       <span className='input-line'>{error}</span>
+      {exists && (
+        <span className='input-line unique'>
+          "{name}" with a value of "{value}" already exists
+        </span>
+      )}
     </div>
   );
 };

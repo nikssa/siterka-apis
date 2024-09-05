@@ -1,12 +1,20 @@
 'use client';
 
-import React, { ChangeEvent, FocusEvent, FormEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import Input from '../formElements/TextField/TextField';
 import RadioGroup from '../formElements/RadioGroup/RadioGroup';
 import Checkbox from '../formElements/Checkbox/Checkbox';
 import Button from '../formElements/Button/Button';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { toast } from 'react-toastify';
+import md5 from 'md5';
+import { useRouter } from 'next/navigation';
 
 enum Role {
   Sitter = 'sitter',
@@ -39,6 +47,8 @@ type RegisterDataProps = {
 // };
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const initialValue = {
     name: '',
     email: '',
@@ -68,6 +78,9 @@ const RegisterForm = () => {
     e.preventDefault();
     // remove confirmPassword from the object 'registerData' and send it to the server
     const { confirmPassword, ...data } = registerData;
+    const dataPasswordHashed = { ...data, password: md5(data.password) };
+
+    // console.log('dataPasswordHashed', dataPasswordHashed);
 
     try {
       const response = await fetch('/api/users', {
@@ -75,30 +88,55 @@ const RegisterForm = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(dataPasswordHashed)
       });
+      //   toast.success('Registration successful');
 
-      redirect('/registration-success?toast=success');
-
+      router.push('/registration-success?toast=success');
       //   setRegisterData(initialValue);
-
-      // TODO toast success message
     } catch (error) {
-      console.log(error);
-      // TODO toast error message
-    } finally {
-      // TODO mail confirmation
+      toast.error(
+        `Registration failed. ${error instanceof Error && error.message}`
+      );
     }
   };
 
-  // console.log('registerData', registerData);
+  const formElement = useRef<HTMLFormElement>(null);
+  const form = document.getElementById('form');
 
-  //   useEffect(() => {
-  //     console.log('registerData', registerData);
-  //   }, [registerData]);
+  console.log('formElement', formElement);
+  console.log('form', form);
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  console.log('isFormValid', isFormValid);
+
+  useEffect(() => {
+    setIsFormValid(formElement.current?.checkValidity() ?? false);
+  }, [registerData]);
+
+  const checkFormValidity = () => {
+    const { name, email, password, confirmPassword, role, acceptTerms } =
+      registerData;
+
+    // const isValid = formElement.checkValidity();
+    // if (
+    //   name &&
+    //   email &&
+    //   password &&
+    //   confirmPassword &&
+    //   role &&
+    //   acceptTerms
+    //   // && formRef.checkValidity()
+    // ) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+  };
 
   return (
-    <form action='' onSubmit={handleSubmit}>
+    <form id='form' ref={formElement} action='' onSubmit={handleSubmit}>
       <Input
         label='Username'
         name='name'
@@ -110,31 +148,35 @@ const RegisterForm = () => {
         onChange={handleChange}
         error='Username has to be at least 3 characters long.'
         autoFocus={true}
+        isUnique={true}
       />
       <Input
         label='Email'
         name='email'
         type='email'
         placeholder='Email'
+        pattern='^[^@]+@[^@]+\.[^@]+$'
         required
         value={registerData.email}
         onChange={handleChange}
         error='Email is not in valid format.'
+        isUnique={true}
       />
       <Input
         label='Password'
         name='password'
-        type='text'
+        type='password'
         placeholder='Password'
+        pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$'
         required
         value={registerData.password}
         onChange={handleChange}
-        error='Password min length is 8 characters. At least one uppercase letter, one lowercase letter, and one number.'
+        error='Must be between 8-20 characters long. At least one uppercase letter, one lowercase letter, and one number.'
       />
       <Input
         label='Confirm Password'
         name='confirmPassword'
-        type='text'
+        type='password'
         placeholder='Confirm Password'
         required
         pattern={registerData.password}
@@ -142,6 +184,7 @@ const RegisterForm = () => {
         onChange={handleChange}
         error="Password and Confirm password don't match."
       />
+
       <RadioGroup
         label='Role'
         name='role'
@@ -166,7 +209,12 @@ const RegisterForm = () => {
         Already have an account? <Link href='/login'>Sign in</Link>
       </p>
 
-      <Button label='Join' type='submit' />
+      <Button
+        label='Join'
+        type='submit'
+        disabled={!isFormValid}
+        className={`primary ${!isFormValid ? 'disabled' : ''}`}
+      />
     </form>
   );
 };
