@@ -6,16 +6,11 @@ const ProfilePage = async ({
 }: {
   params: { userId: string };
 }) => {
-  console.log('userId', userId);
   const res = await fetch(`http://localhost:4000/api/profiles/${userId}`, {
     method: 'GET'
   });
 
   const profile = await res.json();
-  console.log('profile', profile);
-
-  // const status = res.status;
-  // console.log('status', status);
 
   let user;
 
@@ -24,7 +19,6 @@ const ProfilePage = async ({
       method: 'GET'
     });
     user = await res.json();
-    console.log('user', user);
   }
 
   return (

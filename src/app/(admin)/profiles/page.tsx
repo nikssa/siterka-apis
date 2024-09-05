@@ -7,7 +7,7 @@ const ProfilePage = async () => {
     method: 'GET'
   });
   const profiles = await profilesData.json();
-  console.log('profiles', profiles);
+
   return (
     <>
       <h1>Profiles</h1>

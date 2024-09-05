@@ -14,6 +14,8 @@ type UserDataProps = {
   name: string;
   email: string;
   role: string;
+  active: boolean;
+  deleted: boolean;
   photos: PhotoProps[];
   createdAt: string;
 };
@@ -35,8 +37,6 @@ const UserForm = ({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('submit', userData);
-    console.log('event', e);
   };
 
   const userAccountCreated = convertISO8601ToDateTime(
@@ -46,7 +46,7 @@ const UserForm = ({
 
   return (
     <form action='' onSubmit={handleSubmit} aria-disabled={readOnly}>
-      <p>Account is created at: {userAccountCreated}</p>
+      <p>Account created: {userAccountCreated}</p>
       <Input
         label='User Name'
         name='name'
@@ -66,10 +66,25 @@ const UserForm = ({
         value={userData?.email}
         onChange={handleChange}
         disabled={true}
-        // error='Email is not valid'
       />
 
-      {!readOnly && <Button label='Save' type='submit' />}
+      <RadioGroup
+        label='Role'
+        name='role'
+        options={['admin', 'parent', 'sitter', 'moderator']}
+        value={userData?.role}
+        onChange={handleChange}
+        disabled={readOnly}
+      />
+
+      <p>{`User active: ${userData.active ? 'Yes' : 'No'}`}</p>
+      <p>{`User deleted: ${userData.deleted ? 'Yes' : 'No'}`}</p>
+
+      <Button
+        className={`primary ${readOnly ? 'disabled' : ''}`}
+        label='Save'
+        type='submit'
+      />
     </form>
   );
 };

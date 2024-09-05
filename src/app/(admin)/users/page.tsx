@@ -1,28 +1,35 @@
+import DeleteUser from '@/app/components/common/DeleteUser/DeleteUser';
+import { revalidatePath } from 'next/cache';
+import Link from 'next/link';
+import { MouseEvent } from 'react';
+
 const Users = async function () {
   const usersData = await fetch('http://localhost:4000/api/users', {
     method: 'GET'
   });
   const users = await usersData.json();
-  console.log('users', users);
 
   const usersRender = users.map(async (user: any) => {
     const res = await fetch(`http://localhost:4000/api/profiles/${user.id}`, {
       method: 'GET'
     });
     const profile = await res.json();
-    console.log('profile', profile);
+
     return (
       <tr key={user.id}>
         <td>
-          <a href={`/users/${user.id}`}>{user.name}</a>
+          <Link href={`/users/${user.id}`}>{user.name}</Link>
         </td>
         <td>{user.email}</td>
         <td>{user.password}</td>
         <td>{user.role}</td>
         <td>
-          <a href={`/profiles/${user.id}`}>
+          <Link href={`/profiles/${user.id}`}>
             {!profile ? 'Add Profile' : 'Edit Profile'}
-          </a>
+          </Link>
+        </td>
+        <td>
+          <DeleteUser userId={user.id} />
         </td>
       </tr>
     );
@@ -39,6 +46,7 @@ const Users = async function () {
             <th>Password</th>
             <th>Role</th>
             <th>Profile</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>{usersRender}</tbody>
