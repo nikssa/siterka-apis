@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
@@ -42,5 +43,8 @@ export async function DELETE(
       id: Number(id)
     }
   });
+
+  revalidatePath('/users');
+
   return NextResponse.json(user);
 }

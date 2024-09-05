@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes } from 'react';
 
 import './Checkbox.scss';
+import Link from 'next/link';
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -29,7 +30,9 @@ const Checkbox = ({
       />
 
       <label htmlFor={id}>
-        {label} {required && '*'}
+        <Link href='terms-and-conditions'>
+          {label} {required && '*'}
+        </Link>
       </label>
 
       <span className='input-line'>{error}</span>

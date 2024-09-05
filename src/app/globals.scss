@@ -137,6 +137,11 @@
   display: none;
 }
 
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 html,
 body {
   overflow-x: hidden;
@@ -212,7 +217,10 @@ a {
   }
 }
 
-label,
+label {
+  font-size: 1.4rem;
+}
+
 input,
 textarea {
   font-size: 1.6rem;

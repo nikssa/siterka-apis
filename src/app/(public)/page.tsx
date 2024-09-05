@@ -3,7 +3,7 @@ const HomePage = async () => {
     method: 'GET'
   });
   const blogsData = await blogs.json();
-  console.log('blogsData', blogsData);
+
   return (
     <>
       <section>

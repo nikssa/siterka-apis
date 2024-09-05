@@ -1,21 +1,9 @@
 import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
-
 import Logo from '/public/siterka-logo-2.svg';
-
 import RegisterForm from '@/app/components/forms/RegisterForm';
 
 const LoginPage = () => {
-  // const [vw, setVw] = useState(0);
-  // const [vh, setVh] = useState(0);
-
-  // useEffect(() => {
-  //   setVw(window.innerWidth);
-  //   setVh(window.innerHeight);
-  // }, []);
-
-  // console.log(vw * 0.6, vh);
-
   return (
     <>
       <div className='login-page'>

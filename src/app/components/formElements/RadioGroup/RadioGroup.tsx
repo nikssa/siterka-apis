@@ -12,8 +12,8 @@ interface RadioGroupProps
 }
 
 const RadioGroup = (props: RadioGroupProps) => {
-  const { label, name, options, value, onChange, required, error } = props;
-  console.log('Radio group rendering...', value);
+  const { label, name, options, value, onChange, required, error, ...rest } =
+    props;
 
   const radioButtons = options.map((option) => {
     const checked = option === value;
@@ -28,6 +28,7 @@ const RadioGroup = (props: RadioGroupProps) => {
           onChange={onChange}
           checked={checked}
           required={required}
+          {...rest}
         />
         {option}
       </label>

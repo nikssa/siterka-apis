@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
@@ -31,5 +32,21 @@ export async function PUT(
     },
     data: body
   });
+  return NextResponse.json(profile);
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { userId: string } }
+) {
+  const { userId } = params;
+  const profile = await prisma.profile.delete({
+    where: {
+      userId: Number(userId)
+    }
+  });
+
+  revalidatePath('/profiles');
+
   return NextResponse.json(profile);
 }

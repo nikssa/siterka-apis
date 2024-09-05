@@ -3,7 +3,6 @@ const SittersPage = async function () {
     method: 'GET'
   });
   const users = await usersData.json();
-  console.log('users', users);
 
   return (
     <>

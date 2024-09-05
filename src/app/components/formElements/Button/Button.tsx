@@ -5,16 +5,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   //   type?: 'button' | 'submit' | 'reset';
   label: string;
   primary?: boolean;
-  disabled?: boolean;
+  // disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
-  const { label, primary, disabled, ...rest } = props;
-  return (
-    <button className='primary' {...rest}>
-      {label}
-    </button>
-  );
+  const { label, primary, ...rest } = props;
+  return <button {...rest}>{label}</button>;
 };
 
 export default Button;
