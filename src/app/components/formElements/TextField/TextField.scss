@@ -9,6 +9,23 @@
     border-radius: 4px;
     position: relative;
     padding: 15px 14px 10px;
+
+    &:has(input) + span {
+      color: red;
+      display: none;
+    }
+
+    &:has(input[blurred='true']:invalid) + span {
+      display: block;
+    }
+
+    &:has(input[blurred='true']:invalid) {
+      border-color: red;
+
+      label {
+        color: red;
+      }
+    }
   }
 
   label {
@@ -49,24 +66,24 @@
   }
 
   .input-line {
-    display: block;
-    height: 1.6rem;
-    line-height: 1;
+    // display: block;
+    // height: 1.6rem;
+    // line-height: 1;
     padding: 4px 15px 0;
     text-align: left;
   }
 
-  &.error {
-    label {
-      color: red;
-    }
+  // &.error {
+  //   label {
+  //     color: red;
+  //   }
 
-    .input {
-      border-color: red;
-    }
+  //   .input {
+  //     border-color: red;
+  //   }
 
-    .input-line {
-      color: red;
-    }
-  }
+  //   .input-line {
+  //     color: red;
+  //   }
+  // }
 }

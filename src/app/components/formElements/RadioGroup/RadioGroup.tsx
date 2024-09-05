@@ -4,16 +4,15 @@ import { ChangeEventTypes } from '../../forms/ProfileForm';
 
 interface RadioGroupProps
   extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-  name: string;
+  // name: string;
+  // value: string | undefined;
   label: string;
   options: string[];
-  value: string | undefined;
-  onChange: (event: ChangeEventTypes) => void;
   error?: string;
 }
 
 const RadioGroup = (props: RadioGroupProps) => {
-  const { label, name, options, value, onChange, error } = props;
+  const { label, name, options, value, onChange, required, error } = props;
   console.log('Radio group rendering...', value);
 
   const radioButtons = options.map((option) => {
@@ -28,6 +27,7 @@ const RadioGroup = (props: RadioGroupProps) => {
           value={option}
           onChange={onChange}
           checked={checked}
+          required={required}
         />
         {option}
       </label>
@@ -65,7 +65,9 @@ const RadioGroup = (props: RadioGroupProps) => {
     <div className={`radio-group-box ${error ? 'error' : ''}`}>
       <div className='radio-group'>
         <div className='radio-group-label'>
-          <span>{label}</span>
+          <span>
+            {label} {required && '*'}
+          </span>
         </div>
         {radioButtons}
       </div>

@@ -1,15 +1,11 @@
+import React from 'react';
 import './TextField.scss';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  blurred?: string;
   error?: string;
   isHidden?: boolean;
-  // name: string;
-  // type: string;
-  // required?: boolean;
-  // placeholder?: string;
-  // value: string;
-  // onChange: any;
 }
 
 const Input = (props: InputProps) => {
@@ -18,6 +14,7 @@ const Input = (props: InputProps) => {
     name,
     type,
     required,
+    pattern,
     placeholder,
     value,
     error,
@@ -28,15 +25,26 @@ const Input = (props: InputProps) => {
 
   console.log('Input rendering...', rest);
 
+  const [blurred, setBlurred] = React.useState('false');
+
+  const handleFocused = () => {
+    console.log('handleFocused');
+    setBlurred('false');
+  };
+
+  const handleBlurred = () => {
+    console.log('handleBlurred');
+    setBlurred('true');
+  };
+
   return (
-    <div
-      className={`input-box ${error ? 'error' : ''} ${
-        isHidden ? 'hidden' : ''
-      }`}>
+    <div className={`input-box ${isHidden ? 'hidden' : ''}`}>
       <div className='input'>
         {label && (
           <label htmlFor={name}>
-            <span>{label}</span>
+            <span>
+              {label} {required && '*'}
+            </span>
           </label>
         )}
 
@@ -45,9 +53,13 @@ const Input = (props: InputProps) => {
           name={name}
           type={type}
           onChange={onChange}
+          onFocus={handleFocused}
+          onBlur={handleBlurred}
           value={value}
           placeholder={placeholder}
           required={required}
+          pattern={pattern}
+          blurred={blurred}
           {...rest}
         />
       </div>
