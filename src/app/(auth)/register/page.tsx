@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Logo from '/public/siterka-logo-2.svg';
 import RegisterForm from '@/app/components/forms/RegisterForm';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <>
       <div className='login-page'>
@@ -29,4 +29,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

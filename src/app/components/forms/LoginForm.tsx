@@ -5,14 +5,25 @@ import Input from '../formElements/TextField/TextField';
 import Link from 'next/link';
 import Button from '../formElements/Button/Button';
 
+type LoginDataProps = {
+  email: string;
+  password: string;
+};
+
 const LoginForm = () => {
   const initialValue = {
-    username: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-    role: '',
-    acceptTerms: false
+    password: ''
+  };
+
+  const [registerData, setRegisterData] =
+    useState<LoginDataProps>(initialValue);
+
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    setRegisterData({ ...registerData, [name]: value });
   };
 
   // const handleSubmit = async (e: FormEvent) => {
@@ -35,26 +46,6 @@ const LoginForm = () => {
   //   }
   // };
 
-  type RegisterData = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    role: string;
-    acceptTerms: boolean;
-  };
-
-  const [registerData, setRegisterData] = useState<RegisterData>(initialValue);
-
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setRegisterData({ ...registerData, [name]: value });
-  };
-
   return (
     <form action=''>
       <Input
@@ -74,7 +65,6 @@ const LoginForm = () => {
         name='password'
         type='password'
         placeholder='Password'
-        // pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$'
         pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$'
         required
         value={registerData.password}

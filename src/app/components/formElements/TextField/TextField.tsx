@@ -38,11 +38,11 @@ const Input = (props: InputProps) => {
   };
 
   const handleBlurred = async (e: React.FocusEvent<HTMLInputElement>) => {
-    console.log('handleBlurred', isUnique);
-
     setBlurred('true');
 
-    if (isUnique) {
+    const isValid = e.target.checkValidity();
+
+    if (isUnique && isValid) {
       const name = e.target.name;
       const value = e.target.value;
       try {

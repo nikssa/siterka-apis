@@ -1,7 +1,7 @@
 import DeleteUser from '@/app/components/common/DeleteUser/DeleteUser';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
-import { MouseEvent } from 'react';
+import { MouseEvent, Suspense } from 'react';
 
 const Users = async function () {
   const usersData = await fetch('http://localhost:4000/api/users', {
@@ -49,7 +49,16 @@ const Users = async function () {
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>{usersRender}</tbody>
+        <tbody>
+          <Suspense
+            fallback={
+              <tr>
+                <td colSpan={6}>Loading...</td>
+              </tr>
+            }>
+            {usersRender}
+          </Suspense>
+        </tbody>
       </table>
     </>
   );

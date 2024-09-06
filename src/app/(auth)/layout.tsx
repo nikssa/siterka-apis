@@ -1,6 +1,4 @@
-import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
-
 import ViewportInfo from '../components/ViewportInfo';
 
 import './layout.scss';

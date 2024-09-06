@@ -32,20 +32,6 @@ type RegisterDataProps = {
   acceptTerms: boolean;
 };
 
-// type RegistrationFormProps = {
-//   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-//   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-//   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-//   data: {
-//     name: string;
-//     email: string;
-//     password: string;
-//     confirmPassword: string;
-//     role: string;
-//     acceptTerms: boolean;
-//   };
-// };
-
 const RegisterForm = () => {
   const router = useRouter();
 
@@ -61,16 +47,17 @@ const RegisterForm = () => {
   const [registerData, setRegisterData] =
     useState<RegisterDataProps>(initialValue);
 
+  const formElement = useRef<HTMLFormElement>(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsFormValid(formElement.current?.checkValidity() ?? false);
+  }, [registerData]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // e.preventDefault();
-
-    console.log('checked', e.target.type);
-    console.log('event', e);
-
     const name = e.target.name;
     const value =
       e.target.type == 'checkbox' ? e.target.checked : e.target.value;
-
     setRegisterData({ ...registerData, [name]: value });
   };
 
@@ -78,10 +65,8 @@ const RegisterForm = () => {
     e.preventDefault();
     // remove confirmPassword from the object 'registerData' and send it to the server
     const { confirmPassword, ...data } = registerData;
+    // hash password before sending it to the server
     const dataPasswordHashed = { ...data, password: md5(data.password) };
-
-    // console.log('dataPasswordHashed', dataPasswordHashed);
-
     try {
       const response = await fetch('/api/users', {
         method: 'POST',
@@ -90,49 +75,12 @@ const RegisterForm = () => {
         },
         body: JSON.stringify(dataPasswordHashed)
       });
-      //   toast.success('Registration successful');
-
       router.push('/registration-success?toast=success');
-      //   setRegisterData(initialValue);
     } catch (error) {
       toast.error(
         `Registration failed. ${error instanceof Error && error.message}`
       );
     }
-  };
-
-  const formElement = useRef<HTMLFormElement>(null);
-  const form = document.getElementById('form');
-
-  console.log('formElement', formElement);
-  console.log('form', form);
-
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  console.log('isFormValid', isFormValid);
-
-  useEffect(() => {
-    setIsFormValid(formElement.current?.checkValidity() ?? false);
-  }, [registerData]);
-
-  const checkFormValidity = () => {
-    const { name, email, password, confirmPassword, role, acceptTerms } =
-      registerData;
-
-    // const isValid = formElement.checkValidity();
-    // if (
-    //   name &&
-    //   email &&
-    //   password &&
-    //   confirmPassword &&
-    //   role &&
-    //   acceptTerms
-    //   // && formRef.checkValidity()
-    // ) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   };
 
   return (
