@@ -3,6 +3,7 @@ import { Providers } from '../providers';
 import Header from '../components/common/Header/Header';
 import Footer from '../components/common/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import ViewportInfo from '../components/ViewportInfo';
 

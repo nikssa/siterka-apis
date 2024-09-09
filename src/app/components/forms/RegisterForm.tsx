@@ -75,7 +75,15 @@ const RegisterForm = () => {
         },
         body: JSON.stringify(dataPasswordHashed)
       });
-      router.push('/registration-success?toast=success');
+      if (response.status !== 200) {
+        console.log('response', response);
+        toast.error(
+          `Registration failed. Status code: ${response.status}. Status text: ${response.statusText}`
+        );
+        // return;
+      } else {
+        router.push('/registration-success?toast=success');
+      }
     } catch (error) {
       toast.error(
         `Registration failed. ${error instanceof Error && error.message}`
@@ -158,10 +166,10 @@ const RegisterForm = () => {
       </p>
 
       <Button
-        label='Join'
-        type='submit'
         disabled={!isFormValid}
         className={`primary ${!isFormValid ? 'disabled' : ''}`}
+        label='Join'
+        type='submit'
       />
     </form>
   );

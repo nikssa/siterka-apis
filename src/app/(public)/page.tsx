@@ -1,3 +1,5 @@
+import FalseButton from '../components/FalseButton';
+
 const HomePage = async () => {
   const blogs = await fetch('https://api.vercel.app/blog', {
     method: 'GET'
@@ -15,6 +17,7 @@ const HomePage = async () => {
             </li>
           ))}
         </ol>
+        <FalseButton />
       </section>
     </>
   );

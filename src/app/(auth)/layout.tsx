@@ -1,5 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import ViewportInfo from '../components/ViewportInfo';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import './layout.scss';
 
