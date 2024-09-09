@@ -4,7 +4,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Input from '../formElements/TextField/TextField';
 import Link from 'next/link';
 import Button from '../formElements/Button/Button';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { LoginFormSubmit } from '@/actions/actions';
 import { toast } from 'react-toastify';
 
@@ -15,6 +15,7 @@ type LoginDataProps = {
 
 const LoginForm = () => {
   const [loginFormStatus, loginFormAction] = useFormState(LoginFormSubmit, '');
+  const { pending } = useFormStatus();
 
   const initialValue = {
     email: '',
@@ -46,7 +47,7 @@ const LoginForm = () => {
       console.log('loginFormStatus', loginFormStatus);
       toast.error(`${loginFormStatus.statusText}`);
     }
-  }, [loginFormStatus]);
+  }, [loginFormStatus.status]);
 
   return (
     <form ref={formElement} action={loginFormAction}>
@@ -78,9 +79,11 @@ const LoginForm = () => {
         <Link href='/forgot-password'>Forgot password?</Link>
       </p>
 
+      <p>{pending ? 'Please wait...' : ''}</p>
+
       <Button
-        disabled={!isFormValid}
-        className={`primary ${!isFormValid ? 'disabled' : ''}`}
+        disabled={!isFormValid || pending}
+        className={`primary ${!isFormValid || pending ? 'disabled' : ''}`}
         label='Sign in'
         type='submit'
       />
