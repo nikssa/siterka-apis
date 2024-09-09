@@ -28,9 +28,12 @@
     img {
       object-fit: cover;
       // width: 60vw !important;
+      height: auto;
+      width: 100vw;
 
       @media screen and (min-width: 992px) {
-        width: 60vw !important;
+        height: auto;
+        width: 60vw;
       }
     }
   }

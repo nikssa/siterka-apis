@@ -1,7 +1,6 @@
 import DeleteUser from '@/app/components/common/DeleteUser/DeleteUser';
-import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
-import { MouseEvent, Suspense } from 'react';
+import { Suspense } from 'react';
 
 const Users = async function () {
   const usersData = await fetch('http://localhost:4000/api/users', {

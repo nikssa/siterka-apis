@@ -8,7 +8,7 @@ const RegisterPage = () => {
     <>
       <div className='login-page'>
         <div className='login-image'>
-          <Image src={LoginIllustration} alt='Siterka' layout='fill' />
+          <Image src={LoginIllustration} alt='Siterka' priority={true} />
         </div>
 
         <div className='login-wrapper'>

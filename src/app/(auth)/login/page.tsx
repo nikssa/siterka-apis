@@ -14,13 +14,13 @@ const LoginPage = () => {
     <>
       <div className='login-page'>
         <div className='login-image'>
-          <Image src={LoginIllustration} alt='Siterka' layout='fill' />
+          <Image src={LoginIllustration} alt='Siterka' priority={true} />
         </div>
 
         <div className='login-wrapper'>
           <div className='logo'>
             <a href='/'>
-              <Image src={Logo} alt='Siterka' width={200} />
+              <Image src={Logo} alt='Siterka' width={200} priority={true} />
             </a>
           </div>
 

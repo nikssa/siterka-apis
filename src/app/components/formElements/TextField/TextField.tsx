@@ -41,7 +41,6 @@ const Input = (props: InputProps) => {
     setBlurred('true');
 
     const isValid = e.target.checkValidity();
-
     if (isUnique && isValid) {
       const name = e.target.name;
       const value = e.target.value;
