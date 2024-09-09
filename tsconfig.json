@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/components/formElements/TextAreaField"
+    "src/components/formElements/TextAreaField"
   ],
   "exclude": ["node_modules"]
 }

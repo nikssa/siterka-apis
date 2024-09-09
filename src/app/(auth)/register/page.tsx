@@ -1,7 +1,7 @@
 import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
 import Logo from '/public/siterka-logo-2.svg';
-import RegisterForm from '@/app/components/forms/RegisterForm';
+import RegisterForm from '@/components/forms/RegisterForm';
 
 const RegisterPage = () => {
   return (

@@ -1,4 +1,4 @@
-import FalseButton from '../components/FalseButton';
+import FalseButton from '../../components/FalseButton';
 
 import { PrismaClient } from '@prisma/client';
 

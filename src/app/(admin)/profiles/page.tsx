@@ -1,6 +1,4 @@
-import ProfileForm, {
-  ProfileDataProps
-} from '@/app/components/forms/ProfileForm';
+import ProfileForm, { ProfileDataProps } from '@/components/forms/ProfileForm';
 
 const ProfilePage = async () => {
   const profilesData = await fetch('http://localhost:4000/api/profiles', {

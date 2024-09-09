@@ -1,4 +1,4 @@
-import DeleteUser from '@/app/components/common/DeleteUser/DeleteUser';
+import DeleteUser from '@/components/common/DeleteUser/DeleteUser';
 import Link from 'next/link';
 import { Suspense } from 'react';
 

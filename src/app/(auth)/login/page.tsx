@@ -1,7 +1,7 @@
 import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
 import Logo from '/public/siterka-logo-2.svg';
-import LoginForm from '@/app/components/forms/LoginForm';
+import LoginForm from '@/components/forms/LoginForm';
 
 export const metadata = {
   title: 'Login page | SITERKA',

@@ -1,4 +1,4 @@
-import UserForm from '@/app/components/forms/UserForm';
+import UserForm from '@/components/forms/UserForm';
 
 const User = async function ({
   params: { userId }

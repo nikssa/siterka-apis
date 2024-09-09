@@ -1,9 +1,9 @@
 'use client';
 
 import React, { ChangeEvent, FormEvent } from 'react';
-import Button from '@/app/components/formElements/Button/Button';
-import RadioGroup from '@/app/components/formElements/RadioGroup/RadioGroup';
-import Input from '@/app/components/formElements/TextField/TextField';
+import Button from '@/components/formElements/Button/Button';
+import RadioGroup from '@/components/formElements/RadioGroup/RadioGroup';
+import Input from '@/components/formElements/TextField/TextField';
 import { convertISO8601ToDateTime } from '@/utils';
 
 type PhotoProps = {

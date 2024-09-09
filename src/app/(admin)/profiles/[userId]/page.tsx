@@ -1,5 +1,5 @@
-import ProfileForm from '@/app/components/forms/ProfileForm';
-import UserForm from '@/app/components/forms/UserForm';
+import ProfileForm from '@/components/forms/ProfileForm';
+import UserForm from '@/components/forms/UserForm';
 
 const ProfilePage = async ({
   params: { userId }
