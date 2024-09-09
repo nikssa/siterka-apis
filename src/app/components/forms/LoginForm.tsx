@@ -1,9 +1,12 @@
 'use client';
 
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Input from '../formElements/TextField/TextField';
 import Link from 'next/link';
 import Button from '../formElements/Button/Button';
+import { useFormState } from 'react-dom';
+import { LoginFormSubmit } from '@/actions/actions';
+import { toast } from 'react-toastify';
 
 type LoginDataProps = {
   email: string;
@@ -11,43 +14,42 @@ type LoginDataProps = {
 };
 
 const LoginForm = () => {
+  const [loginFormStatus, loginFormAction] = useFormState(LoginFormSubmit, '');
+
   const initialValue = {
     email: '',
     password: ''
   };
 
-  const [registerData, setRegisterData] =
-    useState<LoginDataProps>(initialValue);
+  const [loginData, setLoginData] = useState<LoginDataProps>(initialValue);
+
+  const formElement = useRef<HTMLFormElement>(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsFormValid(formElement.current?.checkValidity() ?? false);
+  }, [loginData]);
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const name = e.target.name;
     const value = e.target.value;
-    setRegisterData({ ...registerData, [name]: value });
+    setLoginData({ ...loginData, [name]: value });
   };
 
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('/api/users', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(registerData)
-  //     });
-  //     setRegisterData(initialValue);
-  //     // TODO toast success message
-  //   } catch (error) {
-  //     console.log(error);
-  //     // TODO toast error message
-  //   } finally {
-  //     // TODO mail confirmation
-  //   }
-  // };
+  useEffect(() => {
+    if (
+      loginFormStatus &&
+      !loginFormStatus.user &&
+      loginFormStatus.status !== 200
+    ) {
+      console.log('loginFormStatus', loginFormStatus);
+      toast.error(`${loginFormStatus.statusText}`);
+    }
+  }, [loginFormStatus]);
 
   return (
-    <form action=''>
+    <form ref={formElement} action={loginFormAction}>
       <Input
         label='Email'
         name='email'
@@ -55,7 +57,7 @@ const LoginForm = () => {
         placeholder='Email'
         pattern='^[^@]+@[^@]+\.[^@]+$'
         required
-        value={registerData.email}
+        value={loginData.email}
         onChange={handleChange}
         error='Email is not in valid format.'
         autoFocus={true}
@@ -65,9 +67,9 @@ const LoginForm = () => {
         name='password'
         type='password'
         placeholder='Password'
-        pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$'
+        // pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$'
         required
-        value={registerData.password}
+        value={loginData.password}
         onChange={handleChange}
         error='Must be between 8-20 characters long. At least one uppercase letter, one lowercase letter, and one number.'
       />
@@ -76,7 +78,12 @@ const LoginForm = () => {
         <Link href='/forgot-password'>Forgot password?</Link>
       </p>
 
-      <Button className='primary' label='Sign in' type='submit' />
+      <Button
+        disabled={!isFormValid}
+        className={`primary ${!isFormValid ? 'disabled' : ''}`}
+        label='Sign in'
+        type='submit'
+      />
 
       <p className='login-register-link'>
         Don't have an account? <Link href='/register'>Join</Link>
