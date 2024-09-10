@@ -1,53 +1,57 @@
 import Logo from '/src/app/assets/siterka-logo.svg';
 import Image from 'next/image';
+import useUserLoggedIn from '@/hooks/useUserLoggedIn';
+import Link from 'next/link';
+import Avatar from '../Avatar/Avatar';
 
 import './Header.scss';
 
-const Header = () => {
-  const isUser = false;
+const Header = async () => {
+  const isUserLoggedIn = await useUserLoggedIn();
+
   return (
     <header>
       <div className='logo'>
-        <a href='/'>
+        <Link href='/'>
           <Image src={Logo} alt='Siterka' width={160} priority={true} />
-        </a>
+        </Link>
       </div>
       <nav>
         <ul className='main-links'>
           <li>
-            <a href='/sitters'>Searching sitter</a>
+            <Link href='/sitters'>Searching sitter</Link>
           </li>
           <li>
-            <a href='/sitter-jobs'>Searching sitter job</a>
+            <Link href='/sitter-jobs'>Searching sitter job</Link>
           </li>
           <li>
-            <a className='in-progress' href='/blog'>
+            <Link className='in-progress' href='/blog'>
               Blog
-            </a>
+            </Link>
           </li>
           <li>
-            <a className='in-progress' href='/chat'>
+            <Link className='in-progress' href='/chat'>
               Chat with us
-            </a>
+            </Link>
           </li>
         </ul>
         <ul className='user-links'>
           <li>
-            <a href='#'>Language</a>
+            <Link href='#'>Language</Link>
           </li>
-          {isUser ? (
+          {isUserLoggedIn ? (
             <li>
-              <a href='/profile'>Avatar</a>
+              <Avatar />
             </li>
           ) : (
             <>
               <li>
-                <a href='/login'>Sign in</a>
+                <Link href='/login'>Sign in</Link>
               </li>
               <li>
-                <a className='join' href='/register'>
+                <Link className='join' href='/register'>
                   Join
-                </a>
+                </Link>
               </li>
             </>
           )}
