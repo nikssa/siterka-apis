@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { email, password } = body;
-  console.log('loginSubmit', email, password);
 
   const user = await prisma.user.findUnique({
     where: {
@@ -15,7 +14,7 @@ export async function POST(request: NextRequest) {
       password
     }
   });
-  console.log('user', user);
+
   if (!user) {
     return NextResponse.json({
       statusText: 'User email or password is incorrect',

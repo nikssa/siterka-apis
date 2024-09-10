@@ -5,8 +5,6 @@ import Input from '../formElements/TextField/TextField';
 import Link from 'next/link';
 import Button from '../formElements/Button/Button';
 import loginFormAction from '@/actions/actions';
-// import { useFormState, useFormStatus } from 'react-dom';
-// import { LoginFormSubmit } from '@/actions/actions';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { createSession } from '@/utils/session';
@@ -18,8 +16,6 @@ type LoginDataProps = {
 
 const LoginForm = () => {
   const router = useRouter();
-  // const [loginFormStatus, loginFormAction] = useFormState(LoginFormSubmit, '');
-  // const { pending } = useFormStatus();
 
   const initialValue = {
     email: '',
@@ -42,42 +38,17 @@ const LoginForm = () => {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  // useEffect(() => {
-  //   if (
-  //     loginFormStatus &&
-  //     !loginFormStatus.user &&
-  //     loginFormStatus.status !== 200
-  //   ) {
-  //     console.log('loginFormStatus', loginFormStatus);
-  //     toast.error(`${loginFormStatus.statusText}`);
-  //   }
-  // }, [loginFormStatus.status]);
-
   const loginForm = async (formData: FormData) => {
     const result = await loginFormAction(formData);
 
-    console.log('loginFormSubmit', result);
-
     if (result.status === 200) {
-      // TODO: authenticate user and create JWT session
+      // Authenticate user - Create JWT session set cookie and redirect to homepage
       const userId = result.user?.id.toString();
       const username = result.user?.name;
       const email = result.user?.email;
       const role = result.user?.role;
       if (userId && username && email && role) {
-        console.log('createSession');
-        console.log(
-          'userId',
-          userId,
-          'username',
-          username,
-          'email',
-          email,
-          'role',
-          role
-        );
         createSession({ id: userId, username, email, role });
-        // Redirecting to homepage
         router.push('/');
       }
     } else {

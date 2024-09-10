@@ -67,6 +67,7 @@ const RegisterForm = () => {
     const { confirmPassword, ...data } = registerData;
     // hash password before sending it to the server
     const dataPasswordHashed = { ...data, password: md5(data.password) };
+
     try {
       const response = await fetch('/api/users', {
         method: 'POST',
@@ -75,8 +76,8 @@ const RegisterForm = () => {
         },
         body: JSON.stringify(dataPasswordHashed)
       });
+
       if (response.status !== 200) {
-        console.log('response', response);
         toast.error(
           `Registration failed. Status code: ${response.status}. Status text: ${response.statusText}`
         );

@@ -32,7 +32,6 @@ const Input = (props: InputProps) => {
   const [exists, setExists] = React.useState(false);
 
   const handleFocused = () => {
-    console.log('handleFocused');
     setBlurred('false');
     setExists(false);
   };
