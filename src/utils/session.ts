@@ -1,23 +1,9 @@
 'use server';
 
 import { SignJWT, jwtVerify } from 'jose';
-// import { cookies } from 'next/headers';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-
-const key = new TextEncoder().encode(process.env.JWT_SECRET);
-
-const alg = 'HS256';
 
 type SameSiteProps = boolean | 'lax' | 'none' | 'strict' | undefined;
-
-enum sameSiteEnum {
-  Boolean = 'boolean',
-  None = 'none',
-  Lax = 'lax',
-  Strict = 'strict',
-  Undefined = 'undefined'
-}
 
 type SessionProps = {
   data: {
@@ -27,6 +13,9 @@ type SessionProps = {
     role: string;
   };
 };
+
+const key = new TextEncoder().encode(process.env.JWT_SECRET);
+const alg = 'HS256';
 
 const cookie = {
   name: 'session',
@@ -39,7 +28,7 @@ const cookie = {
   duration: 24 * 60 * 60 * 1000
 };
 
-export async function encrypt(payload) {
+export async function encrypt(payload: SessionProps & { expires: Date }) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: alg })
     .setIssuedAt()
@@ -47,7 +36,7 @@ export async function encrypt(payload) {
     .sign(key);
 }
 
-export async function decrypt(session) {
+export async function decrypt(session: string) {
   try {
     const { payload } = await jwtVerify(session, key, {
       algorithms: [alg]
@@ -58,16 +47,6 @@ export async function decrypt(session) {
   }
 }
 
-// export async function createSessionToken(data: any) {
-//   const expires = new Date(Date.now() + cookie.duration);
-//   const token = await new SignJWT(data)
-//     .setProtectedHeader({ alg })
-//     .setExpirationTime('2h')
-//     .sign(key);
-//   cookies().set(cookie.name, token, { ...cookie.options, expires });
-//   return token;
-// }
-
 export async function createSession(data: {
   id: string;
   username: string;
@@ -76,35 +55,15 @@ export async function createSession(data: {
 }) {
   const expires = new Date(Date.now() + cookie.duration);
   const session = await encrypt({ data, expires });
-
   cookies().set(cookie.name, session, { ...cookie.options, expires });
-  //   redirect('/');
 }
-
-// export async function verifySessionToken(token: string) {
-//   const { payload } = await jwtVerify(token, key);
-//   return payload;
-// }
 
 export async function verifySession() {
   const _cookie = cookies().get(cookie.name)?.value;
-  const session = await decrypt(_cookie);
-
-  console.log('session', session);
-
-  //   if (!session?.userId) {
-  //     redirect('/login');
-  //   }
-
+  const session = await decrypt(_cookie as string);
   return session as SessionProps;
 }
 
-// export async function deleteSessionToken(token: string) {
-//   const { payload } = await jwtVerify(token, key);
-//   return payload;
-// }
-
 export async function deleteSession() {
   cookies().delete(cookie.name);
-  //   redirect('/login');
 }
