@@ -1,31 +1,18 @@
+import { verifySession } from '@/utils/session';
 import FalseButton from '../../components/FalseButton';
-
 import { PrismaClient } from '@prisma/client';
+import useUserLoggedIn from '@/hooks/useUserLoggedIn';
 
 const prisma = new PrismaClient();
 
 const HomePage = async () => {
-  // const blogs = await fetch('https://api.vercel.app/blog', {
-  //   method: 'GET'
-  // });
-  // const blogsData = await blogs.json();
-
+  const isUserLoggedIn = await useUserLoggedIn();
   const users = await prisma.user.findMany();
 
-  console.log('users', users);
-
-  return (
+  return isUserLoggedIn ? (
     <>
       <section>
         <h1>Home Page</h1>
-        {/* <ol>
-          {blogsData.map((blog: any) => (
-            <li key={blog.id} style={{ listStyleType: 'number' }}>
-              {blog.title} - {blog.author}
-            </li>
-          ))}
-        </ol> */}
-
         <ol>
           {users.map((user: any) => (
             <li key={user.id} style={{ listStyleType: 'number' }}>
@@ -35,6 +22,11 @@ const HomePage = async () => {
         </ol>
         <FalseButton />
       </section>
+    </>
+  ) : (
+    <>
+      <h1>Home Page</h1>
+      <p>You don't have an access to view some content on this page</p>
     </>
   );
 };

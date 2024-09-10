@@ -5,8 +5,8 @@ import Button from '@/components/formElements/Button/Button';
 import RadioGroup from '@/components/formElements/RadioGroup/RadioGroup';
 import Input from '@/components/formElements/TextField/TextField';
 import TextArea from '../formElements/TextAreaField/TextAreaField';
-import { convertISO8601ToDateTime } from '@/utils';
 import { Slide, toast } from 'react-toastify';
+import { convertISO8601ToDateTime } from '@/utils/convertDate';
 
 export type ProfileDataProps = {
   id: string;

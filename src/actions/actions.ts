@@ -1,26 +1,33 @@
-// 'use server';
+'use server';
 
 import { PrismaClient } from '@prisma/client';
-import { toast } from 'react-toastify';
 
 const prisma = new PrismaClient();
 
-export async function LoginFormSubmit(prevState: FormData, formData: FormData) {
+export default async function loginFormAction(formData: FormData) {
   const email = formData.get('email');
   const password = formData.get('password');
-  // console.log('loginFormAction', email, password);
-  const res = await fetch('/api/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password })
-  });
+  console.log('loginFormAction email:', email, 'and password:', password);
+  const users = await prisma.user.findMany();
 
-  if (res.status !== 200) {
-    const error = await res.json();
-    console.log('error', error);
-    return error;
+  const user = users.find(
+    (user) => user.email === email && user.password === password
+  );
+  console.log('user', user);
+
+  if (!user) {
+    return {
+      status: 404,
+      statusText: 'User email or password is incorrect',
+      success: false,
+      user: null
+    };
   } else {
-    const user = await res.json();
-    console.log('user', user);
-    return user;
+    return {
+      status: 200,
+      statusText: 'Login successful',
+      success: true,
+      user
+    };
   }
 }

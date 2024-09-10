@@ -2,6 +2,9 @@ import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
 import Logo from '/public/siterka-logo-2.svg';
 import LoginForm from '@/components/forms/LoginForm';
+import { redirect } from 'next/navigation';
+
+import useUserLoggedIn from '@/hooks/useUserLoggedIn';
 
 export const metadata = {
   title: 'Login page | SITERKA',
@@ -9,7 +12,12 @@ export const metadata = {
     'Sign in to your account. You will gain full access to our users data.'
 };
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const isUserLoggedIn = await useUserLoggedIn();
+
+  if (isUserLoggedIn) {
+    redirect('/');
+  }
   return (
     <>
       <div className='login-page'>
