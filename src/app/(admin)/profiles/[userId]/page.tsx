@@ -1,6 +1,11 @@
 import ProfileForm from '@/components/forms/ProfileForm';
 import UserForm from '@/components/forms/UserForm';
 
+export const metadata = {
+  title: 'Profile page | SITERKA',
+  description: 'User profile page.'
+};
+
 const ProfilePage = async ({
   params: { userId }
 }: {
@@ -29,7 +34,7 @@ const ProfilePage = async ({
       <UserForm data={!profile ? user : profile.user} readOnly={true} />
 
       <h3>Profile</h3>
-      <ProfileForm data={profile} userId={userId} />
+      <ProfileForm data={profile} userId={Number(userId)} />
     </>
   );
 };

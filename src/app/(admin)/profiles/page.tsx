@@ -1,4 +1,10 @@
-import ProfileForm, { ProfileDataProps } from '@/components/forms/ProfileForm';
+import ProfileForm from '@/components/forms/ProfileForm';
+import { ProfileDataProps } from '@/types/types';
+
+export const metadata = {
+  title: 'Profiles page | SITERKA',
+  description: 'Listing all user profiles.'
+};
 
 const ProfilePage = async () => {
   const profilesData = await fetch('http://localhost:4000/api/profiles', {

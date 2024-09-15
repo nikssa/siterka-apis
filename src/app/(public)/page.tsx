@@ -1,15 +1,18 @@
 import { verifySession } from '@/utils/session';
 import FalseButton from '../../components/FalseButton';
 import { PrismaClient } from '@prisma/client';
-import useUserLoggedIn from '@/hooks/useUserLoggedIn';
 
 const prisma = new PrismaClient();
 
+export const metadata = {
+  title: 'Home page | SITERKA',
+  description: 'This is a home page. Learn more about SITERKA.'
+};
+
 const HomePage = async () => {
-  const isUserLoggedIn = await useUserLoggedIn();
   const users = await prisma.user.findMany();
 
-  return isUserLoggedIn ? (
+  return (
     <>
       <section>
         <h1>Home Page</h1>
@@ -22,11 +25,6 @@ const HomePage = async () => {
         </ol>
         <FalseButton />
       </section>
-    </>
-  ) : (
-    <>
-      <h1>Home Page</h1>
-      <p>You don't have an access to view some content on this page</p>
     </>
   );
 };

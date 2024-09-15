@@ -8,6 +8,7 @@ import loginFormAction from '@/actions/actions';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { createSession } from '@/utils/session';
+import { UserDataProps } from '@/types/types';
 
 type LoginDataProps = {
   email: string;
@@ -41,14 +42,15 @@ const LoginForm = () => {
   const loginForm = async (formData: FormData) => {
     const result = await loginFormAction(formData);
 
+    console.log('result', result);
+
     if (result.status === 200) {
       // Authenticate user - Create JWT session set cookie and redirect to homepage
       const userId = result.user?.id.toString();
-      const username = result.user?.name;
-      const email = result.user?.email;
-      const role = result.user?.role;
-      if (userId && username && email && role) {
-        createSession({ id: userId, username, email, role });
+      const user = { ...result.user, id: userId };
+      if (user && userId) {
+        console.log('createSession', user);
+        createSession(user as UserDataProps);
         router.push('/');
       }
     } else {
@@ -73,7 +75,7 @@ const LoginForm = () => {
       <Input
         label='Password'
         name='password'
-        type='password'
+        type='text'
         placeholder='Password'
         // pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$'
         required

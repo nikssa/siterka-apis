@@ -1,14 +1,11 @@
 import Logo from '/src/app/assets/siterka-logo.svg';
 import Image from 'next/image';
-import useUserLoggedIn from '@/hooks/useUserLoggedIn';
 import Link from 'next/link';
-import Avatar from '../Avatar/Avatar';
+import User from '@/components/User/User';
 
 import './Header.scss';
 
 const Header = async () => {
-  const isUserLoggedIn = await useUserLoggedIn();
-
   return (
     <header>
       <div className='logo'>
@@ -39,22 +36,7 @@ const Header = async () => {
           <li>
             <Link href='#'>Language</Link>
           </li>
-          {isUserLoggedIn ? (
-            <li>
-              <Avatar />
-            </li>
-          ) : (
-            <>
-              <li>
-                <Link href='/login'>Sign in</Link>
-              </li>
-              <li>
-                <Link className='join' href='/register'>
-                  Join
-                </Link>
-              </li>
-            </>
-          )}
+          <User />
         </ul>
       </nav>
     </header>

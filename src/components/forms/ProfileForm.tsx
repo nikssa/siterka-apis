@@ -7,19 +7,7 @@ import Input from '@/components/formElements/TextField/TextField';
 import TextArea from '../formElements/TextAreaField/TextAreaField';
 import { Slide, toast } from 'react-toastify';
 import { convertISO8601ToDateTime } from '@/utils/convertDate';
-
-export type ProfileDataProps = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  bio: string;
-  createdAt: string;
-  updatedAt: string;
-  user?: {
-    id: string;
-  };
-};
+import { ProfileDataProps } from '@/types/types';
 
 export type ChangeEventTypes =
   | ChangeEvent<HTMLTextAreaElement>
@@ -27,16 +15,18 @@ export type ChangeEventTypes =
 
 const ProfileForm = ({
   data,
-  userId
+  userId,
+  readOnly = false
 }: {
   data: ProfileDataProps;
-  userId: string;
+  userId?: number;
+  readOnly?: boolean;
 }) => {
   const initialData = {
-    firstName: '',
-    lastName: '',
-    bio: '',
-    gender: '',
+    firstName: data?.firstName,
+    lastName: data?.lastName,
+    bio: data?.bio,
+    gender: data?.gender,
     userId: Number(userId)
   };
 
@@ -94,14 +84,18 @@ const ProfileForm = ({
     }
   };
 
+  console.log('profileData', profileData);
+
   const profileCreated = convertISO8601ToDateTime(
-    profileData?.createdAt,
+    profileData.createdAt?.toString(),
     'en-150'
   );
   const profileUpdated = convertISO8601ToDateTime(
-    profileData?.updatedAt,
+    profileData.updatedAt?.toString(),
     'en-150'
   );
+
+  // console.log('profileData', profileData);
 
   return (
     <form action='' onSubmit={handleSubmit}>
@@ -114,6 +108,7 @@ const ProfileForm = ({
         name='userId'
         type='text'
         defaultValue={Number(userId)}
+        readOnly={readOnly}
       />
       <Input
         label='First Name'
@@ -132,7 +127,6 @@ const ProfileForm = ({
         required
         value={profileData?.lastName}
         onChange={handleChange}
-        // error='Email is not valid'
       />
       <RadioGroup
         label='Gender'
@@ -145,23 +139,18 @@ const ProfileForm = ({
       <TextArea
         label='Short Bio'
         name='bio'
-        // type='text'
         placeholder='Short Bio'
-        // required
         value={profileData?.bio}
         onChange={handleChange}
-        // error="Password and Confirm Password don't match"
       />
-      {/* <RadioGroup
-          label='Role'
-          name='role'
-          options={['parent', 'sitter']}
-          value={profileData?.role}
-          onChange={handleChange}
-          // error='Please select a role'
-        /> */}
 
-      <Button label={!data ? 'Add' : 'Update'} type='submit' />
+      {!readOnly ? (
+        <Button
+          className='primary'
+          label={!data ? 'Add Profile' : 'Update Profile'}
+          type='submit'
+        />
+      ) : null}
     </form>
   );
 };

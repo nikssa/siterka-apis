@@ -1,24 +1,22 @@
 'use server';
 
+import { UserDataProps } from '@/types/types';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
 type SameSiteProps = boolean | 'lax' | 'none' | 'strict' | undefined;
 
 type SessionProps = {
-  data: {
-    id: string;
-    username: string;
-    email: string;
-    role: string;
-  };
+  data: UserDataProps;
 };
 
 const key = new TextEncoder().encode(process.env.JWT_SECRET);
 const alg = 'HS256';
+const sessionName = process.env.JWT_NAME ?? 'session';
+const sessionExpirationTime = process.env.JWT_EXPIRATION_TIME ?? '2h';
 
 const cookie = {
-  name: 'session',
+  name: sessionName,
   options: {
     httpOnly: true,
     secure: true,
@@ -32,7 +30,7 @@ export async function encrypt(payload: SessionProps & { expires: Date }) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: alg })
     .setIssuedAt()
-    .setExpirationTime('2h')
+    .setExpirationTime(sessionExpirationTime)
     .sign(key);
 }
 
@@ -47,12 +45,7 @@ export async function decrypt(session: string) {
   }
 }
 
-export async function createSession(data: {
-  id: string;
-  username: string;
-  email: string;
-  role: string;
-}) {
+export async function createSession(data: UserDataProps) {
   const expires = new Date(Date.now() + cookie.duration);
   const session = await encrypt({ data, expires });
   cookies().set(cookie.name, session, { ...cookie.options, expires });

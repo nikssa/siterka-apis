@@ -1,35 +1,61 @@
 import DeleteUser from '@/components/common/DeleteUser/DeleteUser';
+import useIsAuthenticated from '@/hooks/useIsAuthenticated';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
+export const metadata = {
+  title: 'Users page | SITERKA',
+  description:
+    'Listing all user accounts. Admins can delete users and change their roles.'
+};
+
 const Users = async function () {
+  const { isAuthenticated, user } = await useIsAuthenticated();
+  console.log('isAuthenticated', isAuthenticated);
+
   const usersData = await fetch('http://localhost:4000/api/users', {
     method: 'GET'
   });
   const users = await usersData.json();
 
-  const usersRender = users.map(async (user: any) => {
-    const res = await fetch(`http://localhost:4000/api/profiles/${user.id}`, {
-      method: 'GET'
-    });
+  const usersRender = users.map(async (userItem: any) => {
+    const res = await fetch(
+      `http://localhost:4000/api/profiles/${userItem.id}`,
+      {
+        method: 'GET'
+      }
+    );
     const profile = await res.json();
 
+    const userRole = user.role;
+
     return (
-      <tr key={user.id}>
+      <tr key={userItem.id}>
         <td>
-          <Link href={`/users/${user.id}`}>{user.name}</Link>
+          <Link href={`/users/${userItem.id}`}>{userItem.name}</Link>
         </td>
-        <td>{user.email}</td>
-        <td>{user.password}</td>
-        <td>{user.role}</td>
-        <td>
-          <Link href={`/profiles/${user.id}`}>
-            {!profile ? 'Add Profile' : 'Edit Profile'}
-          </Link>
-        </td>
-        <td>
-          <DeleteUser userId={user.id} />
-        </td>
+
+        {userRole === 'admin' && (
+          <>
+            <td>{userItem.email}</td>
+            <td>{userItem.password}</td>
+          </>
+        )}
+
+        <td>{userItem.role}</td>
+
+        {userRole === 'admin' && (
+          <>
+            <td>
+              <Link href={`/profiles/${userItem.id}`}>
+                {!profile ? 'Add Profile' : 'Edit Profile'}
+              </Link>
+            </td>
+            <td>
+              <DeleteUser userId={userItem.id} />
+            </td>
+          </>
+        )}
       </tr>
     );
   });
@@ -41,11 +67,19 @@ const Users = async function () {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
+            {user.role === 'admin' && (
+              <>
+                <th>Email</th>
+                <th>Password</th>
+              </>
+            )}
             <th>Role</th>
-            <th>Profile</th>
-            <th>Delete</th>
+            {user.role === 'admin' && (
+              <>
+                <th>Profile</th>
+                <th>Delete</th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>

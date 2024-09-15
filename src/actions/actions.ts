@@ -1,6 +1,7 @@
 'use server';
 
 import { PrismaClient } from '@prisma/client';
+// import md5 from 'md5';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +12,7 @@ export default async function loginFormAction(formData: FormData) {
   const users = await prisma.user.findMany();
   const user = users.find(
     (user) => user.email === email && user.password === password
+    // (user) => user.email === email && user.password === md5(password as string)
   );
 
   if (!user) {

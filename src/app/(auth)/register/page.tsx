@@ -2,12 +2,18 @@ import LoginIllustration from '/public/LoginIllustration.jpg';
 import Image from 'next/image';
 import Logo from '/public/siterka-logo-2.svg';
 import RegisterForm from '@/components/forms/RegisterForm';
-import useUserLoggedIn from '@/hooks/useUserLoggedIn';
+import useIsAuthenticated from '@/hooks/useIsAuthenticated';
 import { redirect } from 'next/navigation';
 
+export const metadata = {
+  title: 'Register page | SITERKA',
+  description:
+    'Register new user account. You will gain full access to our users data and be able to create new post/advert.'
+};
+
 const RegisterPage = async () => {
-  const isUserLoggedIn = await useUserLoggedIn();
-  if (isUserLoggedIn) {
+  const { isAuthenticated } = await useIsAuthenticated();
+  if (isAuthenticated) {
     redirect('/');
   }
   return (

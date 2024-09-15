@@ -1,24 +1,12 @@
 'use client';
 
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Button from '@/components/formElements/Button/Button';
 import RadioGroup from '@/components/formElements/RadioGroup/RadioGroup';
 import Input from '@/components/formElements/TextField/TextField';
 import { convertISO8601ToDateTime } from '@/utils/convertDate';
-
-type PhotoProps = {
-  url: string;
-};
-
-type UserDataProps = {
-  name: string;
-  email: string;
-  role: string;
-  active: boolean;
-  deleted: boolean;
-  photos: PhotoProps[];
-  createdAt: string;
-};
+import useIsAuthenticatedClient from '@/hooks/useIsAuthenticatedClient';
+import { UserDataProps } from '@/types/types';
 
 const UserForm = ({
   data,
@@ -27,7 +15,33 @@ const UserForm = ({
   data: UserDataProps;
   readOnly?: boolean;
 }) => {
-  const [userData, setUserData] = React.useState(data);
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<UserDataProps>(data);
+
+  const { isAuthenticated, user } = useIsAuthenticatedClient();
+  const role = user?.role;
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (
+    (!loading && !isAuthenticated) ||
+    (!loading &&
+      isAuthenticated &&
+      role !== 'admin' &&
+      user?.id !== userData.id?.toString())
+  ) {
+    return (
+      <>
+        <h1>Access denied</h1>
+      </>
+    );
+  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -39,10 +53,13 @@ const UserForm = ({
     e.preventDefault();
   };
 
-  const userAccountCreated = convertISO8601ToDateTime(
-    userData?.createdAt,
-    'en-150'
-  );
+  const userAccountCreated =
+    userData.createdAt &&
+    convertISO8601ToDateTime(userData.createdAt.toString(), 'en-150');
+
+  console.log('data', data);
+  console.log('userData', userData);
+  console.log('loading', loading);
 
   return (
     <form action='' onSubmit={handleSubmit} aria-disabled={readOnly}>
@@ -77,14 +94,16 @@ const UserForm = ({
         disabled={readOnly}
       />
 
-      <p>{`User active: ${userData.active ? 'Yes' : 'No'}`}</p>
-      <p>{`User deleted: ${userData.deleted ? 'Yes' : 'No'}`}</p>
+      <p>
+        {`User active: ${userData.active ? 'Yes' : 'No'}`}
+        <br />
+        {`User deleted: ${userData.deleted ? 'Yes' : 'No'}`}
+      </p>
+      <p></p>
 
-      <Button
-        className={`primary ${readOnly ? 'disabled' : ''}`}
-        label='Save'
-        type='submit'
-      />
+      {!readOnly ? (
+        <Button className={`primary`} label='Save' type='submit' />
+      ) : null}
     </form>
   );
 };
