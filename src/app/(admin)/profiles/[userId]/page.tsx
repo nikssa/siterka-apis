@@ -1,5 +1,7 @@
 import ProfileForm from '@/components/forms/ProfileForm';
 import UserForm from '@/components/forms/UserForm';
+import { getProfileIncludeUser } from '@/data-access/profile';
+import { ProfileDataProps, UserDataProps } from '@/types/types';
 
 export const metadata = {
   title: 'Profile page | SITERKA',
@@ -11,30 +13,18 @@ const ProfilePage = async ({
 }: {
   params: { userId: string };
 }) => {
-  const res = await fetch(`http://localhost:4000/api/profiles/${userId}`, {
-    method: 'GET'
-  });
-
-  const profile = await res.json();
-
-  let user;
-
-  if (!profile) {
-    const res = await fetch(`http://localhost:4000/api/users/${userId}`, {
-      method: 'GET'
-    });
-    user = await res.json();
-  }
+  const profile = await getProfileIncludeUser(Number(userId));
+  const user = profile?.user;
 
   return (
     <>
       <h1>{!profile && 'Add'} User profile</h1>
 
-      <h2>User </h2>
-      <UserForm data={!profile ? user : profile.user} readOnly={true} />
+      <h2>User</h2>
+      <UserForm data={user as UserDataProps} readOnly={true} />
 
       <h3>Profile</h3>
-      <ProfileForm data={profile} userId={Number(userId)} />
+      <ProfileForm data={profile as ProfileDataProps} userId={Number(userId)} />
     </>
   );
 };

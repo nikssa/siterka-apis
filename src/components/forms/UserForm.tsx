@@ -5,43 +5,23 @@ import Button from '@/components/formElements/Button/Button';
 import RadioGroup from '@/components/formElements/RadioGroup/RadioGroup';
 import Input from '@/components/formElements/TextField/TextField';
 import { convertISO8601ToDateTime } from '@/utils/convertDate';
-import useIsAuthenticatedClient from '@/hooks/useIsAuthenticatedClient';
 import { UserDataProps } from '@/types/types';
 
-const UserForm = ({
-  data,
-  readOnly = false
-}: {
+type UserFormProps = {
   data: UserDataProps;
   readOnly?: boolean;
-}) => {
+};
+
+const UserForm = ({ data, readOnly = false }: UserFormProps) => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<UserDataProps>(data);
 
-  const { isAuthenticated, user } = useIsAuthenticatedClient();
-  const role = user?.role;
+  // const { isAuthenticated, user } = useIsAuthenticatedClient();
+  const role = userData?.role;
 
   useEffect(() => {
     setLoading(false);
   }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (
-    (!loading && !isAuthenticated) ||
-    (!loading &&
-      isAuthenticated &&
-      role !== 'admin' &&
-      user?.id !== userData.id?.toString())
-  ) {
-    return (
-      <>
-        <h1>Access denied</h1>
-      </>
-    );
-  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -54,12 +34,12 @@ const UserForm = ({
   };
 
   const userAccountCreated =
-    userData.createdAt &&
+    userData?.createdAt &&
     convertISO8601ToDateTime(userData.createdAt.toString(), 'en-150');
 
-  console.log('data', data);
-  console.log('userData', userData);
-  console.log('loading', loading);
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <form action='' onSubmit={handleSubmit} aria-disabled={readOnly}>
@@ -95,9 +75,9 @@ const UserForm = ({
       />
 
       <p>
-        {`User active: ${userData.active ? 'Yes' : 'No'}`}
+        {`User active: ${userData?.active ? 'Yes' : 'No'}`}
         <br />
-        {`User deleted: ${userData.deleted ? 'Yes' : 'No'}`}
+        {`User deleted: ${userData?.deleted ? 'Yes' : 'No'}`}
       </p>
       <p></p>
 

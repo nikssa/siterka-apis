@@ -24,6 +24,7 @@ export type ProfileDataProps = {
   createdAt: Date;
   updatedAt: Date;
   user?: UserDataProps;
+  userId: number;
 };
 
 export type PostDataProps = {

@@ -9,19 +9,17 @@ import { Slide, toast } from 'react-toastify';
 import { convertISO8601ToDateTime } from '@/utils/convertDate';
 import { ProfileDataProps } from '@/types/types';
 
-export type ChangeEventTypes =
+type ChangeEventTypes =
   | ChangeEvent<HTMLTextAreaElement>
   | ChangeEvent<HTMLInputElement>;
 
-const ProfileForm = ({
-  data,
-  userId,
-  readOnly = false
-}: {
+type ProfileFormProps = {
   data: ProfileDataProps;
   userId?: number;
   readOnly?: boolean;
-}) => {
+};
+
+const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
   const initialData = {
     firstName: data?.firstName,
     lastName: data?.lastName,

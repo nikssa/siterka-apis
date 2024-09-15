@@ -1,4 +1,5 @@
 import ProfileForm from '@/components/forms/ProfileForm';
+import { getProfiles } from '@/data-access/profile';
 import { ProfileDataProps } from '@/types/types';
 
 export const metadata = {
@@ -7,10 +8,7 @@ export const metadata = {
 };
 
 const ProfilePage = async () => {
-  const profilesData = await fetch('http://localhost:4000/api/profiles', {
-    method: 'GET'
-  });
-  const profiles = await profilesData.json();
+  const profiles = await getProfiles();
 
   return (
     <>
@@ -30,9 +28,7 @@ const ProfilePage = async () => {
             {profiles.map((profile: ProfileDataProps) => (
               <tr key={profile.id}>
                 <td>
-                  <a href={`profiles/${profile.user?.id}`}>
-                    {profile.firstName}
-                  </a>
+                  <a href={`profiles/${profile.userId}`}>{profile.firstName}</a>
                 </td>
                 <td>{profile.lastName}</td>
                 <td>{profile.gender}</td>

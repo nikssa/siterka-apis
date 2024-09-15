@@ -1,8 +1,13 @@
 'use client';
 
+import { PostDataProps } from '@/types/types';
 import Input from '../formElements/TextField/TextField';
 
-const PostForm = ({ userId }: { userId: number }) => {
+type PostFormProps = {
+  data: PostDataProps;
+};
+
+const PostForm = ({ data }: PostFormProps) => {
   return (
     <form action='' style={{ marginTop: '20px' }}>
       <Input
@@ -10,6 +15,7 @@ const PostForm = ({ userId }: { userId: number }) => {
         name='firstname'
         label='firstname'
         placeholder='First Name'
+        value={data?.title}
       />
     </form>
   );

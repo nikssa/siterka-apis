@@ -1,7 +1,9 @@
 import PostForm from '@/components/forms/PostForm';
 import ProfileForm from '@/components/forms/ProfileForm';
 import UserForm from '@/components/forms/UserForm';
+import { getUserIncludeProfileAndPost } from '@/data-access/user';
 import useIsAuthenticated from '@/hooks/useIsAuthenticated';
+import { PostDataProps, ProfileDataProps, UserDataProps } from '@/types/types';
 import React from 'react';
 
 export const metadata = {
@@ -10,23 +12,24 @@ export const metadata = {
     "Add or update post/advert/ about yourself. After it's published, users will be able to see it."
 };
 
-const PostByUserId = async () => {
-  const { user } = await useIsAuthenticated();
-  const userId = user?.id as number;
+type PostByUserIdProps = {
+  params: { userId: string };
+};
 
-  const profile = await fetch(`http://localhost:4000/api/profiles/${userId}`, {
-    method: 'GET'
-  });
-  const userProfile = await profile.json();
-  console.log('userProfile', userProfile);
+const PostByUserId = async ({ params: { userId } }: PostByUserIdProps) => {
+  const { isAuthenticated } = await useIsAuthenticated();
+
+  const user = await getUserIncludeProfileAndPost({ userId: Number(userId) });
+  const profile = user?.profile;
+  const post = user?.post;
 
   return (
     <>
       <h1>Add About Yourself</h1>
 
-      <UserForm data={user} readOnly={true} />
-      <ProfileForm data={userProfile} readOnly={true} />
-      <PostForm userId={userId} />
+      <UserForm data={user as UserDataProps} readOnly={true} />
+      <ProfileForm data={profile as ProfileDataProps} readOnly={true} />
+      <PostForm data={post as PostDataProps} />
     </>
   );
 };

@@ -1,4 +1,6 @@
 import DeleteUser from '@/components/common/DeleteUser/DeleteUser';
+import { getProfile } from '@/data-access/profile';
+import { getUsers } from '@/data-access/user';
 import useIsAuthenticated from '@/hooks/useIsAuthenticated';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -13,21 +15,11 @@ const Users = async function () {
   const { isAuthenticated, user } = await useIsAuthenticated();
   console.log('isAuthenticated', isAuthenticated);
 
-  const usersData = await fetch('http://localhost:4000/api/users', {
-    method: 'GET'
-  });
-  const users = await usersData.json();
+  const users = await getUsers();
 
-  const usersRender = users.map(async (userItem: any) => {
-    const res = await fetch(
-      `http://localhost:4000/api/profiles/${userItem.id}`,
-      {
-        method: 'GET'
-      }
-    );
-    const profile = await res.json();
-
-    const userRole = user.role;
+  const usersRender = users?.map(async (userItem: any) => {
+    const profile = await getProfile(userItem.id);
+    const userRole = user?.role;
 
     return (
       <tr key={userItem.id}>
