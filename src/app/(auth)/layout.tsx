@@ -1,7 +1,8 @@
 import { ToastContainer } from 'react-toastify';
-import ViewportInfo from '../../components/ViewportInfo';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { Providers } from '@/components/providers/Providers';
 
+import 'react-toastify/dist/ReactToastify.min.css';
+import '../assets/globals.scss';
 import './layout.scss';
 
 export default function LoginLayout({
@@ -10,7 +11,7 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className='main-layout auth'>
+    <html lang='en' className='auth'>
       <body>
         <ToastContainer
           position='top-center'
@@ -21,8 +22,7 @@ export default function LoginLayout({
           draggable={true}
           theme='light'
         />
-        <ViewportInfo />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

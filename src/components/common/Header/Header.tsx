@@ -1,7 +1,7 @@
 import Logo from '/src/app/assets/siterka-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import User from '@/components/User/User';
+import User from '@/components/common/User/User';
 
 import './Header.scss';
 

@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
-import { Providers } from '../providers';
+import { Providers } from '../../components/providers/Providers';
 import Header from '../../components/common/Header/Header';
 import Footer from '../../components/common/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.min.css';
-
-import ViewportInfo from '../../components/ViewportInfo';
-
+import '../assets/globals.scss';
 import '../(public)/layout.scss';
-import './layout.scss';
+// import './layout.scss';
 
 export const metadata: Metadata = {
   title: 'Siterka APIs',
@@ -21,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='main-layout'>
+    <html lang='en'>
       <body>
         <Providers>
           <ToastContainer
@@ -34,7 +33,6 @@ export default function RootLayout({
             theme='light'
           />
           <Header />
-          <ViewportInfo />
           <main>{children}</main>
           <Footer />
         </Providers>

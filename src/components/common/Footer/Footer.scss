@@ -1,8 +1,12 @@
 footer {
-  background-color: #fefefe;
-  border-top: 1px solid rgba($color: #0a4226, $alpha: 0.15);
-  color: #999;
+  background-color: var(--primary-color);
+  color: #ccc;
   font-size: 1.6rem;
   padding: 10px 20px;
   text-align: center;
+  width: 100vw;
+
+  p {
+    margin: 0;
+  }
 }

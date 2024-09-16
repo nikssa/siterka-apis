@@ -1,9 +1,7 @@
-@import './../globals.scss';
-
-.logo {
-  margin-bottom: 30px;
-  height: auto;
-  width: 200px;
+.auth {
+  .logo {
+    margin-bottom: 30px;
+  }
 }
 
 .login-page {
@@ -78,9 +76,4 @@
   form {
     margin-top: 40px;
   }
-
-  // button {
-  //   margin-top: 15px;
-  //   cursor: pointer;
-  // }
 }

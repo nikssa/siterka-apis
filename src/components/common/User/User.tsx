@@ -1,6 +1,6 @@
 'use client';
 
-import Avatar from '../common/Avatar/Avatar';
+import Avatar from '../Avatar/Avatar';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import useIsAuthenticated from '@/hooks/useIsAuthenticated';

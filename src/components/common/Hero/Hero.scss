@@ -1,0 +1,27 @@
+.hero {
+  background-color: var(--primary-color);
+  color: #fefefe;
+  min-height: calc(100vh - var(--header-height));
+  width: 100vw;
+
+  .inner {
+    h1 {
+      color: #fefefe;
+      margin-top: 40px;
+    }
+
+    .hero-image {
+      background-color: #fefefe;
+      color: var(--primary-color);
+      height: 50vh;
+      width: 100%;
+    }
+
+    .call-to-action {
+      background-color: #fefefe;
+      color: var(--primary-color);
+      display: inline-block;
+      margin-top: 20px;
+    }
+  }
+}
