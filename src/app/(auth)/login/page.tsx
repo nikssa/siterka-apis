@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Logo from '/public/siterka-logo-2.svg';
 import LoginForm from '@/components/forms/LoginForm';
 import { redirect } from 'next/navigation';
-
 import useIsAuthenticated from '@/hooks/useIsAuthenticated';
 
 export const metadata = {

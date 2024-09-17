@@ -2,7 +2,7 @@ import './ParentsHero.scss';
 
 const ParentsHero = () => {
   return (
-    <section className='parents-hero'>
+    <section className='hero parents-hero'>
       <div className='inner'>
         <h2>Latest Parents</h2>
         <div className='main'></div>

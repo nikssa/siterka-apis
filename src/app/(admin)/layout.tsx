@@ -6,8 +6,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import '../assets/globals.scss';
-import '../(public)/layout.scss';
-// import './layout.scss';
+import './layout.scss';
 
 export const metadata: Metadata = {
   title: 'Siterka APIs',

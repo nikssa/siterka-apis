@@ -2,7 +2,7 @@ import './SittersHero.scss';
 
 const SittersHero = () => {
   return (
-    <section className='sitters-hero'>
+    <section className='hero sitters-hero'>
       <div className='inner'>
         <h2>Latest Sitters</h2>
         <div className='main'></div>
