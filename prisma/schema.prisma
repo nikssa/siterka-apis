@@ -34,6 +34,40 @@ enum Age {
   OverSixtyFive
 }
 
+enum ChildAge {
+  NEWBORNS // 0-2 months
+  INFANTS // 3-12 months
+  TODDLERS // 1-2 years
+  PRESCHOOLERS // 3-6 years
+  SCHOOLERS // 7-12 years
+  TEENS // 13-19 years
+}
+
+enum Education {
+  PRIMARY_SCHOOL
+  SECONDARY_SCHOOL
+  UNIVERSITY_DEGREE
+  BACHELORS_DEGREE
+  MASTERS_DEGREE
+  DOCTORAL_DEGREE
+}
+
+enum Languages {
+  ENGLISH
+  GERMAN
+  FRANCH
+  ITALIAN
+  SPANISH
+  RUSSIAN
+  OTHERS
+}
+
+enum EarningsRate {
+  HOURLY
+  DAILY
+  MONTHLY
+}
+
 model User {
   id          Int      @id @default(autoincrement())
   email       String   @unique
@@ -42,11 +76,12 @@ model User {
   role        Role     @default(sitter)
   acceptTerms Boolean
   createdAt   DateTime @default(now())
+  membership  Boolean  @default(false)
   active      Boolean  @default(false)
   deleted     Boolean  @default(false)
   post        Post?
   profile     Profile?
-  photos      Photo[]
+  photos      Photo?
 }
 
 model Profile {
@@ -62,25 +97,52 @@ model Profile {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
+  id                Int          @id @default(autoincrement())
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  title             String       @db.VarChar(255)
+  description       String?
+  birthDate         DateTime //date picker
+  contry            String //dropdown
+  city              String //dropdown country sensitive
+  experience        Int // years or months
+  childAgeGroup     ChildAge
+  numberOfChildren  Int
+  pets              Boolean
+  specialNeeds      Boolean
+  inOwnHouse        Boolean
+  cleaning          Boolean
+  cleaningChildOnly Boolean
+  shopping          Boolean
+  cooking           Boolean
+  cookingChildOnly  Boolean
+  outWithChild      Boolean
+  car               Boolean
+  driversLicense    Boolean
+  smoking           Boolean
+  education         Education
+  sitterCourse      Boolean
+  firstAid          Boolean
+  languages         Languages
+  otherLanguages    String
+  earnings          Int
+  earningsRate      EarningsRate
+
   photos    Photo[]
-  photosId  Int      @unique
+  photosId  Int     @unique
   cell      Int
   mail      String
   age       Age
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int      @unique
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int     @unique
 }
 
 model Photo {
   id       Int    @id @default(autoincrement())
   url      String
-  author   User   @relation(fields: [authorId], references: [id])
+  author   User?  @relation(fields: [authorId], references: [id])
   authorId Int    @unique
-  post     Post?  @relation(fields: [id], references: [photosId])
+  post     Post?  @relation(fields: [postId], references: [id])
+  postId   Int
 }
