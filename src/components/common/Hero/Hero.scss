@@ -1,27 +1,118 @@
 .main-hero {
   background-color: var(--primary-color);
   color: #fefefe;
-  min-height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height));
   width: 100vw;
 
   .inner {
-    h1 {
-      color: #fefefe;
-      margin-top: 40px;
-    }
+    min-height: calc(100vh - var(--header-height));
+    padding: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: repeat(3, 1fr);
+
+    // @media screen and (min-width: 768px) {
+    //   padding: 30px 20px;
+    // }
+
+    // @media screen and (min-width: 992px) {
+    //   padding: 40px 20px;
+    // }
+
+    // @media screen and (min-width: 1600px) {
+    //   padding: 60px 20px;
+    // }
+
+    // @media screen and (min-width: 1400px) {
+    //   grid-template-rows: 1fr 1fr auto;
+    // }
+
+    // @media screen and (min-width: 1600px) {
+    //   grid-template-rows: repeat(3, 1fr);
+    // }
 
     .hero-image {
-      background-color: #fefefe;
+      box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
       color: var(--primary-color);
-      height: 50vh;
+      height: 100%;
       width: 100%;
+      position: relative;
+      overflow: hidden;
+      grid-column: 1 / 3;
+      grid-row: 1 / 4;
+      align-self: center;
+      justify-self: center;
+
+      @media screen and (min-width: 768px) {
+        grid-column: 2 / 3;
+        grid-row: 1 / 4;
+      }
+
+      @media screen and (min-width: 992px) {
+        width: calc(100% - 80px);
+        margin-left: 80px;
+      }
+
+      @media screen and (min-width: 1600px) {
+        --move-right: calc((100vw - 1600px) / 2);
+        //
+        overflow: visible;
+        height: 100%;
+        width: calc(100% + ((100vw - 1600px) / 2));
+        position: absolute;
+        right: -var(--move-right);
+      }
+
+      img {
+        object-fit: cover;
+        object-position: top center;
+      }
     }
 
-    .call-to-action {
-      background-color: #fefefe;
-      color: var(--primary-color);
-      display: inline-block;
-      margin-top: 20px;
+    .hero-text {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      align-self: end;
+      padding: 0 10px 0 20px;
+      z-index: 1;
+
+      @media screen and (min-width: 768px) {
+        padding: 0 0 0 30px;
+      }
+
+      @media screen and (min-width: 992px) {
+        background-color: transparent;
+        grid-column: 1 / 2;
+      }
+
+      @media screen and (min-width: 1400px) {
+        grid-row: 2 / 3;
+        padding: 0 10px 0 20px;
+      }
+
+      h1 {
+        color: #fefefe;
+        font-size: 6rem;
+        margin-top: 40px;
+        text-transform: uppercase;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+
+      p {
+        background-color: #fefefe;
+        color: var(--heading-color);
+        display: inline;
+        font-size: 1.8rem;
+        line-height: 1.8;
+        padding: 5px 10px;
+
+        @media screen and (min-width: 992px) {
+          background-color: transparent;
+          color: inherit;
+          display: inherit;
+        }
+      }
     }
   }
 }
