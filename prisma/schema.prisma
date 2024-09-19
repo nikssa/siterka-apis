@@ -27,11 +27,11 @@ enum Gender {
 }
 
 enum Age {
-  EighteenToTwentyFive
-  TwentyFiveToForty
-  FortyToFiftyFive
-  FiftyFiveToSixtyFive
-  OverSixtyFive
+  EIGHTEEN
+  TWENTY_FIVE
+  FORTY
+  FIFTY_FIVE
+  SIXTY_FIVE
 }
 
 enum ChildAge {
@@ -44,12 +44,10 @@ enum ChildAge {
 }
 
 enum Education {
-  PRIMARY_SCHOOL
-  SECONDARY_SCHOOL
-  UNIVERSITY_DEGREE
-  BACHELORS_DEGREE
-  MASTERS_DEGREE
-  DOCTORAL_DEGREE
+  ELEMENTARY
+  HIGH_SCHOOL
+  COLLEGE
+  GRADUATE
 }
 
 enum Languages {
@@ -100,10 +98,14 @@ model Post {
   id                Int          @id @default(autoincrement())
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
+  published         Boolean      @default(false)
   title             String       @db.VarChar(255)
   description       String?
+  email             String
+  phone             String
   birthDate         DateTime //date picker
-  contry            String //dropdown
+  ageGroup          Age
+  country           String //dropdown
   city              String //dropdown country sensitive
   experience        Int // years or months
   childAgeGroup     ChildAge
@@ -127,15 +129,9 @@ model Post {
   otherLanguages    String
   earnings          Int
   earningsRate      EarningsRate
-
-  photos    Photo[]
-  photosId  Int     @unique
-  cell      Int
-  mail      String
-  age       Age
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int     @unique
+  photos            Photo[]
+  author            User         @relation(fields: [authorId], references: [id])
+  authorId          Int          @unique
 }
 
 model Photo {
