@@ -42,14 +42,11 @@ const LoginForm = () => {
   const loginForm = async (formData: FormData) => {
     const result = await loginFormAction(formData);
 
-    console.log('result', result);
-
     if (result.status === 200) {
       // Authenticate user - Create JWT session set cookie and redirect to homepage
       const userId = result.user?.id.toString();
       const user = { ...result.user, id: userId };
       if (user && userId) {
-        console.log('createSession', user);
         createSession(user as UserDataProps);
         router.push('/');
       }
@@ -90,7 +87,8 @@ const LoginForm = () => {
 
       <Button
         disabled={!isFormValid}
-        className={`primary ${!isFormValid ? 'disabled' : ''}`}
+        className={!isFormValid ? 'disabled' : ''}
+        primary={true}
         label='Sign in'
         type='submit'
       />

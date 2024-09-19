@@ -28,9 +28,9 @@ export async function getProfile(userId: number) {
 
 export async function getProfileIncludeUser(userId: number) {
   const isAuthenticated = await useIsAuthenticated();
-  if (!isAuthenticated) {
-    return null;
-  }
+  // if (!isAuthenticated) {
+  //   return null;
+  // }
   const profile = await prisma.profile.findUnique({
     where: {
       userId: userId

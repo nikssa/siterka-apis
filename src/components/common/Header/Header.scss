@@ -3,7 +3,10 @@ header {
   background-color: #fefefe;
   border-bottom: 1px solid rgba($color: #0a4226, $alpha: 0.15);
   height: var(--header-height);
+  max-width: 1600px;
+  width: 100%;
   padding: 10px 20px;
+  justify-self: center;
 
   .logo {
     height: auto;

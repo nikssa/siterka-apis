@@ -16,10 +16,10 @@ const Header = async () => {
       <nav>
         <ul className='main-links'>
           <li>
-            <Link href='/sitters'>Searching sitter</Link>
+            <Link href='/sitters'>Looking for a sitter</Link>
           </li>
           <li>
-            <Link href='/sitter-jobs'>Searching sitter job</Link>
+            <Link href='/sitter-jobs'>Looking for a sitter job</Link>
           </li>
           <li>
             <Link className='in-progress' href='/blog'>

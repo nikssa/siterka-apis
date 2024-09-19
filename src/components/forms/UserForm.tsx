@@ -81,9 +81,7 @@ const UserForm = ({ data, readOnly = false }: UserFormProps) => {
       </p>
       <p></p>
 
-      {!readOnly ? (
-        <Button className={`primary`} label='Save' type='submit' />
-      ) : null}
+      {!readOnly ? <Button primary={true} label='Save' type='submit' /> : null}
     </form>
   );
 };

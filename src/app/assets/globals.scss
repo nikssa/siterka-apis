@@ -1,9 +1,6 @@
-// NOTE: these fonts are for headers and/or siterka logo
-// @import url('https://fonts.googleapis.com/css2?family=Port+Lligat+Sans&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=Rum+Raisin&display=swap');
+// This fonts is for headers and/or siterka logo
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');
-// NOTE: this font is for the body text and other text
-// @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rum+Raisin&display=swap');
+// This font is for the body text and other text
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&family=Rum+Raisin&display=swap');
 
 :root {
@@ -12,7 +9,7 @@
   --primary-color: #0a4226;
   --primary-color-rgb: 10, 66, 38;
   --primary-color-hover: #00b884;
-  --secondary-color: #666;
+  --secondary-color: #808080;
   --secondary-color-hover: #999;
 
   --foreground-color: #444;
@@ -25,39 +22,8 @@
   --border-radius: 12px;
 
   --header-height: 80px;
-
-  // Toastify
-  // --toastify-color-dark: #121212;
-  // --toastify-color-info: #3498db;
-  // --toastify-color-success: #07bc0c;
-  // --toastify-color-warning: #fff3cd;
-  // --toastify-color-error: #e74c3c;
-  // --toastify-color-transparent: rgba(255, 255, 255, 0.7);
-
-  // --toastify-icon-color-info: var(--toastify-color-info);
-  // --toastify-icon-color-success: var(--toastify-color-success);
-  // --toastify-icon-color-warning: var(--toastify-color-warning);
-  // --toastify-icon-color-error: var(--toastify-color-error);
-
-  // --toastify-toast-width: 320px;
-  // --toastify-toast-background: #fff;
-  // --toastify-toast-min-height: 64px;
-  // --toastify-toast-max-height: 800px;
-  // --toastify-font-family: sans-serif;
-  // --toastify-z-index: 9999;
-
-  // --toastify-text-color-light: #757575;
-  // --toastify-text-color-dark: #fff;
-
-  // //Used only for colored theme
-  // --toastify-text-color-info: #fff;
-  // --toastify-text-color-success: #fff;
-  // --toastify-text-color-warning: #fff;
-  // --toastify-text-color-error: #fff;
-
-  // --toastify-spinner-color: #616161;
-  // --toastify-spinner-color-empty-area: #e0e0e0;
 }
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -139,15 +105,7 @@
   margin: 0;
 }
 
-.hidden {
-  display: none;
-}
-
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
+// Global styles
 html,
 body {
   overflow-x: hidden;
@@ -164,7 +122,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   min-height: 100dvh;
-  max-width: 100vw;
+  width: 100vw;
   grid-template-rows: auto auto 1fr auto;
 }
 
@@ -175,8 +133,6 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  // font-family: 'Port Lligat Sans', sans-serif;
-  // font-size: 'Rum Raisin', sans-serif;
   font-family: 'Open Sans', sans-serif;
   font-weight: 800;
   line-height: 1.1;
@@ -227,6 +183,7 @@ a {
   }
 }
 
+// Form and form elements styles
 label {
   font-size: 1.4rem;
 }
@@ -237,6 +194,7 @@ textarea {
   font-size: 1.6rem;
 }
 
+// Layout styles
 main {
   width: 100vw;
 
@@ -244,31 +202,27 @@ main {
     width: 100vw;
 
     .inner {
-      padding: 30px;
+      padding: 20px;
       margin: 0 auto;
-      width: 100vw;
+
+      max-width: 1600px;
 
       @media screen and (min-width: 768px) {
-        max-width: 80vw;
+        padding: 30px 20px;
       }
 
       @media screen and (min-width: 992px) {
-        max-width: 800px;
+        padding: 40px 20px;
       }
 
-      @media screen and (min-width: 1200px) {
-        max-width: 900px;
-      }
-    }
-
-    &.hero {
-      .inner {
-        padding: 40px 30px;
+      @media screen and (min-width: 1600px) {
+        padding: 80px 20px;
       }
     }
   }
 }
 
+// Tables styles
 table {
   border-collapse: collapse;
   font-size: 1.4rem;
@@ -277,10 +231,8 @@ table {
 
 th {
   background-color: #222;
-  // border-radius: var(--border-radius) var(--border-radius) 0 0;
   color: #f2f2f2;
   font-size: 1.6rem;
-  // font-weight: 600;
   padding: 20px 10px;
 
   &:first-child {
@@ -307,8 +259,6 @@ tr {
   }
 
   &:last-child {
-    // border-radius: 0 0 var(--border-radius) var(--border-radius);
-
     td {
       border-bottom: 0;
 
@@ -323,6 +273,17 @@ tr {
   }
 }
 
+// Helper styles
+.hidden {
+  display: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+// Toastify styles
 .Toastify:not(:empty) {
   height: 100vh;
   width: 100vw;

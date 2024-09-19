@@ -15,16 +15,16 @@ type ChangeEventTypes =
 
 type ProfileFormProps = {
   data: ProfileDataProps;
-  userId?: number;
+  userId: number;
   readOnly?: boolean;
 };
 
 const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
   const initialData = {
-    firstName: data?.firstName,
-    lastName: data?.lastName,
-    bio: data?.bio,
-    gender: data?.gender,
+    firstName: data?.firstName || '',
+    lastName: data?.lastName || '',
+    bio: data?.bio || '',
+    gender: data?.gender || '',
     userId: Number(userId)
   };
 
@@ -82,8 +82,6 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
     }
   };
 
-  console.log('profileData', profileData);
-
   const profileCreated = convertISO8601ToDateTime(
     profileData.createdAt?.toString(),
     'en-150'
@@ -92,8 +90,6 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
     profileData.updatedAt?.toString(),
     'en-150'
   );
-
-  // console.log('profileData', profileData);
 
   return (
     <form action='' onSubmit={handleSubmit}>
@@ -105,7 +101,7 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
         label='User Id'
         name='userId'
         type='text'
-        defaultValue={Number(userId)}
+        defaultValue={userId}
         readOnly={readOnly}
       />
       <Input
@@ -144,7 +140,7 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
 
       {!readOnly ? (
         <Button
-          className='primary'
+          primary={true}
           label={!data ? 'Add Profile' : 'Update Profile'}
           type='submit'
         />

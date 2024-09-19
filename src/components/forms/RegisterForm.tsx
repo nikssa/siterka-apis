@@ -168,7 +168,8 @@ const RegisterForm = () => {
 
       <Button
         disabled={!isFormValid}
-        className={`primary ${!isFormValid ? 'disabled' : ''}`}
+        className={`${!isFormValid ? 'disabled' : ''}`}
+        primary={true}
         label='Join'
         type='submit'
       />

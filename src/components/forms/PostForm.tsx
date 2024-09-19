@@ -8,6 +8,8 @@ type PostFormProps = {
 };
 
 const PostForm = ({ data }: PostFormProps) => {
+  // if (!data.profile) {}
+  // const firstName = data.profile.firstName;
   return (
     <form action='' style={{ marginTop: '20px' }}>
       <Input
@@ -15,7 +17,9 @@ const PostForm = ({ data }: PostFormProps) => {
         name='firstname'
         label='firstname'
         placeholder='First Name'
-        value={data?.title}
+        // value={data?.title}
+        // onChange={handleChange}
+        defaultValue={data?.title}
       />
     </form>
   );

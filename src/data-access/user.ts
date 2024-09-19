@@ -45,7 +45,7 @@ export async function getUser({ userId }: { userId: number }) {
     return userDTO;
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log('e.code', e.code);
+      // console.log('e.code', e.code);
       // The .code property can be accessed in a type-safe manner
       // if (e.code === 'P2002') {
       //   console.log(
@@ -103,9 +103,9 @@ export async function getUserIncludeProfileAndPost({
   userId: number;
 }) {
   const { isAuthenticated } = await useIsAuthenticated();
-  if (!isAuthenticated) {
-    return null;
-  }
+  // if (!isAuthenticated) {
+  //   return null;
+  // }
   const user = await prisma.user.findUnique({
     where: {
       id: userId

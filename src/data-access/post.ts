@@ -8,7 +8,7 @@ export async function getPosts() {
   if (!isAuthenticated) {
     return null;
   }
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({});
   return posts;
 }
 

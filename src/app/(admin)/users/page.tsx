@@ -13,7 +13,6 @@ export const metadata = {
 
 const Users = async function () {
   const { isAuthenticated, user } = await useIsAuthenticated();
-  console.log('isAuthenticated', isAuthenticated);
 
   const users = await getUsers();
 
