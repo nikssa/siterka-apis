@@ -55,12 +55,6 @@ export async function getUser({ userId }: { userId: number }) {
     }
     throw e;
   }
-
-  // const user = await prisma.user.findUnique({
-  //   where: {
-  //     id: userId
-  //   }
-  // });
 }
 
 export async function getUserIncludeProfile({ userId }: { userId: number }) {

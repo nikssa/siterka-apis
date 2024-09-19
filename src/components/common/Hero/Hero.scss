@@ -1,5 +1,6 @@
 .main-hero {
-  background-color: var(--primary-color);
+  // background-color: var(--primary-color);
+  background: linear-gradient(30deg, var(--primary-color) 20%, #000000 100%);
   color: #fefefe;
   height: calc(100vh - var(--header-height));
   width: 100vw;
@@ -95,6 +96,7 @@
         color: #fefefe;
         font-size: 6rem;
         margin-top: 40px;
+        text-align: left;
         text-transform: uppercase;
         text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
       }

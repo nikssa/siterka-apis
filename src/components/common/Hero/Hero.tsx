@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import SitterBabyInTheLaps from '../../../../public/pexels-vika-glitter-392079-1648363.webp';
+// import SitterBabyInTheLap from '/public/hero.webp';
+import SitterBabyInTheLap from '/src/app/assets/hero.webp';
 import CallToAction from './CallToAction';
 
 import './Hero.scss';
@@ -11,7 +12,7 @@ const Hero = () => {
       <div className='inner'>
         <div className='hero-image'>
           <Image
-            src={SitterBabyInTheLaps}
+            src={SitterBabyInTheLap}
             alt='Sitter Baby in Lap'
             placeholder='blur'
             quality={50}

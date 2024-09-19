@@ -134,7 +134,7 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: 'Open Sans', sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.1;
   margin-bottom: 2rem;
   // text-transform: uppercase;
@@ -143,6 +143,7 @@ h6 {
 h1 {
   color: var(--primary-color);
   font-size: 3.2rem;
+  font-weight: 800;
   margin-bottom: 2rem;
 }
 
@@ -207,16 +208,21 @@ main {
 
       max-width: 1600px;
 
-      @media screen and (min-width: 768px) {
-        padding: 30px 20px;
-      }
+      // @media screen and (min-width: 768px) {
+      //   padding: 30px 20px;
+      // }
 
-      @media screen and (min-width: 992px) {
-        padding: 40px 20px;
-      }
+      // @media screen and (min-width: 992px) {
+      //   padding: 40px 20px;
+      // }
 
-      @media screen and (min-width: 1600px) {
-        padding: 80px 20px;
+      // @media screen and (min-width: 1600px) {
+      //   padding: 80px 20px;
+      // }
+
+      h1,
+      h2 {
+        text-align: center;
       }
     }
   }

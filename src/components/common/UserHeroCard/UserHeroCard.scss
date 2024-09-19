@@ -1,0 +1,47 @@
+.user {
+  border-radius: 10px;
+  justify-self: center;
+  overflow: hidden;
+  position: relative;
+  height: 400px;
+  width: 300px;
+  animation: fade-in 0.5s ease-in 0s 1 normal forwards;
+
+  img {
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .background {
+    border-radius: 0 0 10px 10px;
+    // background-color: rgba($color: #ebaa69, $alpha: 1);
+    padding: 20px 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.9;
+    transition: height 0.3s;
+    height: 130px;
+
+    .text {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  &:hover {
+    .background {
+      height: 100%;
+      opacity: 0.8;
+    }
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
