@@ -1,22 +1,38 @@
 import React from 'react';
 
 const TestPage = () => {
-  const module = {
-    x: 42,
-    getX: function () {
-      return this.x;
-    }
-  };
+  const className = 'some-class';
+  const inputClassName = classNames(
+    className,
+    'k-input k-input-md k-rounded-md k-input-solid'
+  );
 
-  const unboundGetX = module.getX;
-  console.log(unboundGetX()); // The function gets invoked at the global scope
-  // Expected output: undefined
+  return <div className={inputClassName}>TestPage</div>;
+};
 
-  const boundGetX = unboundGetX.bind(module);
-  console.log(boundGetX());
-  // Expected output: 42
+const classNames = (...args: any[]): string => {
+  const result: any = {};
 
-  return <h1>{boundGetX()}</h1>;
+  const addLeafKeys = (arg: any) =>
+    typeof arg === 'object'
+      ? Object.keys(arg).forEach((key) => {
+          result[key] = arg[key];
+        })
+      : (result[arg] = true);
+
+  const addKeys = (list: any) =>
+    list
+      .filter((arg: any) => arg !== true && !!arg)
+      .map((arg: any) =>
+        Array.isArray(arg) ? addKeys(arg) : addLeafKeys(arg)
+      );
+
+  addKeys(args);
+
+  return Object.keys(result)
+    .map((key) => (result[key] && key) || null)
+    .filter((el) => el !== null)
+    .join(' ');
 };
 
 export default TestPage;
