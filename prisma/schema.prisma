@@ -71,12 +71,12 @@ model User {
   email       String   @unique
   name        String   @unique
   password    String
-  role        Role     @default(sitter)
   acceptTerms Boolean
-  createdAt   DateTime @default(now())
+  role        Role     @default(sitter)
   membership  Boolean  @default(false)
   active      Boolean  @default(false)
   deleted     Boolean  @default(false)
+  createdAt   DateTime @default(now())
   post        Post?
   profile     Profile?
   photos      Photo?
