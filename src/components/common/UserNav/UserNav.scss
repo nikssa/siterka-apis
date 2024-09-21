@@ -1,0 +1,59 @@
+.user-links {
+  background-color: #fefefe;
+  border: 1px solid rgba($color: #0a4226, $alpha: 0.15);
+  border-radius: 10px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  display: block;
+  min-width: 160px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  z-index: 5;
+
+  @media screen and (min-width: 1200px) {
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+    display: flex;
+    margin-left: auto;
+    min-width: auto;
+    padding: 0;
+    position: relative;
+    right: unset;
+    top: unset;
+  }
+
+  li {
+    list-style: none;
+    text-wrap: nowrap;
+    a {
+      border-radius: var(--border-radius);
+      color: var(--primary-color);
+      display: block;
+      font-size: 1.6rem;
+      padding: 10px;
+      text-decoration: none;
+
+      &.in-progress {
+        color: var(--secondary-color);
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      &.join {
+        background-color: var(--primary-color);
+        color: #fefefe;
+        margin-left: 10px;
+        padding: 10px 20px;
+      }
+    }
+  }
+
+  //   a {
+  //     &.join {
+  //       padding: 10px 20px;
+  //     }
+  //   }
+}

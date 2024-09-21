@@ -1,21 +1,25 @@
 'use client';
 
-import { deleteSession } from '@/utils/session';
+import { Icons } from '@/app/assets/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-export default function Avatar() {
+import './Avatar.scss';
+import AvatarImage from './AvatarImage';
+
+export default function Avatar({ isAuth }: { isAuth: boolean }) {
   const router = useRouter();
   return (
     <Link
+      className={`avatar ${!isAuth ? 'public' : 'auth'}`}
       href='/'
-      title='Logout'
-      onClick={(e) => {
-        e.preventDefault();
-        deleteSession();
-        router.push('/login');
-      }}>
-      Avatar
+      title='Click to show user menu'
+      onClick={() => {}}>
+      {!isAuth ? (
+        <Icons.Anonymous color='#fefefe' size='22px' />
+      ) : (
+        <AvatarImage />
+      )}
     </Link>
   );
 }

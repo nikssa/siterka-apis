@@ -1,44 +1,39 @@
+'use client';
+
+import { useState } from 'react';
 import Logo from '/src/app/assets/siterka-logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import User from '@/components/common/User/User';
+import UserNav from '@/components/common/UserNav/UserNav';
+import { Icons } from '../../../app/assets/icons';
 
 import './Header.scss';
+import Avatar from '../Avatar/Avatar';
+import MainNav from './MainNav/MainNav';
 
-const Header = async () => {
+const Header = () => {
+  const [toggleMainNav, setToggleMainNav] = useState(false);
+
   return (
     <header>
+      <Icons.Bars
+        toggle={toggleMainNav}
+        className='bars'
+        size='50px'
+        onClick={(e) => {
+          e.preventDefault();
+          setToggleMainNav(!toggleMainNav);
+        }}
+      />
       <div className='logo'>
         <Link href='/'>
           <Image src={Logo} alt='Siterka' width={160} priority={true} />
         </Link>
       </div>
-      <nav>
-        <ul className='main-links'>
-          <li>
-            <Link href='/sitters'>Looking for a sitter</Link>
-          </li>
-          <li>
-            <Link href='/sitter-jobs'>Looking for a sitter job</Link>
-          </li>
-          <li>
-            <Link className='in-progress' href='/blog'>
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link className='in-progress' href='/chat'>
-              Chat with us
-            </Link>
-          </li>
-        </ul>
-        <ul className='user-links'>
-          <li>
-            <Link href='#'>Language</Link>
-          </li>
-          <User />
-        </ul>
-      </nav>
+
+      <MainNav toggle={toggleMainNav} setToggle={setToggleMainNav} />
+
+      <UserNav />
     </header>
   );
 };

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export const metadata = {
-  title: 'Posts page | SITERKA',
+  title: 'Posts page | Admin part of SITERKA',
   description: 'Listing all user posts.'
 };
 

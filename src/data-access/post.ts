@@ -1,3 +1,5 @@
+'use sever';
+
 import useIsAuthenticated from '@/hooks/useIsAuthenticated';
 import { PrismaClient } from '@prisma/client';
 

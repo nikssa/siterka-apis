@@ -6,7 +6,7 @@ import './UserHeroCard.scss';
 
 const UserHeroCard = ({ data }: { data: SitterProps }) => {
   return (
-    <div className='user' key={data.desc}>
+    <div className='user' key={data.url}>
       <Image
         src={data.url}
         alt={data.desc}

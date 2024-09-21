@@ -1,3 +1,5 @@
+'use server';
+
 import useIsAuthenticated from '@/hooks/useIsAuthenticated';
 import { ProfileDataProps } from '@/types/types';
 import { PrismaClient } from '@prisma/client';
@@ -14,16 +16,21 @@ export async function getProfiles() {
 }
 
 export async function getProfile(userId: number) {
+  console.log('getProfile userId:', userId);
   const isAuthenticated = await useIsAuthenticated();
   if (!isAuthenticated) {
     return null;
   }
-  const profile: ProfileDataProps | null = await prisma.profile.findUnique({
-    where: {
-      userId
-    }
-  });
-  return profile;
+  try {
+    const profile: ProfileDataProps | null = await prisma.profile.findUnique({
+      where: {
+        userId: userId
+      }
+    });
+    return profile;
+  } catch (e) {
+    throw e;
+  }
 }
 
 export async function getProfileIncludeUser(userId: number) {

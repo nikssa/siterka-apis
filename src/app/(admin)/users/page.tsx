@@ -53,37 +53,41 @@ const Users = async function () {
 
   return (
     <>
-      <h1>Users</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            {user.role === 'admin' && (
-              <>
-                <th>Email</th>
-                <th>Password</th>
-              </>
-            )}
-            <th>Role</th>
-            {user.role === 'admin' && (
-              <>
-                <th>Profile</th>
-                <th>Delete</th>
-              </>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          <Suspense
-            fallback={
+      <section>
+        <div className='inner'>
+          <h1>Users</h1>
+          <table>
+            <thead>
               <tr>
-                <td colSpan={6}>Loading...</td>
+                <th>Name</th>
+                {user.role === 'admin' && (
+                  <>
+                    <th>Email</th>
+                    <th>Password</th>
+                  </>
+                )}
+                <th>Role</th>
+                {user.role === 'admin' && (
+                  <>
+                    <th>Profile</th>
+                    <th>Delete</th>
+                  </>
+                )}
               </tr>
-            }>
-            {usersRender}
-          </Suspense>
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              <Suspense
+                fallback={
+                  <tr>
+                    <td colSpan={6}>Loading...</td>
+                  </tr>
+                }>
+                {usersRender}
+              </Suspense>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </>
   );
 };

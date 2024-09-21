@@ -32,7 +32,7 @@ export default function RootLayout({
             theme='light'
           />
           <Header />
-          <main>{children}</main>
+          <main className='admin'>{children}</main>
           <Footer />
         </Providers>
       </body>
