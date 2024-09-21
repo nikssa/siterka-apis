@@ -16,7 +16,7 @@ nav.main-nav {
     left: -260px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 992px) {
     background-color: transparent;
     border: 0;
     display: flex;
@@ -37,7 +37,7 @@ nav.main-nav {
   ul {
     display: block;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 992px) {
       display: flex;
       align-items: center;
     }

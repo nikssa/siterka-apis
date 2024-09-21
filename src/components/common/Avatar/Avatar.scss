@@ -11,7 +11,7 @@
   width: 45px;
 
   &.public {
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 992px) {
       display: none;
     }
   }

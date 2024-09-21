@@ -9,10 +9,6 @@ header {
   justify-self: center;
   align-items: center;
 
-  @media screen and (min-width: 1200px) {
-    // position: inherit;
-  }
-
   .bars {
     display: flex;
     align-content: center;
@@ -20,7 +16,7 @@ header {
     padding: 10px;
     z-index: 10;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 992px) {
       display: none;
     }
   }
@@ -30,9 +26,6 @@ header {
     height: auto;
     width: 160px;
     z-index: 10;
-
-    @media screen and (min-width: 1200px) {
-    }
 
     a {
       display: block;
