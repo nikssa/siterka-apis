@@ -22,7 +22,7 @@ const Hero = () => {
           />
         </div>
         <div className='hero-text'>
-          <h1>Do you ever care enough?</h1>
+          <h1>Peace of mind, one click away</h1>
           <p>No matter what your needs are sitterka can help.</p>
         </div>
         <CallToAction />

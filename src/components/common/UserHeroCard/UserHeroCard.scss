@@ -1,5 +1,4 @@
 .user {
-  border-radius: 10px;
   justify-self: center;
   overflow: hidden;
   position: relative;
@@ -13,14 +12,12 @@
   }
 
   .background {
-    border-radius: 0 0 10px 10px;
-    // background-color: rgba($color: #ebaa69, $alpha: 1);
     padding: 20px 20px 0;
     position: absolute;
     bottom: 0;
     width: 100%;
     opacity: 0.9;
-    transition: height 0.3s;
+    transition: height 0.2s;
     height: 130px;
 
     .text {

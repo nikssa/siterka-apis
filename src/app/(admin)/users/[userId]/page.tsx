@@ -21,13 +21,18 @@ const User = async function ({
       <section>
         <div className='inner'>
           <h1>User</h1>
-          {isAuthenticated ? (
-            <UserForm data={user as UserDataProps} readOnly={true} />
-          ) : (
-            <p>Not authenticated</p>
-          )}
         </div>
       </section>
+
+      {isAuthenticated ? (
+        <UserForm data={user as UserDataProps} readOnly={true} />
+      ) : (
+        <section>
+          <div className='inner'>
+            <p>You are not authenticated.</p>
+          </div>
+        </section>
+      )}
     </>
   );
 };

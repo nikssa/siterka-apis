@@ -1,15 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import Logo from '/src/app/assets/siterka-logo.svg';
+import Logo from '/src/app/assets/siterka-logo-inverse.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import UserNav from '@/components/common/UserNav/UserNav';
+import UserNav from '@/components/common/Header/UserNav/UserNav';
 import { Icons } from '../../../app/assets/icons';
-
-import './Header.scss';
-import Avatar from '../Avatar/Avatar';
 import MainNav from './MainNav/MainNav';
+import './Header.scss';
 
 const Header = () => {
   const [toggleMainNav, setToggleMainNav] = useState(false);
@@ -25,6 +23,7 @@ const Header = () => {
           setToggleMainNav(!toggleMainNav);
         }}
       />
+
       <div className='logo'>
         <Link href='/'>
           <Image src={Logo} alt='Siterka' width={160} priority={true} />

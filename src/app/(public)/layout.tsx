@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import { Providers } from '../../components/providers/Providers';
+import { Providers } from '@/providers/Providers';
 import Header from '../../components/common/Header/Header';
 import Footer from '../../components/common/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.min.css';
 import '../assets/globals.scss';
 import './layout.scss';

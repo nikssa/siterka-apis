@@ -1,0 +1,88 @@
+.user-links {
+  background-color: #fefefe;
+  border: 1px solid rgba($color: #0a4226, $alpha: 0.15);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  display: none;
+  min-width: 160px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  z-index: 5;
+
+  &.public {
+    @media screen and (min-width: 992px) {
+      background-color: transparent;
+      box-shadow: none;
+      border: 0;
+      display: flex;
+      margin-left: auto;
+      min-width: auto;
+      padding: 0;
+      position: relative;
+      right: unset;
+      top: unset;
+    }
+  }
+
+  &.auth {
+    li {
+      a {
+        @media screen and (min-width: 992px) {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  &.open {
+    display: block;
+  }
+
+  li {
+    list-style: none;
+    text-wrap: nowrap;
+
+    a {
+      color: var(--primary-color);
+      display: block;
+      font-size: 1.5rem;
+      padding: 10px;
+      transition: color 0.2s linear;
+
+      @media screen and (min-width: 992px) {
+        color: var(--color-pale-white);
+
+        &:hover {
+          color: var(--primary-color-hover);
+        }
+      }
+
+      &.join {
+        --height: 38px;
+        background-color: var(--primary-color);
+        border-radius: calc(var(--height) * 0.5);
+        color: #fefefe;
+        margin-left: 0;
+        padding: 10px 20px;
+        transition: background-color 0.2s linear;
+
+        &:hover {
+          background-color: var(--primary-color-hover);
+          text-decoration: none;
+        }
+
+        @media screen and (min-width: 992px) {
+          margin-left: 10px;
+          background-color: var(--color-pale-white);
+          color: var(--primary-color);
+
+          &:hover {
+            background-color: var(--primary-color-hover);
+            // color: #fefefe;
+          }
+        }
+      }
+    }
+  }
+}

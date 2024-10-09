@@ -1,6 +1,5 @@
 .main-hero {
-  // background-color: var(--primary-color);
-  background: linear-gradient(30deg, var(--primary-color) 20%, #000000 100%);
+  background: linear-gradient(-30deg, var(--primary-color) 60%, #000000 100%);
   color: #fefefe;
   height: calc(100vh - var(--header-height));
   width: 100vw;
@@ -13,29 +12,7 @@
     grid-template-columns: 2fr 3fr;
     grid-template-rows: repeat(3, 1fr);
 
-    // @media screen and (min-width: 768px) {
-    //   padding: 30px 20px;
-    // }
-
-    // @media screen and (min-width: 992px) {
-    //   padding: 40px 20px;
-    // }
-
-    // @media screen and (min-width: 1600px) {
-    //   padding: 60px 20px;
-    // }
-
-    // @media screen and (min-width: 1400px) {
-    //   grid-template-rows: 1fr 1fr auto;
-    // }
-
-    // @media screen and (min-width: 1600px) {
-    //   grid-template-rows: repeat(3, 1fr);
-    // }
-
     .hero-image {
-      // box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
-      // color: var(--primary-color);
       height: 100%;
       width: 100%;
       position: relative;
@@ -57,12 +34,12 @@
 
       @media screen and (min-width: 1600px) {
         --move-right: calc((100vw - 1600px) / 2);
-        //
         overflow: visible;
         height: 100%;
         width: calc(100% + ((100vw - 1600px) / 2));
         position: absolute;
-        right: -var(--move-right);
+        left: 0;
+        right: calc(0 - var(--move-right));
       }
 
       img {
@@ -79,12 +56,13 @@
       z-index: 1;
 
       @media screen and (min-width: 768px) {
-        padding: 0 0 0 30px;
+        padding: 0 100px 0 30px;
       }
 
       @media screen and (min-width: 992px) {
         background-color: transparent;
         grid-column: 1 / 2;
+        padding: 0 0 0 30px;
       }
 
       @media screen and (min-width: 1400px) {

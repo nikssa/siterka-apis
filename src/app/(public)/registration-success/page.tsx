@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const metadata = {
   title: 'Registration success page | SITERKA',
   description:
@@ -9,8 +7,14 @@ export const metadata = {
 const RegistrationSuccessPage = () => {
   return (
     <>
-      <h1>Registration Successful</h1>
-      <p>You are now registered. Please check your email for confirmation.</p>
+      <section>
+        <div className='inner'>
+          <h1>Registration Successful</h1>
+          <p>
+            You are now registered. Please check your email for confirmation.
+          </p>
+        </div>
+      </section>
     </>
   );
 };

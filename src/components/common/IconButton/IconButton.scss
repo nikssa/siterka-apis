@@ -1,0 +1,19 @@
+button {
+  &.icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+      justify-content: center;
+      margin-right: 5px;
+    }
+
+    &.right {
+      div {
+        margin-right: 0;
+        margin-left: 5px;
+      }
+    }
+  }
+}

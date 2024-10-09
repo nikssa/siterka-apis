@@ -34,6 +34,7 @@ const LoginPage = async () => {
           <div className='login-box'>
             <h1>Sign in</h1>
             <p>to gain full access to our users data.</p>
+
             <LoginForm />
           </div>
         </div>

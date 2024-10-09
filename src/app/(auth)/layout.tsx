@@ -1,6 +1,5 @@
+import { Providers } from '@/providers/Providers';
 import { ToastContainer } from 'react-toastify';
-import { Providers } from '@/components/providers/Providers';
-
 import 'react-toastify/dist/ReactToastify.min.css';
 import '../assets/globals.scss';
 import './layout.scss';

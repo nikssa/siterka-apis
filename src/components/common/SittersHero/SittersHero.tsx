@@ -5,6 +5,7 @@ import UserHeroCard from '../UserHeroCard/UserHeroCard';
 import Link from 'next/link';
 
 export type SitterProps = {
+  id: number;
   name: string;
   age: number;
   url: string;
@@ -13,36 +14,42 @@ export type SitterProps = {
 
 const latestSitters: SitterProps[] = [
   {
+    id: 1,
     name: 'John Doe',
     age: 25,
     url: 'https://images.pexels.com/photos/755049/pexels-photo-755049.jpeg',
     desc: 'Sitter 1 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum iusto harum quo.'
   },
   {
+    id: 2,
     name: 'Jane Doe',
     age: 30,
     url: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg',
     desc: 'Sitter 2 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum iusto harum quo.'
   },
   {
+    id: 3,
     name: 'John Doe',
     age: 25,
     url: 'https://images.pexels.com/photos/1542085/pexels-photo-1542085.jpeg',
     desc: 'Sitter 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum iusto harum quo.'
   },
   {
+    id: 4,
     name: 'Jane Doe',
     age: 30,
     url: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg',
     desc: 'Sitter 4 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum iusto harum quo.'
   },
   {
+    id: 5,
     name: 'John Doe',
     age: 25,
     url: 'https://images.pexels.com/photos/678783/pexels-photo-678783.jpeg',
     desc: 'Sitter 5 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum iusto harum quo.'
   },
   {
+    id: 6,
     name: 'Jane Doe',
     age: 30,
     url: 'https://images.pexels.com/photos/1499327/pexels-photo-1499327.jpeg',
@@ -57,10 +64,12 @@ const SittersHero = () => {
         <h2>Latest Sitters</h2>
         <div className='sitters'>
           {latestSitters.map((sitter: SitterProps) => (
-            <UserHeroCard data={sitter} />
+            <UserHeroCard data={sitter} key={sitter.url} />
           ))}
         </div>
-        <Link href='/parents'>See all sitters</Link>
+        <Link className='load-more' href='/parents'>
+          See all sitters
+        </Link>
       </div>
     </section>
   );
