@@ -3,18 +3,23 @@
 import { Icons } from '@/app/assets/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-import './Avatar.scss';
 import AvatarImage from './AvatarImage';
+import './Avatar.scss';
 
-export default function Avatar({ isAuth }: { isAuth: boolean }) {
+export default function Avatar({
+  isAuth,
+  onClick
+}: {
+  isAuth: boolean;
+  onClick: (e: React.MouseEvent) => void;
+}) {
   const router = useRouter();
   return (
     <Link
       className={`avatar ${!isAuth ? 'public' : 'auth'}`}
       href='/'
       title='Click to show user menu'
-      onClick={() => {}}>
+      onClick={onClick}>
       {!isAuth ? (
         <Icons.Anonymous color='#fefefe' size='22px' />
       ) : (

@@ -1,18 +1,39 @@
 .avatar {
-  background-color: var(--primary-color);
-  //   border: 2px solid var(--primary-color);
+  background-color: var(--color-pale-white);
   border-radius: 50%;
-  color: #fefefe;
+  color: var(--primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.7rem;
   margin-left: auto;
-  height: 45px;
-  width: 45px;
+  height: 46px;
+  width: 46px;
+  transition: background-color 0.2s linear;
+
+  &:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--primary-color);
+    text-decoration: none;
+  }
 
   &.public {
     @media screen and (min-width: 992px) {
       display: none;
+    }
+
+    div {
+      display: flex;
+    }
+
+    &:hover {
+      svg {
+        fill: var(--color-pale-white);
+      }
+    }
+
+    svg {
+      fill: var(--primary-color);
     }
   }
 }

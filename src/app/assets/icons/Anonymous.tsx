@@ -1,6 +1,6 @@
 import Icon from './Icon';
 
-const Bars = ({
+const Anonymous = ({
   className,
   size,
   color,
@@ -27,4 +27,4 @@ const Bars = ({
   );
 };
 
-export default Bars;
+export default Anonymous;
