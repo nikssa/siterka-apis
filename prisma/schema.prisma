@@ -26,14 +26,6 @@ enum Gender {
   other
 }
 
-enum Age {
-  EIGHTEEN
-  TWENTY_FIVE
-  FORTY
-  FIFTY_FIVE
-  SIXTY_FIVE
-}
-
 enum ChildAge {
   NEWBORNS // 0-2 months
   INFANTS // 3-12 months
@@ -50,7 +42,8 @@ enum Education {
   GRADUATE
 }
 
-enum Languages {
+enum Language {
+  SERBIAN
   ENGLISH
   GERMAN
   FRANCH
@@ -63,13 +56,19 @@ enum Languages {
 enum EarningsRate {
   HOURLY
   DAILY
+  WEEKLY
   MONTHLY
+}
+
+enum TimeUnits {
+  MONTHS
+  YEARS
 }
 
 model User {
   id          Int      @id @default(autoincrement())
   email       String   @unique
-  name        String   @unique
+  name        String   @unique @db.VarChar(255)
   password    String
   acceptTerms Boolean
   role        Role     @default(sitter)
@@ -79,7 +78,6 @@ model User {
   createdAt   DateTime @default(now())
   post        Post?
   profile     Profile?
-  photos      Photo?
 }
 
 model Profile {
@@ -92,53 +90,55 @@ model Profile {
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
   userId    Int      @unique
+  photo     Photo?
 }
 
 model Post {
-  id                Int          @id @default(autoincrement())
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
-  published         Boolean      @default(false)
-  title             String       @db.VarChar(255)
-  description       String?
-  email             String
-  phone             String
-  birthDate         DateTime //date picker
-  ageGroup          Age
-  country           String //dropdown
-  city              String //dropdown country sensitive
-  experience        Int // years or months
-  childAgeGroup     ChildAge
-  numberOfChildren  Int
-  pets              Boolean
-  specialNeeds      Boolean
-  inOwnHouse        Boolean
-  cleaning          Boolean
-  cleaningChildOnly Boolean
-  shopping          Boolean
-  cooking           Boolean
-  cookingChildOnly  Boolean
-  outWithChild      Boolean
-  car               Boolean
-  driversLicense    Boolean
-  smoking           Boolean
-  education         Education
-  sitterCourse      Boolean
-  firstAid          Boolean
-  languages         Languages
-  otherLanguages    String
-  earnings          Int
-  earningsRate      EarningsRate
-  photos            Photo[]
-  author            User         @relation(fields: [authorId], references: [id])
-  authorId          Int          @unique
+  id                 Int          @id @default(autoincrement())
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  published          Boolean      @default(false)
+  title              String       @db.VarChar(255)
+  description        String?
+  email              String
+  phone              String
+  birthDate          DateTime //date picker
+  country            String //dropdown
+  city               String //dropdown country sensitive
+  address            String       @default("")
+  availability       String       @default("")
+  experience         Int // years or months
+  experienceTimeUnit TimeUnits    @default(YEARS)
+  childAgeGroup      Json
+  numberOfChildren   Int
+  pets               Boolean
+  specialNeeds       Boolean
+  inOwnHouse         Boolean
+  cleaning           Boolean
+  cleaningChildOnly  Boolean
+  shopping           Boolean
+  cooking            Boolean
+  cookingChildOnly   Boolean
+  outWithChild       Boolean
+  car                Boolean
+  driversLicense     Boolean
+  smoking            Boolean
+  education          Education
+  sitterCourse       Boolean
+  firstAid           Boolean
+  languages          Json
+  otherLanguages     String
+  earnings           Int
+  earningsRate       EarningsRate
+  author             User         @relation(fields: [authorId], references: [id])
+  authorId           Int          @unique
 }
 
 model Photo {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   url      String
-  author   User?  @relation(fields: [authorId], references: [id])
-  authorId Int    @unique
-  post     Post?  @relation(fields: [postId], references: [id])
-  postId   Int
+  author   Profile? @relation(fields: [authorId], references: [userId])
+  authorId Int      @unique
+  // post     Post?  @relation(fields: [postId], references: [id])
+  // postId   Int    @unique
 }
