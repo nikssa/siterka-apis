@@ -9,11 +9,12 @@ import { Slide, toast } from 'react-toastify';
 import { convertISO8601ToDateTime } from '@/utils/convertDate';
 import { ProfileDataProps } from '@/types/types';
 
-type ChangeEventTypes =
+export type ChangeEventTypes =
   | ChangeEvent<HTMLTextAreaElement>
-  | ChangeEvent<HTMLInputElement>;
+  | ChangeEvent<HTMLInputElement>
+  | ChangeEvent<HTMLSelectElement>;
 
-type ProfileFormProps = {
+export type ProfileFormProps = {
   data: ProfileDataProps;
   userId: number;
   readOnly?: boolean;
@@ -92,60 +93,67 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
   );
 
   return (
-    <form action='' onSubmit={handleSubmit}>
-      <p>
-        Profile created: {profileCreated} | Profile updated: {profileUpdated}
-      </p>
-      <Input
-        isHidden={true}
-        label='User Id'
-        name='userId'
-        type='text'
-        defaultValue={userId}
-        readOnly={readOnly}
-      />
-      <Input
-        label='First Name'
-        name='firstName'
-        type='text'
-        placeholder='First Name'
-        required
-        value={profileData?.firstName}
-        onChange={handleChange}
-      />
-      <Input
-        label='Last Name'
-        name='lastName'
-        type='text'
-        placeholder='Last Name'
-        required
-        value={profileData?.lastName}
-        onChange={handleChange}
-      />
-      <RadioGroup
-        label='Gender'
-        name='gender'
-        options={['male', 'female', 'other']}
-        value={profileData?.gender}
-        onChange={handleChange}
-        // error='Please select a role'
-      />
-      <TextArea
-        label='Short Bio'
-        name='bio'
-        placeholder='Short Bio'
-        value={profileData?.bio}
-        onChange={handleChange}
-      />
+    <section>
+      <div className='inner'>
+        <h2>Profile</h2>
+        <form action='' onSubmit={handleSubmit}>
+          <p>
+            Profile created: {profileCreated} | Profile updated:{' '}
+            {profileUpdated}
+          </p>
+          {/* TODO: Add profile image */}
+          <Input
+            isHidden={true}
+            label='User Id'
+            name='userId'
+            type='text'
+            defaultValue={userId}
+            readOnly={readOnly}
+          />
+          <Input
+            label='First Name'
+            name='firstName'
+            type='text'
+            placeholder='First Name'
+            required
+            value={profileData?.firstName}
+            onChange={handleChange}
+          />
+          <Input
+            label='Last Name'
+            name='lastName'
+            type='text'
+            placeholder='Last Name'
+            required
+            value={profileData?.lastName}
+            onChange={handleChange}
+          />
+          <RadioGroup
+            label='Gender'
+            name='gender'
+            options={['male', 'female', 'other']}
+            value={profileData?.gender}
+            onChange={handleChange}
+            // error='Please select a role'
+          />
+          <TextArea
+            label='Short Bio'
+            name='bio'
+            placeholder='Short Bio'
+            value={profileData?.bio}
+            onChange={handleChange}
+          />
 
-      {!readOnly ? (
-        <Button
-          primary={true}
-          label={!data ? 'Add Profile' : 'Update Profile'}
-          type='submit'
-        />
-      ) : null}
-    </form>
+          {!readOnly ? (
+            <Button
+              primary={true}
+              label={!data ? 'Add Profile' : 'Update Profile'}
+              type='submit'
+            />
+          ) : null}
+        </form>
+      </div>
+    </section>
   );
 };
 

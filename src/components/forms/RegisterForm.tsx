@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import Input from '../formElements/TextField/TextField';
 import RadioGroup from '../formElements/RadioGroup/RadioGroup';
-import Checkbox from '../formElements/Checkbox/Checkbox';
+import Checkbox from '../formElements/SimpleCheckbox/SimpleCheckbox';
 import Button from '../formElements/Button/Button';
 import Link from 'next/link';
 import { toast } from 'react-toastify';

@@ -38,51 +38,65 @@ const UserForm = ({ data, readOnly = false }: UserFormProps) => {
     convertISO8601ToDateTime(userData.createdAt.toString(), 'en-150');
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <section>
+        <div className='inner'>
+          <p>Loading...</p>
+        </div>
+      </section>
+    );
   }
 
   return (
-    <form action='' onSubmit={handleSubmit} aria-disabled={readOnly}>
-      <p>Account created: {userAccountCreated}</p>
-      <Input
-        label='User Name'
-        name='name'
-        type='text'
-        placeholder='User Name'
-        required
-        value={userData?.name}
-        onChange={handleChange}
-        disabled={readOnly}
-      />
-      <Input
-        label='Email'
-        name=''
-        type='text'
-        placeholder='Email'
-        required
-        value={userData?.email}
-        onChange={handleChange}
-        disabled={true}
-      />
+    <section>
+      <div className='inner'>
+        <h2>User</h2>
 
-      <RadioGroup
-        label='Role'
-        name='role'
-        options={['admin', 'parent', 'sitter', 'moderator']}
-        value={userData?.role}
-        onChange={handleChange}
-        disabled={readOnly}
-      />
+        <form action='' onSubmit={handleSubmit} aria-disabled={readOnly}>
+          <p>Account created: {userAccountCreated}</p>
+          <Input
+            label='User Name'
+            name='name'
+            type='text'
+            placeholder='User Name'
+            required
+            value={userData?.name}
+            onChange={handleChange}
+            disabled={readOnly}
+          />
+          <Input
+            label='Email'
+            name=''
+            type='text'
+            placeholder='Email'
+            required
+            value={userData?.email}
+            onChange={handleChange}
+            disabled={true}
+          />
 
-      <p>
-        {`User active: ${userData?.active ? 'Yes' : 'No'}`}
-        <br />
-        {`User deleted: ${userData?.deleted ? 'Yes' : 'No'}`}
-      </p>
-      <p></p>
+          <RadioGroup
+            label='Role'
+            name='role'
+            options={['admin', 'parent', 'sitter', 'moderator']}
+            value={userData?.role}
+            onChange={handleChange}
+            disabled={readOnly}
+          />
 
-      {!readOnly ? <Button primary={true} label='Save' type='submit' /> : null}
-    </form>
+          <p>
+            {`User active: ${userData?.active ? 'Yes' : 'No'}`}
+            <br />
+            {`User deleted: ${userData?.deleted ? 'Yes' : 'No'}`}
+          </p>
+          <p></p>
+
+          {!readOnly ? (
+            <Button primary={true} label='Save' type='submit' />
+          ) : null}
+        </form>
+      </div>
+    </section>
   );
 };
 

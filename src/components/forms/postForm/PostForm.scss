@@ -1,0 +1,59 @@
+main.admin {
+  .post-form {
+    height: 100%;
+
+    section {
+      height: 100%;
+
+      .inner {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        @media screen and (min-width: 768px) {
+          max-width: 400px;
+        }
+      }
+    }
+
+    .form-elements {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      width: 100%;
+
+      //   @media screen and (min-width: 768px) {
+      //     max-width: 400px;
+      //   }
+
+      .buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 10px;
+        text-wrap: nowrap;
+
+        button {
+          width: auto;
+
+          &.primary {
+            width: 100%;
+          }
+
+          &:not(.primary) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+
+            & + .primary {
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

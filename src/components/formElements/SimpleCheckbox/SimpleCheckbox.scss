@@ -1,0 +1,35 @@
+.simple-checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 15px;
+  text-align: left;
+
+  input[type='checkbox'] {
+    accent-color: var(--primary-color);
+  }
+
+  //   input[type='checkbox']:not(:checked) ~ span {
+  //     display: block;
+  //   }
+
+  input[type='checkbox']:user-invalid ~ span {
+    display: block;
+  }
+
+  label {
+    // display: inline-block;
+  }
+
+  span {
+    color: red;
+    display: none;
+  }
+
+  .input-line {
+    // display: block;
+    // height: 1.6rem;
+    // line-height: 1;
+    padding: 4px 25px 0;
+    // text-align: left;
+  }
+}

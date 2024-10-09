@@ -46,10 +46,12 @@ const LoginForm = () => {
       // Authenticate user - Create JWT session set cookie and redirect to homepage
       const userId = result.user?.id.toString();
       const user = { ...result.user, id: userId };
-      if (user && userId) {
-        createSession(user as UserDataProps);
-        router.push('/');
-      }
+      console.log('preparing to createSession', user);
+      // if (user && userId) {
+      const session = await createSession(user as UserDataProps);
+      console.log('session created', session);
+      router.push('/');
+      // }
     } else {
       toast.error(`${result.statusText}`);
     }

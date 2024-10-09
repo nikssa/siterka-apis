@@ -1,0 +1,35 @@
+main.admin .post-form .user-about {
+  .inner {
+    @media screen and (min-width: 768px) {
+      display: flex;
+      max-width: 750px;
+    }
+
+    .form-elements {
+      @media screen and (min-width: 768px) {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+      }
+
+      .single-checkbox {
+        @media screen and (min-width: 768px) {
+          margin: 0 20px 0 0;
+          width: calc(50% - 10px);
+        }
+
+        &:nth-child(2n) {
+          @media screen and (min-width: 768px) {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .buttons {
+        @media screen and (min-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

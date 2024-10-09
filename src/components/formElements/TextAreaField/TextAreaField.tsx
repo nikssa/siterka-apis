@@ -1,6 +1,7 @@
 import './TextAreaField.scss';
 
-interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
   // name: string;
@@ -15,10 +16,10 @@ const TextArea = (props: TextAreaProps) => {
   const {
     label,
     name,
-    type,
     required,
     placeholder,
     value,
+    rows = 5,
     error,
     onChange,
     ...rest
@@ -36,7 +37,7 @@ const TextArea = (props: TextAreaProps) => {
         <textarea
           id={name}
           name={name}
-          rows={5}
+          rows={rows}
           onChange={onChange}
           value={value}
           placeholder={placeholder}

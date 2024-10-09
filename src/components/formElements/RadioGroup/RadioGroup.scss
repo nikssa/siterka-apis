@@ -3,10 +3,17 @@
 
   .radio-group {
     background-color: var(--field-background-color);
-    border: 1px solid rgb(128, 128, 128);
-    border-radius: 4px;
+    border: 1px solid var(--field-border-color);
+    border-radius: var(--field-border-radius);
     position: relative;
     padding: 15px 14px 10px;
+
+    &:not(:has(.disabled)) {
+      &:hover {
+        border-color: rgba(var(--primary-color-rgb), 0.5);
+        box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.03);
+      }
+    }
 
     .radio-group-label {
       background-color: var(--field-background-color);
@@ -40,6 +47,12 @@
     align-items: center;
     gap: 5px;
     margin-bottom: 5px;
+
+    &:has(.disabled) {
+      span {
+        opacity: 0.5;
+      }
+    }
 
     input {
       accent-color: var(--primary-color);

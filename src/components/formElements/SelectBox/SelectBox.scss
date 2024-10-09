@@ -1,9 +1,7 @@
-// --field-background-color: #fff;
-
-.input-box {
+.select-box {
   margin-bottom: 15px;
 
-  .input {
+  .select {
     background-color: var(--field-background-color);
     border: 1px solid var(--field-border-color);
     border-radius: var(--field-border-radius);
@@ -66,7 +64,7 @@
     }
   }
 
-  input {
+  select {
     background-color: transparent;
     border: 0;
     outline: 0;
@@ -77,11 +75,6 @@
   .help-line {
     padding: 4px 15px 0;
     text-align: left;
-
-    &.unique {
-      color: red;
-      display: block;
-    }
   }
 
   .help-line {

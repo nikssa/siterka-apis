@@ -16,6 +16,7 @@ const RadioGroup = (props: RadioGroupProps) => {
     return (
       <label htmlFor={option} key={option}>
         <input
+          className={rest.disabled ? 'disabled' : ''}
           type='radio'
           id={option}
           name={name}
@@ -25,7 +26,7 @@ const RadioGroup = (props: RadioGroupProps) => {
           required={required}
           {...rest}
         />
-        {option}
+        <span>{option}</span>
       </label>
     );
   });

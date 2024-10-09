@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   blurred?: string;
+  helpText?: string;
   error?: string;
   isHidden?: boolean;
   isUnique?: boolean;
@@ -21,6 +22,7 @@ const Input = (props: InputProps) => {
     pattern,
     placeholder,
     value,
+    helpText,
     error,
     onChange,
     isHidden,
@@ -69,6 +71,7 @@ const Input = (props: InputProps) => {
         )}
 
         <input
+          className={rest.disabled ? 'disabled' : ''}
           id={name}
           name={name}
           type={type}
@@ -84,6 +87,7 @@ const Input = (props: InputProps) => {
         />
       </div>
       <span className='input-line'>{error}</span>
+      {helpText && <span className='help-line'>{helpText}</span>}
       {exists && (
         <span className='input-line unique'>
           "{name}" with a value of "{value}" already exists

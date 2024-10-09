@@ -1,0 +1,31 @@
+.single-checkbox {
+  .input-box {
+    display: none;
+
+    &:has(input[type='checkbox']:checked) + label {
+      //   border-color: var(--primary-color);
+      //   box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.03);
+    }
+  }
+
+  label {
+    background-color: var(--field-background-color);
+    border: 1px solid var(--field-border-color);
+    border-radius: var(--field-border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    padding: 15px;
+    position: relative;
+
+    > div {
+      background-color: var(--background-color);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

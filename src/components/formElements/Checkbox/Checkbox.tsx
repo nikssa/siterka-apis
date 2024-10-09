@@ -1,41 +1,39 @@
-import React, { InputHTMLAttributes } from 'react';
-
+import { ChangeEvent } from 'react';
+import Input from '../TextField/TextField';
+import { Icons } from '@/app/assets/icons';
 import './Checkbox.scss';
-import Link from 'next/link';
 
-type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
-  label: string;
-  error?: string;
+export type ChecksProps = {
+  [key: string]: boolean;
 };
 
-const Checkbox = ({
-  id,
-  name,
-  label,
-  checked,
-  required,
-  onChange,
-  error
-}: CheckboxProps) => {
+export type CheckboxProps = {
+  check: string;
+  checks: ChecksProps;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Checkbox = ({ check, checks, onChange }: CheckboxProps) => {
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   return (
     <div className='checkbox'>
-      <input
-        style={{ marginRight: '10px' }}
+      <Input
         type='checkbox'
-        id={id}
-        name={name}
-        checked={checked}
+        name={check}
+        id={check}
         onChange={onChange}
-        required={required}
+        checked={checks && checks[check] ? true : false}
       />
-
-      <label htmlFor={id}>
-        <Link href='terms-and-conditions'>
-          {label} {required && '*'}
-        </Link>
+      <label htmlFor={check}>
+        {checks && checks[check] ? (
+          <Icons.Checked size='18px' />
+        ) : (
+          <Icons.Unchecked size='18px' />
+        )}
+        {capitalizeFirstLetter(check)}
       </label>
-
-      <span className='input-line'>{error}</span>
     </div>
   );
 };
