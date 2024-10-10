@@ -16,7 +16,7 @@ export enum ChildAge {
 
 export enum Education {
   ELEMENTARY = 'Elementary',
-  HIGH_SCHOOL = 'High School',
+  HIGH_SCHOOL = 'High_School',
   COLLEGE = 'College',
   GRADUATE = 'Graduate'
 }
@@ -45,10 +45,10 @@ export type LangProps = {
 };
 
 export enum EarningsRate {
-  HOURLY = 'HOURLY',
-  DAILY = 'DAILY',
-  WEEKLY = 'WEEKLY',
-  MONTHLY = 'MONTHLY'
+  HOURLY = 'Hourly',
+  DAILY = 'Daily',
+  WEEKLY = 'Weekly',
+  MONTHLY = 'Monthly'
 }
 
 export type PhotoProps = {
@@ -75,11 +75,11 @@ export type ProfileDataProps = {
   id: number;
   firstName: string;
   lastName: string;
-  gender?: string;
+  gender: string;
   bio?: string;
   photo?: PhotoProps;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   user?: UserDataProps;
   userId?: number;
 };
@@ -95,11 +95,11 @@ export type ChildAgeGroupProps = {
 
 export type PostDataProps = {
   id: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  published?: boolean;
-  title?: string;
-  description?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  published: boolean;
+  title: string;
+  description: string;
   email?: string;
   phone?: string;
   birthDate?: Date;
@@ -108,28 +108,28 @@ export type PostDataProps = {
   address?: string;
   availability?: string;
   experience?: number;
-  experienceTimeUnit?: TimeUnits;
-  childAgeGroup?: ChildAgeGroupProps;
-  numberOfChildren?: number;
-  pets?: boolean;
-  specialNeeds?: boolean;
-  inOwnHouse?: boolean;
-  cleaning?: boolean;
-  cleaningChildOnly?: boolean;
-  shopping?: boolean;
-  cooking?: boolean;
-  cookingChildOnly?: boolean;
-  outWithChild?: boolean;
-  car?: boolean;
-  driversLicense?: boolean;
-  smoking?: boolean;
-  education?: Education;
-  sitterCourse?: boolean;
-  firstAid?: boolean;
-  languages?: LangProps;
+  experienceTimeUnit: TimeUnits;
+  childAgeGroup: ChildAgeGroupProps;
+  numberOfChildren: number;
+  pets: boolean;
+  specialNeeds: boolean;
+  inOwnHouse: boolean;
+  cleaning: boolean;
+  cleaningChildOnly: boolean;
+  shopping: boolean;
+  cooking: boolean;
+  cookingChildOnly: boolean;
+  outWithChild: boolean;
+  car: boolean;
+  driversLicense: boolean;
+  notSmoking: boolean;
+  education: Education;
+  sitterCourse: boolean;
+  firstAid: boolean;
+  languages: LangProps;
   otherLanguages?: string;
-  earnings?: number;
-  earningsRate?: EarningsRate;
+  earnings: number;
+  earningsRate: EarningsRate;
   author?: UserDataProps;
   authorId?: number;
   profile?: ProfileDataProps;

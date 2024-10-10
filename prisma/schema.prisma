@@ -36,10 +36,10 @@ enum ChildAge {
 }
 
 enum Education {
-  ELEMENTARY
-  HIGH_SCHOOL
-  COLLEGE
-  GRADUATE
+  Elementary
+  High_School
+  College
+  Graduate
 }
 
 enum Language {
@@ -54,15 +54,15 @@ enum Language {
 }
 
 enum EarningsRate {
-  HOURLY
-  DAILY
-  WEEKLY
-  MONTHLY
+  Hourly
+  Daily
+  Weekly
+  Monthly
 }
 
 enum TimeUnits {
-  MONTHS
-  YEARS
+  months
+  years
 }
 
 model User {
@@ -100,17 +100,17 @@ model Post {
   published          Boolean      @default(false)
   title              String       @db.VarChar(255)
   description        String?
-  email              String
-  phone              String
+  email              String?
+  phone              String?
   birthDate          DateTime //date picker
   country            String //dropdown
   city               String //dropdown country sensitive
   address            String       @default("")
   availability       String       @default("")
   experience         Int // years or months
-  experienceTimeUnit TimeUnits    @default(YEARS)
+  experienceTimeUnit TimeUnits    @default(years)
   childAgeGroup      Json
-  numberOfChildren   Int
+  numberOfChildren   Int          @default(1)
   pets               Boolean
   specialNeeds       Boolean
   inOwnHouse         Boolean
@@ -122,7 +122,7 @@ model Post {
   outWithChild       Boolean
   car                Boolean
   driversLicense     Boolean
-  smoking            Boolean
+  notSmoking         Boolean
   education          Education
   sitterCourse       Boolean
   firstAid           Boolean
@@ -130,7 +130,7 @@ model Post {
   otherLanguages     String
   earnings           Int
   earningsRate       EarningsRate
-  author             User         @relation(fields: [authorId], references: [id])
+  author             User?        @relation(fields: [authorId], references: [id])
   authorId           Int          @unique
 }
 
