@@ -1,9 +1,32 @@
 main.admin {
   .post-form {
     height: 100%;
+    overflow: hidden;
+    position: relative;
 
     section {
       height: 100%;
+      transition: opacity 0.3s linear, top 0.5s ease;
+
+      &.waiting {
+        position: absolute;
+        opacity: 0;
+        top: 100%;
+        z-index: -1;
+      }
+
+      &.active {
+        position: relative;
+        opacity: 1;
+        top: 0;
+      }
+
+      &.done {
+        position: absolute;
+        opacity: 0;
+        top: -100%;
+        z-index: -1;
+      }
 
       .inner {
         display: flex;
@@ -26,10 +49,6 @@ main.admin {
       flex-direction: column;
       width: 100%;
 
-      //   @media screen and (min-width: 768px) {
-      //     max-width: 400px;
-      //   }
-
       .buttons {
         display: flex;
         flex-wrap: nowrap;
@@ -37,6 +56,9 @@ main.admin {
         text-wrap: nowrap;
 
         button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           width: auto;
 
           &.primary {
@@ -46,6 +68,7 @@ main.admin {
           &:not(.primary) {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            padding-right: 15px;
 
             & + .primary {
               border-top-left-radius: 0;
@@ -57,3 +80,33 @@ main.admin {
     }
   }
 }
+
+// @keyframes fade-in {
+//   0% {
+//     display: none;
+//     opacity: 0;
+//     position: absolute;
+//     top: 100%;
+//   }
+//   100% {
+//     display: block;
+//     opacity: 1;
+//     position: relative;
+//     top: 0;
+//   }
+// }
+
+// @keyframes fade-out {
+//   0% {
+//     display: block;
+//     opacity: 1;
+//     position: relative;
+//     top: 0;
+//   }
+//   100% {
+//     display: none;
+//     opacity: 0;
+//     position: absolute;
+//     top: -100%;
+//   }
+// }

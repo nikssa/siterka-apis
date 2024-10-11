@@ -6,6 +6,11 @@
   padding: 20px 15px;
   position: relative;
 
+  &:hover {
+    border-color: rgba(var(--primary-color-rgb), 0.5);
+    box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.03);
+  }
+
   .input-box:has(input[type='checkbox']) {
     display: none;
   }
