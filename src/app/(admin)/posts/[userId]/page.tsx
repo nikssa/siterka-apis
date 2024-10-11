@@ -79,18 +79,18 @@ const PostByUserId = async ({ params: { userId } }: PostByUserIdProps) => {
     );
   }
 
-  if (!post) {
-    return (
-      <>
-        <section>
-          <div className='inner'>
-            <h1>Post not found.</h1>
-            <Link href={`/posts/${userId}`}>Create Post</Link>
-          </div>
-        </section>
-      </>
-    );
-  }
+  // if (!post) {
+  //   return (
+  //     <>
+  //       <section>
+  //         <div className='inner'>
+  //           <h1>Post not found.</h1>
+  //           <Link href={`/posts/${userId}`}>Create Post</Link>
+  //         </div>
+  //       </section>
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -109,6 +109,7 @@ const PostByUserId = async ({ params: { userId } }: PostByUserIdProps) => {
       /> */}
 
       <PostForm
+        userId={userId}
         name={profile?.firstName}
         data={post as unknown as PostDataProps}
       />

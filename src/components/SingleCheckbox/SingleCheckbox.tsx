@@ -11,6 +11,7 @@ export type SingleCheckboxProps = {
   id: string;
   name: string;
   label: string;
+  icon?: React.ReactNode;
   checked: boolean;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -19,6 +20,7 @@ const SingleCheckbox = ({
   id,
   name,
   label,
+  icon,
   checked,
   onChange
 }: SingleCheckboxProps) => {
@@ -33,11 +35,16 @@ const SingleCheckbox = ({
       />
       <label htmlFor={id}>
         {checked ? (
-          <Icons.Checked size='20px' />
+          <Icons.Checked className='checkbox-icon' size='20px' />
         ) : (
-          <Icons.Unchecked color='var(--field-border-color)' size='20px' />
+          <Icons.Unchecked
+            className='checkbox-icon'
+            color='var(--field-border-color)'
+            size='20px'
+          />
         )}
-        <span>{label}</span>
+        {icon}
+        <span title={label}>{label}</span>
       </label>
     </div>
   );

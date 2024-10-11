@@ -18,7 +18,7 @@ const UserCardDetails = ({ data }: { data: PostDataProps }) => {
               }}></div>
             <Image
               src={data?.profile?.photo?.url}
-              alt={data.title}
+              alt={data?.title}
               // alt={data.desc}
               width={250}
               height={250}

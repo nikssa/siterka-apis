@@ -16,6 +16,7 @@ type UserDescriptionProps = PostDataProps & {
   onChange: (e: ChangeEventTypes) => void;
   step: number;
   setStep: (step: number) => void;
+  className: string;
 };
 
 const UserDescription = ({
@@ -26,74 +27,59 @@ const UserDescription = ({
   availability,
   onChange,
   step,
-  setStep
+  setStep,
+  className
 }: UserDescriptionProps) => {
   const userDescription = description ? description : defaultDescription;
   const userTitle = title ? title : defaultTitle;
   return (
-    step === 7 && (
-      <section>
-        <div className='inner'>
-          <h1>Define title , describe your offerings and availability</h1>
+    <section className={className}>
+      <div className='inner'>
+        <h1>Define title , describe your offerings and availability</h1>
 
-          <div className='form-elements'>
-            <Input
-              type='text'
-              name='title'
-              label='Title'
-              placeholder='Enter title'
-              value={userTitle}
-              onChange={onChange}
+        <div className='form-elements'>
+          <Input
+            type='text'
+            name='title'
+            label='Title'
+            placeholder='Enter title'
+            value={userTitle}
+            onChange={onChange}
+          />
+
+          <TextArea
+            name='description'
+            label='Describe your offerings'
+            placeholder='Enter description'
+            value={userDescription}
+            onChange={onChange}
+          />
+
+          <TextArea
+            name='availability'
+            label='Describe your availability'
+            placeholder='Enter availability'
+            value={availability}
+            onChange={onChange}
+            rows={3}
+          />
+
+          <div className='buttons'>
+            <IconButton
+              // label='Go back'
+              iconPosition='left'
+              icon={<Icons.Back color='#fefefe' size='20px' />}
+              onClick={(e) => {
+                e.preventDefault();
+                setStep(step - 1);
+                window.scrollTo(0, 0);
+              }}
             />
-
-            <TextArea
-              name='description'
-              label='Describe your offerings'
-              placeholder='Enter description'
-              value={userDescription}
-              onChange={onChange}
-            />
-
-            {/* <Input
-              type='text'
-              name='description'
-              label='Description'
-              placeholder='Enter description'
-              value={description}
-              onChange={onChange}
-            /> */}
-
-            <TextArea
-              name='availability'
-              label='Describe your availability'
-              placeholder='Enter availability'
-              value={availability}
-              onChange={onChange}
-              rows={3}
-            />
-
-            {/* <Input
-              type='text'
-              name='availability'
-              label='Availability'
-              placeholder='Enter availability'
-              value={availability}
-              onChange={onChange}
-            /> */}
-
-            <div className='buttons'>
-              <IconButton
-                // label='Go back'
-                iconPosition='left'
-                icon={<Icons.Back color='#fefefe' size='20px' />}
-                onClick={() => setStep(step - 1)}
-              />
-              <Button type='submit' label='Submit' primary />
-            </div>
+            <Button type='submit' label='Submit' primary />
           </div>
         </div>
-      </section>
-    )
+      </div>
+    </section>
   );
 };
 

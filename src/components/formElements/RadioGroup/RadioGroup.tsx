@@ -1,7 +1,9 @@
 import './RadioGroup.scss';
 
 interface RadioGroupProps
-  extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+  extends React.InputHTMLAttributes<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  > {
   label: string;
   options: string[];
   error?: string;

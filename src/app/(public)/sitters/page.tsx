@@ -3,7 +3,8 @@ import {
   EarningsRate,
   Education,
   Languages,
-  PostDataProps
+  PostDataProps,
+  TimeUnits
 } from '@/types/types';
 
 const SittersPage = async function () {
@@ -15,6 +16,9 @@ const SittersPage = async function () {
   const posts: PostDataProps[] = [
     {
       id: 1,
+      createdAt: new Date('2022-01-01'),
+      updatedAt: new Date('2022-01-01'),
+      published: true,
       title: 'Sitter Nanny',
       description: 'Sitter Nanny Description',
       email: 'pGK3B@example.com',
@@ -23,14 +27,36 @@ const SittersPage = async function () {
       country: 'USA',
       city: 'New York',
       address: '123 Main St',
-      languages: [Languages.ENGLISH, Languages.FRENCH],
+      languages: { english: true, serbian: true },
       earnings: 500,
       earningsRate: EarningsRate.HOURLY,
       experience: 5,
+      experienceTimeUnit: TimeUnits.months,
+      childAgeGroup: {
+        newborns: true,
+        infants: true,
+        toddlers: true,
+        preschoolers: true,
+        schoolers: true,
+        teens: true
+      },
+      numberOfChildren: 5,
       availability: 'Monday - Friday',
       education: Education.HIGH_SCHOOL,
       sitterCourse: true,
       firstAid: true,
+      pets: true,
+      specialNeeds: true,
+      inOwnHouse: true,
+      cleaning: true,
+      cleaningChildOnly: true,
+      shopping: true,
+      cooking: true,
+      cookingChildOnly: true,
+      outWithChild: true,
+      car: true,
+      driversLicense: true,
+      notSmoking: true,
       author: {
         id: 1,
         name: 'John Doe',
@@ -41,6 +67,8 @@ const SittersPage = async function () {
       authorId: 1,
       profile: {
         id: 1,
+        createdAt: new Date('2022-01-01'),
+        updatedAt: new Date('2022-01-01'),
         firstName: 'John',
         lastName: 'Doe',
         gender: 'male',

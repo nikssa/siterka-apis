@@ -13,7 +13,7 @@ const SingleSitterPage = async ({ params }: { params: { id: string } }) => {
   return (
     <section>
       <div className='inner'>
-        <UserCardDetails data={postData as PostDataProps} />
+        <UserCardDetails data={postData as unknown as PostDataProps} />
       </div>
     </section>
   );

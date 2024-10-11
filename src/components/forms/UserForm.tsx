@@ -16,7 +16,6 @@ const UserForm = ({ data, readOnly = false }: UserFormProps) => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<UserDataProps>(data);
 
-  // const { isAuthenticated, user } = useIsAuthenticatedClient();
   const role = userData?.role;
 
   useEffect(() => {

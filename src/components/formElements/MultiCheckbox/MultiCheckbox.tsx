@@ -1,4 +1,3 @@
-import { ChildAge, ChildAgeGroupProps } from '@/types/types';
 import { ChangeEvent } from 'react';
 import Checkbox, { ChecksProps } from '../Checkbox/Checkbox';
 import './MultiCheckbox.scss';

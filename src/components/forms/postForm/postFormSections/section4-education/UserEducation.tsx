@@ -1,19 +1,18 @@
 import { Icons } from '@/app/assets/icons';
+import SingleCheckbox from '@/components/SingleCheckbox/SingleCheckbox';
 import IconButton from '@/components/common/IconButton/IconButton';
-import Button from '@/components/formElements/Button/Button';
 import MultiCheckbox from '@/components/formElements/MultiCheckbox/MultiCheckbox';
 import SelectBox from '@/components/formElements/SelectBox/SelectBox';
-import Checkbox from '@/components/formElements/Checkbox/Checkbox';
 import Input from '@/components/formElements/TextField/TextField';
-import { Education, LangProps, Languages, PostDataProps } from '@/types/types';
-import SingleCheckbox from '@/components/SingleCheckbox/SingleCheckbox';
+import { ChangeEventTypes } from '@/components/forms/ProfileForm';
+import { Education, LangProps, PostDataProps } from '@/types/types';
 
 interface UserEducationProps extends PostDataProps {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEducationChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleLanguagesChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEventTypes) => void;
+  onLanguagesChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   step: number;
   setStep: (step: number) => void;
+  className: string;
 }
 
 const UserEducation = ({
@@ -23,81 +22,87 @@ const UserEducation = ({
   languages,
   otherLanguages,
   onChange,
-  handleEducationChange,
-  handleLanguagesChange,
+  onLanguagesChange,
   step,
-  setStep
+  setStep,
+  className
 }: UserEducationProps) => {
   const langs = Object.keys(languages!).filter(
     (key) => languages?.[key as keyof typeof languages]
   );
 
   return (
-    step === 4 && (
-      <section>
-        <div className='inner'>
-          <h1>What are your education details?</h1>
+    <section className={className}>
+      <div className='inner'>
+        <h1>What are your education details?</h1>
 
-          <div className='form-elements'>
-            <SelectBox
-              id='education'
-              name='education'
-              label='Education'
-              options={Object.values(Education)}
-              selected={education}
-              onChange={handleEducationChange}
+        <div className='form-elements'>
+          <SelectBox
+            id='education'
+            name='education'
+            label='Education'
+            options={Object.values(Education)}
+            selected={education}
+            onChange={onChange}
+          />
+
+          <SingleCheckbox
+            id='sitterCourse'
+            name='sitterCourse'
+            label='Do you have a sitter course?'
+            checked={sitterCourse}
+            onChange={onChange}
+          />
+
+          <SingleCheckbox
+            id='firstAid'
+            name='firstAid'
+            label='Have you finished a first aid course?'
+            checked={firstAid}
+            onChange={onChange}
+          />
+
+          <MultiCheckbox
+            label='In which languages you can converse with parents and children'
+            checks={languages as LangProps}
+            onChange={onLanguagesChange}
+          />
+
+          <Input
+            type='text'
+            name='otherLanguages'
+            label='Other Languages'
+            placeholder='Enter other languages'
+            value={otherLanguages}
+            onChange={onChange}
+          />
+
+          <div className='buttons'>
+            <IconButton
+              // label='Go back'
+              iconPosition='left'
+              icon={<Icons.Back color='#fefefe' size='20px' />}
+              onClick={(e) => {
+                e.preventDefault();
+                setStep(step - 1);
+                window.scrollTo(0, 0);
+              }}
             />
-
-            <SingleCheckbox
-              id='sitterCourse'
-              name='sitterCourse'
-              label='Do you have a sitter course?'
-              checked={sitterCourse}
-              onChange={onChange}
+            <IconButton
+              label='Next'
+              iconPosition='right'
+              icon={<Icons.Next color='#fefefe' size='20px' />}
+              primary
+              onClick={(e) => {
+                e.preventDefault();
+                setStep(step + 1);
+                window.scrollTo(0, 0);
+              }}
             />
-
-            <SingleCheckbox
-              id='firstAid'
-              name='firstAid'
-              label='Have you finished a first aid course?'
-              checked={firstAid}
-              onChange={onChange}
-            />
-
-            <MultiCheckbox
-              label='In which languages you can converse with parents and children'
-              checks={languages as LangProps}
-              onChange={handleLanguagesChange}
-            />
-
-            <Input
-              type='text'
-              name='otherLanguages'
-              label='Other Languages'
-              placeholder='Enter other languages'
-              value={otherLanguages}
-              onChange={onChange}
-            />
-
-            <div className='buttons'>
-              <IconButton
-                // label='Go back'
-                iconPosition='left'
-                icon={<Icons.Back color='#fefefe' size='20px' />}
-                onClick={() => setStep(step - 1)}
-              />
-              <IconButton
-                label='Next'
-                iconPosition='right'
-                icon={<Icons.Next color='#fefefe' size='20px' />}
-                primary
-                onClick={() => setStep(step + 1)}
-              />
-            </div>
           </div>
         </div>
-      </section>
-    )
+      </div>
+    </section>
   );
 };
 

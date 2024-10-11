@@ -1,5 +1,4 @@
 import { TimeUnits } from '@/types/types';
-
 import './SelectBox.scss';
 
 type SelectBoxProps = {
@@ -18,7 +17,7 @@ const SelectBox = ({
   label,
   required,
   options,
-  selected = TimeUnits.YEARS,
+  selected = TimeUnits.years,
   onChange
 }: SelectBoxProps) => {
   return (
@@ -31,12 +30,7 @@ const SelectBox = ({
             </span>
           </label>
         )}
-        <select
-          id={id}
-          name={name}
-          value={selected}
-          //   selected={option === selected}
-          onChange={onChange}>
+        <select id={id} name={name} value={selected} onChange={onChange}>
           {options.map((option: string) => (
             <option key={option} value={option}>
               {option}
