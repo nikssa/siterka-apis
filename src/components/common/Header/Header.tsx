@@ -7,6 +7,7 @@ import Link from 'next/link';
 import UserNav from '@/components/common/Header/UserNav/UserNav';
 import { Icons } from '../../../app/assets/icons';
 import MainNav from './MainNav/MainNav';
+import { Suspense } from 'react';
 import './Header.scss';
 
 const Header = () => {
@@ -32,7 +33,9 @@ const Header = () => {
 
       <MainNav toggle={toggleMainNav} setToggle={setToggleMainNav} />
 
-      <UserNav />
+      <Suspense fallback={<div>Loading...</div>}>
+        <UserNav />
+      </Suspense>
     </header>
   );
 };

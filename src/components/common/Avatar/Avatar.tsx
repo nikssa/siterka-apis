@@ -4,6 +4,7 @@ import { Icons } from '@/app/assets/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AvatarImage from './AvatarImage';
+import { Suspense } from 'react';
 import './Avatar.scss';
 
 export default function Avatar({
@@ -23,7 +24,9 @@ export default function Avatar({
       {!isAuth ? (
         <Icons.Anonymous color='#fefefe' size='22px' />
       ) : (
-        <AvatarImage />
+        <Suspense fallback={<Icons.Anonymous color='#fefefe' size='22px' />}>
+          <AvatarImage />
+        </Suspense>
       )}
     </Link>
   );
