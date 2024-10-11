@@ -22,8 +22,8 @@ export enum Education {
 }
 
 export enum TimeUnits {
-  MONTHS = 'months',
-  YEARS = 'years'
+  months = 'months',
+  years = 'years'
 }
 
 export enum Languages {
@@ -94,14 +94,14 @@ export type ChildAgeGroupProps = {
 };
 
 export type PostDataProps = {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
   published: boolean;
   title: string;
   description: string;
-  email?: string;
-  phone?: string;
+  email: string | null;
+  phone: string | null;
   birthDate?: Date;
   country?: string;
   city?: string;

@@ -99,7 +99,7 @@ model Post {
   updatedAt          DateTime     @updatedAt
   published          Boolean      @default(false)
   title              String       @db.VarChar(255)
-  description        String?
+  description        String
   email              String?
   phone              String?
   birthDate          DateTime //date picker
