@@ -4,6 +4,7 @@ const Icon = ({
   className,
   size = '20px',
   color = 'var(--primary-color)',
+  opacity = 1,
   link,
   onClick,
   children
@@ -11,12 +12,14 @@ const Icon = ({
   className?: string;
   size?: string;
   color?: string;
+  opacity?: number;
   link?: string;
   onClick?: (e: React.MouseEvent) => void;
   children?: React.ReactNode;
 }) => {
   const styles = {
     fill: color,
+    opacity: opacity,
     width: size,
     height: size
   };
