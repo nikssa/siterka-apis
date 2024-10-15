@@ -102,7 +102,7 @@ model Post {
   description        String
   email              String?
   phone              String?
-  birthDate          DateTime //date picker
+  birthDate          DateTime? //date picker
   country            String //dropdown
   city               String //dropdown country sensitive
   address            String       @default("")

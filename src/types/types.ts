@@ -103,8 +103,8 @@ export type PostDataProps = {
   email: string | null;
   phone: string | null;
   birthDate?: Date;
-  country?: string;
-  city?: string;
+  country: string;
+  city: string;
   address?: string;
   availability?: string;
   experience?: number;
