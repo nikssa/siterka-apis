@@ -1,4 +1,5 @@
-import ProfileForm from '@/components/forms/ProfileForm';
+import ProfileForm from '@/components/forms/profileForm/ProfileForm';
+import UploadForm from '@/components/forms/uploadForm/UploadForm';
 import UserForm from '@/components/forms/UserForm';
 import { getProfileIncludeUser } from '@/data-access/profile';
 import { getUser } from '@/data-access/user';
@@ -23,9 +24,6 @@ const ProfilePage = async ({
 
   const isAdmin = user?.role === Role.ADMIN;
 
-  console.log('user', user);
-  console.log('profile', profile);
-
   return (
     <>
       <section>
@@ -33,6 +31,8 @@ const ProfilePage = async ({
           <h1>{!profile && 'Add'} User profile</h1>
         </div>
       </section>
+
+      <UploadForm userId={Number(userId)} />
 
       {isAdmin && <UserForm data={user as UserDataProps} readOnly={true} />}
 
