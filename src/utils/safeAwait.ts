@@ -1,7 +1,12 @@
-export default async function safeAwait(
-  promise: Promise<any>,
-  errorHandler?: (error: unknown) => void
-) {
+type safeAwaitProps = {
+  promise: Promise<any>;
+  errorHandler?: (error: unknown) => void;
+};
+
+export default async function safeAwait({
+  promise,
+  errorHandler
+}: safeAwaitProps) {
   try {
     const data = await promise;
     return [null, data]; // Success: No error, return the data
