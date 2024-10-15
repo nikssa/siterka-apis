@@ -18,4 +18,9 @@ button {
       background-color: var(--primary-color-hover);
     }
   }
+
+  &.sm {
+    --height: 30px;
+    padding: 5px 15px;
+  }
 }

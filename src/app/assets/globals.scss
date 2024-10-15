@@ -9,8 +9,12 @@
   --primary-color: #0a4226;
   --primary-color-rgb: 10, 66, 38;
   --primary-color-hover: #00b884;
+  --primary-color-hover-rgb: 0, 184, 132;
   --secondary-color: #808080;
   --secondary-color-hover: #999;
+
+  --accent-color: #c4541d;
+  --accent-color-rgb: 193, 84, 29;
 
   --foreground-color: #444;
   --background-color: #fefefe;
@@ -124,12 +128,12 @@ html {
 
 body {
   color: var(--foreground-color);
-  display: grid;
+  // display: grid;
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   min-height: 100dvh;
   width: 100vw;
-  grid-template-rows: auto auto 1fr auto;
+  // grid-template-rows: auto auto 1fr auto;
 }
 
 h1,
@@ -203,33 +207,46 @@ select {
 }
 
 // Layout styles
-main {
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
   width: 100vw;
 
-  section {
+  main {
     width: 100vw;
 
-    .inner {
-      // padding: 20px;
-      margin: 0 auto;
-      max-width: 1600px;
-      padding: 40px 20px;
+    > section {
+      width: 100vw;
 
-      // @media screen and (min-width: 768px) {
-      //   padding: 30px 20px;
-      // }
+      .inner {
+        // padding: 20px;
+        margin: 0 auto;
+        max-width: 1600px;
+        padding: 10px 20px;
 
-      // @media screen and (min-width: 992px) {
-      //   padding: 40px 20px;
-      // }
+        @media screen and (min-width: 768px) {
+          padding: 20px;
+        }
 
-      // @media screen and (min-width: 1600px) {
-      //   padding: 80px 20px;
-      // }
+        @media screen and (min-width: 992px) {
+          padding: 40px 20px;
+        }
 
-      h1,
-      h2 {
-        text-align: center;
+        // @media screen and (min-width: 1600px) {
+        //   padding: 80px 20px;
+        // }
+
+        h1,
+        h2 {
+          text-align: center;
+        }
+      }
+      &.main-hero {
+        .inner {
+          padding: 0;
+        }
       }
     }
   }
