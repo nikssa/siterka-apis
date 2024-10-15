@@ -36,7 +36,7 @@ const UserContactDetails = ({
             name='email'
             label='Email'
             placeholder='Enter email'
-            value={email}
+            value={email || ''}
             onChange={onChange}
             helpText='Provide email address (other then the one you enter in your profile) where people can reach you'
           />
@@ -46,7 +46,7 @@ const UserContactDetails = ({
             name='phone'
             label='Phone'
             placeholder='Enter phone'
-            value={phone}
+            value={phone || ''}
             onChange={onChange}
             required={true}
           />

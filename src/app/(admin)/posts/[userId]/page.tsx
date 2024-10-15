@@ -1,4 +1,4 @@
-// import ProfileForm from '@/components/forms/ProfileForm';
+// import ProfileForm from '@/components/forms/profileForm/ProfileForm';
 // import UserForm from '@/components/forms/UserForm';
 import PostForm from '@/components/forms/postForm/PostForm';
 import { getUserIncludeProfileAndPost } from '@/data-access/user';
@@ -110,7 +110,8 @@ const PostByUserId = async ({ params: { userId } }: PostByUserIdProps) => {
 
       <PostForm
         userId={userId}
-        name={profile?.firstName}
+        userRole={user?.role}
+        firstName={profile?.firstName}
         data={post as unknown as PostDataProps}
       />
 

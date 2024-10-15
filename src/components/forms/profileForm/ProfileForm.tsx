@@ -4,10 +4,12 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import Button from '@/components/formElements/Button/Button';
 import RadioGroup from '@/components/formElements/RadioGroup/RadioGroup';
 import Input from '@/components/formElements/TextField/TextField';
-import TextArea from '../formElements/TextAreaField/TextAreaField';
+import TextArea from '../../formElements/TextAreaField/TextAreaField';
 import { Slide, toast } from 'react-toastify';
 import { convertISO8601ToDateTime } from '@/utils/convertDate';
-import { ProfileDataProps } from '@/types/types';
+import { PhotoProps, ProfileDataProps } from '@/types/types';
+import Image from 'next/image';
+import './ProfileForm.scss';
 
 export type ChangeEventTypes =
   | ChangeEvent<HTMLTextAreaElement>
@@ -102,6 +104,7 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
             {profileUpdated}
           </p>
           {/* TODO: Add profile image */}
+
           <Input
             isHidden={true}
             label='User Id'
@@ -119,6 +122,7 @@ const ProfileForm = ({ data, userId, readOnly = false }: ProfileFormProps) => {
             value={profileData?.firstName}
             onChange={handleChange}
           />
+
           <Input
             label='Last Name'
             name='lastName'

@@ -15,7 +15,14 @@ interface IconButtonProps
 }
 
 const IconButton = (props: IconButtonProps) => {
-  const { icon, iconPosition, label, primary, className, ...rest } = props;
+  const {
+    icon,
+    iconPosition = 'left',
+    label,
+    primary,
+    className,
+    ...rest
+  } = props;
   const { pending } = useFormStatus();
 
   return (

@@ -30,11 +30,11 @@ export default function RootLayout({
             draggable={true}
             theme='light'
           />
-          <Header />
-
-          <main>{children}</main>
-
-          <Footer />
+          <div className='layout'>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

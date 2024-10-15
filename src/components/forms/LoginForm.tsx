@@ -46,10 +46,8 @@ const LoginForm = () => {
       // Authenticate user - Create JWT session set cookie and redirect to homepage
       const userId = result.user?.id.toString();
       const user = { ...result.user, id: userId };
-      console.log('preparing to createSession', user);
       // if (user && userId) {
       const session = await createSession(user as UserDataProps);
-      console.log('session created', session);
       router.push('/');
       // }
     } else {

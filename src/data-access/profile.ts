@@ -16,7 +16,6 @@ export async function getProfiles() {
 }
 
 export async function getProfile(userId: number) {
-  console.log('getProfile userId:', userId);
   const isAuthenticated = await useIsAuthenticated();
   if (!isAuthenticated) {
     return null;

@@ -40,40 +40,23 @@ export default async function loginFormAction(formData: FormData) {
 }
 
 export async function postFormAction(formData: FormData) {
-  // const languages = formData.getAll('languages');
-  // const childAgeGroup = formData.getAll('childAgeGroup');
-  // console.log('languages', languages);
-  // console.log('childAgeGroup', childAgeGroup);
-
   const languages = {
-    serbian: (formData.get('serbian') as string) === 'true',
-    english: (formData.get('english') as string) === 'true',
-    spanish: (formData.get('spanish') as string) === 'true',
-    german: (formData.get('german') as string) === 'true',
-    french: (formData.get('french') as string) === 'true',
-    italian: (formData.get('italian') as string) === 'true'
+    serbian: (formData.get('serbian') as string) === 'on',
+    english: (formData.get('english') as string) === 'on',
+    spanish: (formData.get('spanish') as string) === 'on',
+    german: (formData.get('german') as string) === 'on',
+    french: (formData.get('french') as string) === 'on',
+    italian: (formData.get('italian') as string) === 'on'
   };
-
-  const serbian = formData.get('serbian') as string;
-  console.log('serbian', serbian);
-  const english = formData.get('english') as string;
-  console.log('english', english);
 
   const childAgeGroup = {
-    newborns: (formData.get('newborns') as string) === 'true',
-    infants: (formData.get('infants') as string) === 'true',
-    toddlers: (formData.get('toddlers') as string) === 'true',
-    preschoolers: (formData.get('preschoolers') as string) === 'true',
-    schoolers: (formData.get('schoolers') as string) === 'true',
-    teens: (formData.get('teens') as string) === 'true'
+    newborns: (formData.get('newborns') as string) === 'on',
+    infants: (formData.get('infants') as string) === 'on',
+    toddlers: (formData.get('toddlers') as string) === 'on',
+    preschoolers: (formData.get('preschoolers') as string) === 'on',
+    schoolers: (formData.get('schoolers') as string) === 'on',
+    teens: (formData.get('teens') as string) === 'on'
   };
-
-  console.log('languages', languages);
-  console.log('childAgeGroup', childAgeGroup);
-
-  const TimeUnits = formData.get('experienceTimeUnit');
-
-  console.log('TimeUnits', TimeUnits);
 
   const body = {
     title: formData.get('title') as string,
@@ -89,31 +72,27 @@ export async function postFormAction(formData: FormData) {
     availability: formData.get('availability') as string,
     experience: Number(formData.get('experience')),
     experienceTimeUnit: formData.get('experienceTimeUnit') as TimeUnits,
-
     childAgeGroup: childAgeGroup,
-
     numberOfChildren: Number(formData.get('numberOfChildren')),
-    pets: (formData.get('pets') as string) === 'true',
-    specialNeeds: (formData.get('specialNeeds') as string) === 'true',
-    inOwnHouse: (formData.get('inOwnHouse') as string) === 'true',
-    cleaning: (formData.get('cleaning') as string) === 'true',
-    cleaningChildOnly: (formData.get('cleaningChildOnly') as string) === 'true',
-    shopping: (formData.get('shopping') as string) === 'true',
-    cooking: (formData.get('cooking') as string) === 'true',
-    cookingChildOnly: (formData.get('cookingChildOnly') as string) === 'true',
-    outWithChild: (formData.get('outWithChild') as string) === 'true',
-    car: (formData.get('car') as string) === 'true',
-    driversLicense: (formData.get('driversLicense') as string) === 'true',
-    notSmoking: (formData.get('notSmoking') as string) === 'true',
-
+    pets: (formData.get('pets') as string) === 'on',
+    specialNeeds: (formData.get('specialNeeds') as string) === 'on',
+    inOwnHouse: (formData.get('inOwnHouse') as string) === 'on',
+    cleaning: (formData.get('cleaning') as string) === 'on',
+    cleaningChildOnly: (formData.get('cleaningChildOnly') as string) === 'on',
+    shopping: (formData.get('shopping') as string) === 'on',
+    cooking: (formData.get('cooking') as string) === 'on',
+    cookingChildOnly: (formData.get('cookingChildOnly') as string) === 'on',
+    outWithChild: (formData.get('outWithChild') as string) === 'on',
+    car: (formData.get('car') as string) === 'on',
+    driversLicense: (formData.get('driversLicense') as string) === 'on',
+    notSmoking: (formData.get('notSmoking') as string) === 'on',
     languages: languages,
-
     otherLanguages: formData.get('otherLanguages') as string,
     earnings: Number(formData.get('earnings')),
     earningsRate: formData.get('earningsRate') as EarningsRate,
     education: formData.get('education') as Education,
-    sitterCourse: (formData.get('sitterCourse') as string) === 'true',
-    firstAid: (formData.get('firstAid') as string) === 'true',
+    sitterCourse: (formData.get('sitterCourse') as string) === 'on',
+    firstAid: (formData.get('firstAid') as string) === 'on',
     authorId: Number(formData.get('authorId'))
   };
 
@@ -124,7 +103,6 @@ export async function postFormAction(formData: FormData) {
   });
 
   const isPost = findPost ? true : false;
-
   let post;
 
   if (isPost) {
@@ -155,4 +133,15 @@ export async function postFormAction(formData: FormData) {
       post
     };
   }
+}
+
+export async function uploadFormAction(formData: FormData) {
+  // const file = formData.get('file') as File;
+
+  const result = await fetch('http://localhost:4000/api/upload', {
+    method: 'POST',
+    body: formData
+  });
+  console.log('result from action', result);
+  // return result;
 }
