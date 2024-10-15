@@ -2,7 +2,7 @@ import { Icons } from '@/app/assets/icons';
 import IconButton from '@/components/common/IconButton/IconButton';
 import SelectBox from '@/components/formElements/SelectBox/SelectBox';
 import Input from '@/components/formElements/TextField/TextField';
-import { ChangeEventTypes } from '@/components/forms/ProfileForm';
+import { ChangeEventTypes } from '@/components/forms/profileForm/ProfileForm';
 import { EarningsRate, PostDataProps } from '@/types/types';
 
 interface UserEarningsProps extends PostDataProps {
@@ -10,6 +10,7 @@ interface UserEarningsProps extends PostDataProps {
   step: number;
   setStep: (step: number) => void;
   className: string;
+  userRole: string;
 }
 
 const UserEarnings = ({
@@ -18,18 +19,26 @@ const UserEarnings = ({
   onChange,
   step,
   setStep,
-  className
+  className,
+  userRole
 }: UserEarningsProps) => {
+  const title =
+    userRole === 'sitter'
+      ? 'How much you expect to earn?'
+      : 'How much you can offer?';
+
+  const earningsLabel = userRole === 'sitter' ? 'Earnings' : 'Sitter fee';
+
   return (
     <section className={className}>
       <div className='inner'>
-        <h1>How much you expect to earn</h1>
+        <h1>{title}</h1>
 
         <div className='form-elements'>
           <Input
             type='number'
             name='earnings'
-            label='Earnings'
+            label={earningsLabel}
             placeholder='Enter earnings'
             value={earnings}
             onChange={onChange}

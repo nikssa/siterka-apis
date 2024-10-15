@@ -4,7 +4,7 @@ import IconButton from '@/components/common/IconButton/IconButton';
 import MultiCheckbox from '@/components/formElements/MultiCheckbox/MultiCheckbox';
 import SelectBox from '@/components/formElements/SelectBox/SelectBox';
 import Input from '@/components/formElements/TextField/TextField';
-import { ChangeEventTypes } from '@/components/forms/ProfileForm';
+import { ChangeEventTypes } from '@/components/forms/profileForm/ProfileForm';
 import { Education, LangProps, PostDataProps } from '@/types/types';
 
 interface UserEducationProps extends PostDataProps {
@@ -13,6 +13,7 @@ interface UserEducationProps extends PostDataProps {
   step: number;
   setStep: (step: number) => void;
   className: string;
+  userRole: string;
 }
 
 const UserEducation = ({
@@ -25,22 +26,42 @@ const UserEducation = ({
   onLanguagesChange,
   step,
   setStep,
-  className
+  className,
+  userRole
 }: UserEducationProps) => {
-  const langs = Object.keys(languages!).filter(
-    (key) => languages?.[key as keyof typeof languages]
-  );
+  const title =
+    userRole === 'sitter'
+      ? 'What are your education details?'
+      : 'Siterka education expectations?';
+
+  const educationLabel =
+    userRole === 'sitter' ? 'Education' : 'You expect that siterka will have';
+
+  const sitterCourseLabel =
+    userRole === 'sitter'
+      ? 'Do you have a sitter course?'
+      : 'Do you expect that siterka will have a sitter course?';
+
+  const firstAidLabel =
+    userRole === 'sitter'
+      ? 'Have you finished a First Aid course?'
+      : 'Do you expect that siterka will have a First Aid course?';
+
+  const languagesLabel =
+    userRole === 'sitter'
+      ? 'In which languages you can converse with parents and children?'
+      : 'In which languages siterka need to be proficient?';
 
   return (
     <section className={className}>
       <div className='inner'>
-        <h1>What are your education details?</h1>
+        <h1>{title}</h1>
 
         <div className='form-elements'>
           <SelectBox
             id='education'
             name='education'
-            label='Education'
+            label={educationLabel}
             options={Object.values(Education)}
             selected={education}
             onChange={onChange}
@@ -49,7 +70,7 @@ const UserEducation = ({
           <SingleCheckbox
             id='sitterCourse'
             name='sitterCourse'
-            label='Do you have a sitter course?'
+            label={sitterCourseLabel}
             checked={sitterCourse}
             onChange={onChange}
           />
@@ -57,13 +78,13 @@ const UserEducation = ({
           <SingleCheckbox
             id='firstAid'
             name='firstAid'
-            label='Have you finished a first aid course?'
+            label={firstAidLabel}
             checked={firstAid}
             onChange={onChange}
           />
 
           <MultiCheckbox
-            label='In which languages you can converse with parents and children'
+            label={languagesLabel}
             checks={languages as LangProps}
             onChange={onLanguagesChange}
           />

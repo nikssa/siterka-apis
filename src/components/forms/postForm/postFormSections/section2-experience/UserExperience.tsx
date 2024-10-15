@@ -3,7 +3,7 @@ import IconButton from '@/components/common/IconButton/IconButton';
 import MultiCheckbox from '@/components/formElements/MultiCheckbox/MultiCheckbox';
 import SelectBox from '@/components/formElements/SelectBox/SelectBox';
 import Input from '@/components/formElements/TextField/TextField';
-import { ChangeEventTypes } from '@/components/forms/ProfileForm';
+import { ChangeEventTypes } from '@/components/forms/profileForm/ProfileForm';
 import { ChildAgeGroupProps, PostDataProps, TimeUnits } from '@/types/types';
 
 interface UserExperienceProps extends PostDataProps {
@@ -12,31 +12,52 @@ interface UserExperienceProps extends PostDataProps {
   step: number;
   setStep: (step: number) => void;
   className: string;
+  userRole: string;
 }
 
 const UserExperience = ({
   experience,
   experienceTimeUnit,
-  numberOfChildren,
+  numberOfChildren = 1,
   childAgeGroup,
   onChange,
   onChildAgeGroupChange,
   step,
   setStep,
-  className
+  className,
+  userRole = 'parent'
 }: UserExperienceProps) => {
+  const title =
+    userRole === 'sitter'
+      ? 'Tell us about your experience'
+      : 'Tell us about your expectations from siterka';
+  const experienceLabel =
+    userRole === 'sitter'
+      ? 'How many years/months of experience do you have?'
+      : 'How many years/months of experience siterka should have?';
+
+  const ageGroupsLabel =
+    userRole === 'sitter'
+      ? 'Which age groups you can babysit?'
+      : 'Which age groups siterka should babysit?';
+
+  const numberOfChildrenLabel =
+    userRole === 'sitter'
+      ? 'How many children can you babysit?'
+      : 'How many children siterka should babysit?';
+
   return (
     <section className={className}>
       <div className='inner'>
-        <h1>Tell us about your experience</h1>
+        <h1>{title}</h1>
         <div className='form-elements'>
           <Input
             type='number'
             name='experience'
-            label='How many years/months of experience do you have?'
+            label={experienceLabel}
             placeholder='Enter number of years or months'
             value={experience}
-            min={1}
+            min={0}
             required
             onChange={onChange}
           />
@@ -52,7 +73,7 @@ const UserExperience = ({
           />
 
           <MultiCheckbox
-            label='Which age groups you can babysit?'
+            label={ageGroupsLabel}
             checks={childAgeGroup as ChildAgeGroupProps}
             onChange={onChildAgeGroupChange}
           />
@@ -60,7 +81,7 @@ const UserExperience = ({
           <Input
             type='number'
             name='numberOfChildren'
-            label='How many children can you babysit?n'
+            label={numberOfChildrenLabel}
             placeholder='Enter number of children'
             value={numberOfChildren}
             min={1}

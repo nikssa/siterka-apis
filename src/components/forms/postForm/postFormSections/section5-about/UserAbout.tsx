@@ -9,6 +9,7 @@ interface UserAboutProps extends PostDataProps {
   step: number;
   setStep: (step: number) => void;
   className: string;
+  userRole: string;
 }
 
 const UserAbout = ({
@@ -27,18 +28,65 @@ const UserAbout = ({
   onChange,
   step,
   setStep,
-  className
+  className,
+  userRole
 }: UserAboutProps) => {
+  const title =
+    userRole === 'sitter'
+      ? 'About your offerings'
+      : 'Expectation related to siterka';
+  const petsLabel =
+    userRole === 'sitter' ? 'I can work with pets present' : 'Family has pets';
+  const specialNeedsLabel =
+    userRole === 'sitter'
+      ? 'I can babysit children with the special needs'
+      : 'Child has special needs';
+  const inOwnHouseLabel =
+    userRole === 'sitter'
+      ? 'I can babysit in my own house'
+      : 'We agree that siterka babysit in her own home';
+
+  const cleaningLabel =
+    userRole === 'sitter' ? 'I can do cleaning' : 'Siterka should do cleaning';
+  const cleaningChildOnlyLabel =
+    userRole === 'sitter'
+      ? 'I can do cleaning after children only'
+      : 'Siterka should do cleaning after children only';
+  const shoppingLabel =
+    userRole === 'sitter'
+      ? 'I can do shopping'
+      : 'We expect that siterka will do shopping';
+  const cookingLabel =
+    userRole === 'sitter'
+      ? 'I can cook'
+      : 'Siterka should do cooking for the family';
+  const cookingChildOnlyLabel =
+    userRole === 'sitter'
+      ? 'I can cook for children only'
+      : 'Siterka should cook for children only';
+  const outWithChildLabel =
+    userRole === 'sitter'
+      ? 'I can go out with children'
+      : 'Siterka should go out with children';
+  const carLabel =
+    userRole === 'sitter' ? 'I have a car' : 'Siterka should have a car';
+  const driversLicenseLabel =
+    userRole === 'sitter'
+      ? 'I have drivers license'
+      : 'Siterka should have drivers license';
+  const notSmokingLabel =
+    userRole === 'sitter' ? 'I do not smoke' : 'Siterka should not smoke';
+
   return (
     <section className={`user-about ${className}`}>
       <div className='inner'>
-        <h1>Give us more details about your offerings</h1>
+        <h1>{title}</h1>
 
         <div className='form-elements'>
           <SingleCheckbox
             id='pets'
             name='pets'
-            label='I can work with pets present'
+            label={petsLabel}
             icon={<Icons.Pets size='22px' />}
             checked={pets}
             onChange={onChange}
@@ -47,7 +95,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='specialNeeds'
             name='specialNeeds'
-            label='I can babysit persons with the special needs'
+            label={specialNeedsLabel}
             checked={specialNeeds}
             onChange={onChange}
           />
@@ -55,7 +103,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='inOwnHouse'
             name='inOwnHouse'
-            label='I can babysit in my own house'
+            label={inOwnHouseLabel}
             checked={inOwnHouse}
             onChange={onChange}
           />
@@ -63,7 +111,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='cleaning'
             name='cleaning'
-            label='I can do cleaning'
+            label={cleaningLabel}
             checked={cleaning}
             onChange={onChange}
           />
@@ -71,7 +119,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='cleaningChildOnly'
             name='cleaningChildOnly'
-            label='I want to clean but after the children only'
+            label={cleaningChildOnlyLabel}
             checked={cleaningChildOnly}
             onChange={onChange}
           />
@@ -79,7 +127,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='shopping'
             name='shopping'
-            label='I can do shopping for the family'
+            label={shoppingLabel}
             checked={shopping}
             onChange={onChange}
           />
@@ -87,7 +135,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='cooking'
             name='cooking'
-            label='I want to cook for the family'
+            label={cookingLabel}
             checked={cooking}
             onChange={onChange}
           />
@@ -95,7 +143,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='cookingChildOnly'
             name='cookingChildOnly'
-            label='I want to cook but for children only'
+            label={cookingChildOnlyLabel}
             checked={cookingChildOnly}
             onChange={onChange}
           />
@@ -103,7 +151,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='outWithChild'
             name='outWithChild'
-            label='I want to take the kids outside'
+            label={outWithChildLabel}
             checked={outWithChild}
             onChange={onChange}
           />
@@ -111,7 +159,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='car'
             name='car'
-            label='I have a car'
+            label={carLabel}
             checked={car}
             onChange={onChange}
           />
@@ -119,7 +167,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='driversLicense'
             name='driversLicense'
-            label='I have a drivers license'
+            label={driversLicenseLabel}
             checked={driversLicense}
             onChange={onChange}
           />
@@ -127,7 +175,7 @@ const UserAbout = ({
           <SingleCheckbox
             id='notSmoking'
             name='notSmoking'
-            label='I do not smoke'
+            label={notSmokingLabel}
             checked={notSmoking}
             onChange={onChange}
           />

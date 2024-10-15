@@ -1,9 +1,9 @@
 'use client';
 
-import { ChildAge, Languages, PostDataProps } from '@/types/types';
+import { ChildAge, Languages, PostDataProps, Role } from '@/types/types';
 import { calculateAge } from '@/utils/calculateAge';
 import { ChangeEvent, useState } from 'react';
-import { ChangeEventTypes } from '../ProfileForm';
+import { ChangeEventTypes } from '../profileForm/ProfileForm';
 import UserContactDetails from './postFormSections/section1-contact/UserContactDetails';
 import UserExperience from './postFormSections/section2-experience/UserExperience';
 import UserBirthday from './postFormSections/section3-birthday/UserBirthday';
@@ -14,14 +14,16 @@ import UserDescription from './postFormSections/section7-description/UserDescrip
 import './PostForm.scss';
 import loginFormAction, { postFormAction } from '@/actions/actions';
 import Input from '@/components/formElements/TextField/TextField';
+import { toast } from 'react-toastify';
 
 type PostFormProps = {
   userId: string;
-  name: string;
+  userRole: string;
+  firstName: string;
   data: PostDataProps;
 };
 
-const PostForm = ({ userId, name, data }: PostFormProps) => {
+const PostForm = ({ userId, userRole, firstName, data }: PostFormProps) => {
   let newData = data;
   if (
     !data?.childAgeGroup ||
@@ -56,19 +58,28 @@ const PostForm = ({ userId, name, data }: PostFormProps) => {
   }
 
   const [postData, setPostData] = useState<PostDataProps>(newData);
+  const stepsTotal = userRole === Role.SITTER ? 7 : 6;
   const [step, setStep] = useState(1);
 
-  const userAge = calculateAge(postData.birthDate as Date);
-
-  const defaultUserTitle = `Siterka ${name}, ${userAge}, ${postData.city}, ${postData.country}`;
-
-  const defaultUserDescription = `Pozdrav! Moje ime je ${name}. Tražim posao siterke. Imam ${
-    postData.experience
-  } ${postData.experienceTimeUnit} iskustva. ${
-    postData.firstAid && 'Sertifikovan pružalac prve pomoći.'
-  } Živim u ${postData.city}, ${
-    postData.country
-  }. Javite se, očekujem Vašu poruku.`;
+  const steps =
+    userRole === Role.SITTER
+      ? {
+          UserContactDetails: 1,
+          UserExperience: 2,
+          UserBirthday: 3,
+          UserEducation: 4,
+          UserAbout: 5,
+          UserEarnings: 6,
+          UserDescription: 7
+        }
+      : {
+          UserContactDetails: 1,
+          UserExperience: 2,
+          UserEducation: 3,
+          UserAbout: 4,
+          UserEarnings: 5,
+          UserDescription: 6
+        };
 
   const handleChange = (e: ChangeEventTypes) => {
     if ('checked' in e.target && e.target.type === 'checkbox') {
@@ -108,116 +119,133 @@ const PostForm = ({ userId, name, data }: PostFormProps) => {
     });
   };
 
-  console.log('step', step);
-
   const postForm = async (formData: FormData) => {
     const result = await postFormAction(formData);
 
-    // if (result.status === 200) {
-    //   // Authenticate user - Create JWT session set cookie and redirect to homepage
-    //   const userId = result.user?.id.toString();
-    //   const user = { ...result.user, id: userId };
-    //   console.log('preparing to createSession', user);
-    //   // if (user && userId) {
-    //   const session = await createSession(user as UserDataProps);
-    //   console.log('session created', session);
-    //   router.push('/');
-    //   // }
-    // } else {
-    //   toast.error(`${result.statusText}`);
-    // }
+    if (result.status === 200) {
+      // router.push('/');
+      toast.success(`You published a job successfully. ${result.statusText}`);
+      // TODO: redirect to public job page
+    } else {
+      toast.error(`${result.statusText}`);
+    }
   };
 
   return (
-    <form className='post-form' action={postForm}>
-      <Input
-        type='text'
-        name='authorId'
-        label='UserId'
-        defaultValue={userId}
-        hidden
-      />
-      {/* User Contact and Location Details */}
-      <UserContactDetails
-        {...postData}
-        onChange={handleChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 1 ? 'active' : ''} ${
-          step > 1 ? 'done' : ''
-        }`}
-      />
+    <>
+      <div className='form-progress-steps'>
+        {Array.from({ length: stepsTotal }).map((_, index) => {
+          console.log('step', step);
+          console.log('index', index);
+          return (
+            <div
+              key={index}
+              style={{ width: `${100 / stepsTotal}%` }}
+              className={`progress-step ${index + 1 < step ? 'done' : ''} ${
+                index + 1 === step ? 'active' : ''
+              }`}>
+              {index + 1 === step && <span>{`${step} / ${stepsTotal}`}</span>}
+            </div>
+          );
+        })}
+      </div>
+      <form className='post-form' action={postForm}>
+        <Input
+          type='text'
+          name='authorId'
+          label='User Id'
+          defaultValue={userId}
+          isHidden
+        />
 
-      {/* User Experience Details */}
-      <UserExperience
-        {...postData}
-        onChange={handleChange}
-        onChildAgeGroupChange={handleChildAgeGroupChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 2 ? 'active' : ''} ${
-          step > 2 ? 'done' : ''
-        } ${step < 2 ? 'waiting' : ''}`}
-      />
+        {/* User Contact and Location Details */}
+        <UserContactDetails
+          {...postData}
+          onChange={handleChange}
+          step={step}
+          setStep={setStep}
+          className={`step ${
+            step === steps.UserContactDetails ? 'active' : ''
+          } ${step > 1 ? 'done' : ''}`}
+        />
 
-      {/* User Birth Date */}
-      <UserBirthday
-        {...postData}
-        onChange={handleDateChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 3 ? 'active' : ''} ${
-          step > 3 ? 'done' : ''
-        } ${step < 3 ? 'waiting' : ''}`}
-      />
+        {/* User Experience Details */}
+        <UserExperience
+          {...postData}
+          onChange={handleChange}
+          onChildAgeGroupChange={handleChildAgeGroupChange}
+          step={step}
+          setStep={setStep}
+          className={`step ${step === steps.UserExperience ? 'active' : ''} ${
+            step > steps.UserExperience ? 'done' : ''
+          } ${step < steps.UserExperience ? 'waiting' : ''}`}
+          userRole={userRole}
+        />
 
-      {/* Education & Languages Section */}
-      <UserEducation
-        {...postData}
-        onChange={handleChange}
-        onLanguagesChange={handleLanguagesChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 4 ? 'active' : ''} ${
-          step > 4 ? 'done' : ''
-        } ${step < 4 ? 'waiting' : ''}`}
-      />
+        {/* User Birth Date */}
+        {userRole === Role.SITTER && steps.UserBirthday && (
+          <UserBirthday
+            {...postData}
+            onChange={handleDateChange}
+            step={step}
+            setStep={setStep}
+            className={`step ${step === steps.UserBirthday ? 'active' : ''} ${
+              step > steps.UserBirthday ? 'done' : ''
+            } ${step < steps.UserBirthday ? 'waiting' : ''}`}
+          />
+        )}
 
-      {/* Special details about user offerings */}
-      <UserAbout
-        {...postData}
-        onChange={handleChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 5 ? 'active' : ''} ${
-          step > 5 ? 'done' : ''
-        } ${step < 5 ? 'waiting' : ''}`}
-      />
+        {/* Education & Languages Section */}
+        <UserEducation
+          {...postData}
+          onChange={handleChange}
+          onLanguagesChange={handleLanguagesChange}
+          step={step}
+          setStep={setStep}
+          className={`step ${step === steps.UserEducation ? 'active' : ''} ${
+            step > steps.UserEducation ? 'done' : ''
+          } ${step < steps.UserEducation ? 'waiting' : ''}`}
+          userRole={userRole}
+        />
 
-      {/* Earnings Section */}
-      <UserEarnings
-        {...postData}
-        onChange={handleChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 6 ? 'active' : ''} ${
-          step > 6 ? 'done' : ''
-        } ${step < 6 ? 'waiting' : ''}`}
-      />
+        {/* Special details about user offerings */}
+        <UserAbout
+          {...postData}
+          onChange={handleChange}
+          step={step}
+          setStep={setStep}
+          className={`step ${step === steps.UserAbout ? 'active' : ''} ${
+            step > steps.UserAbout ? 'done' : ''
+          } ${step < steps.UserAbout ? 'waiting' : ''}`}
+          userRole={userRole}
+        />
 
-      {/* Title and Description of the offering */}
-      <UserDescription
-        defaultTitle={defaultUserTitle}
-        defaultDescription={defaultUserDescription}
-        {...postData}
-        onChange={handleChange}
-        step={step}
-        setStep={setStep}
-        className={`step ${step === 7 ? 'active' : ''} ${
-          step > 7 ? 'done' : ''
-        } ${step < 7 ? 'waiting' : ''}`}
-      />
-    </form>
+        {/* Earnings Section */}
+        <UserEarnings
+          {...postData}
+          onChange={handleChange}
+          step={step}
+          setStep={setStep}
+          className={`step ${step === steps.UserEarnings ? 'active' : ''} ${
+            step > steps.UserEarnings ? 'done' : ''
+          } ${step < steps.UserEarnings ? 'waiting' : ''}`}
+          userRole={userRole}
+        />
+
+        {/* Title and Description of the offering */}
+        <UserDescription
+          firstName={firstName}
+          {...postData}
+          onChange={handleChange}
+          step={step}
+          setStep={setStep}
+          className={`step ${step === steps.UserDescription ? 'active' : ''} ${
+            step > steps.UserDescription ? 'done' : ''
+          } ${step < steps.UserDescription ? 'waiting' : ''}`}
+          userRole={userRole}
+        />
+      </form>
+    </>
   );
 };
 
