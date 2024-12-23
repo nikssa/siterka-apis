@@ -3,10 +3,14 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET() {
-  const sitters = await prisma.user.findMany({
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { userId: string } }
+) {
+  const { userId } = params;
+  const sitters = await prisma.user.findUnique({
     where: {
-      role: 'sitter'
+      id: Number(userId)
     },
     include: {
       post: true,

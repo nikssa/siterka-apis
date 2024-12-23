@@ -8,6 +8,7 @@ export async function GET() {
   return NextResponse.json(profiles);
 }
 export async function POST(request: NextRequest) {
+  console.log('request: ', request);
   const body = await request.json();
   const { firstName, lastName, gender, bio, userId } = body;
   const profile = await prisma.profile.create({
