@@ -60,6 +60,12 @@ enum EarningsRate {
   Monthly
 }
 
+enum Currency {
+  RSD
+  USD
+  EUR
+}
+
 enum TimeUnits {
   months
   years
@@ -99,7 +105,7 @@ model Post {
   updatedAt          DateTime     @updatedAt
   published          Boolean      @default(false)
   title              String       @db.VarChar(255)
-  description        String
+  description        String       @db.VarChar(2000)
   email              String?
   phone              String?
   birthDate          DateTime? //date picker
@@ -130,6 +136,7 @@ model Post {
   otherLanguages     String
   earnings           Int
   earningsRate       EarningsRate
+  currency           Currency     @default(RSD)
   author             User?        @relation(fields: [authorId], references: [id])
   authorId           Int          @unique
 }
