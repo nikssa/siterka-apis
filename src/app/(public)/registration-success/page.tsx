@@ -11,7 +11,8 @@ const RegistrationSuccessPage = () => {
         <div className='inner'>
           <h1>Registration Successful</h1>
           <p>
-            You are now registered. Please check your email for confirmation.
+            Data submitted successfully. Please check your inbox for
+            confirmation email and follow instructions.
           </p>
         </div>
       </section>

@@ -16,6 +16,7 @@ interface UserEarningsProps extends PostDataProps {
 const UserEarnings = ({
   earnings,
   earningsRate,
+  currency,
   onChange,
   step,
   setStep,
@@ -40,7 +41,16 @@ const UserEarnings = ({
             name='earnings'
             label={earningsLabel}
             placeholder='Enter earnings'
-            value={earnings}
+            value={earnings || ''}
+            onChange={onChange}
+          />
+
+          <SelectBox
+            id='currency'
+            name='currency'
+            label='Currency'
+            selected={currency}
+            options={['RSD', 'USD', 'EUR']}
             onChange={onChange}
           />
 

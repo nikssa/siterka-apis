@@ -75,7 +75,7 @@ const UserAbout = ({
       ? 'I have drivers license'
       : 'Siterka should have drivers license';
   const notSmokingLabel =
-    userRole === 'sitter' ? 'I do not smoke' : 'Siterka should not smoke';
+    userRole === 'sitter' ? `I don't smoke` : 'Siterka should not smoke';
 
   return (
     <section className={`user-about ${className}`}>
@@ -96,6 +96,7 @@ const UserAbout = ({
             id='specialNeeds'
             name='specialNeeds'
             label={specialNeedsLabel}
+            icon={<Icons.SpecialNeeds size='22px' />}
             checked={specialNeeds}
             onChange={onChange}
           />
@@ -104,6 +105,7 @@ const UserAbout = ({
             id='inOwnHouse'
             name='inOwnHouse'
             label={inOwnHouseLabel}
+            icon={<Icons.House size='22px' />}
             checked={inOwnHouse}
             onChange={onChange}
           />
@@ -112,6 +114,7 @@ const UserAbout = ({
             id='cleaning'
             name='cleaning'
             label={cleaningLabel}
+            icon={<Icons.Cleaning size='22px' />}
             checked={cleaning}
             onChange={onChange}
           />
@@ -120,6 +123,7 @@ const UserAbout = ({
             id='cleaningChildOnly'
             name='cleaningChildOnly'
             label={cleaningChildOnlyLabel}
+            icon={<Icons.CleaningChildren size='22px' />}
             checked={cleaningChildOnly}
             onChange={onChange}
           />
@@ -128,6 +132,7 @@ const UserAbout = ({
             id='shopping'
             name='shopping'
             label={shoppingLabel}
+            icon={<Icons.Shopping size='22px' />}
             checked={shopping}
             onChange={onChange}
           />
@@ -136,6 +141,7 @@ const UserAbout = ({
             id='cooking'
             name='cooking'
             label={cookingLabel}
+            icon={<Icons.Cooking size='22px' />}
             checked={cooking}
             onChange={onChange}
           />
@@ -144,6 +150,7 @@ const UserAbout = ({
             id='cookingChildOnly'
             name='cookingChildOnly'
             label={cookingChildOnlyLabel}
+            icon={<Icons.CookingChildren size='22px' />}
             checked={cookingChildOnly}
             onChange={onChange}
           />
@@ -152,6 +159,7 @@ const UserAbout = ({
             id='outWithChild'
             name='outWithChild'
             label={outWithChildLabel}
+            icon={<Icons.Outdoor size='22px' />}
             checked={outWithChild}
             onChange={onChange}
           />
@@ -160,6 +168,7 @@ const UserAbout = ({
             id='car'
             name='car'
             label={carLabel}
+            icon={<Icons.Car size='22px' />}
             checked={car}
             onChange={onChange}
           />
@@ -168,6 +177,7 @@ const UserAbout = ({
             id='driversLicense'
             name='driversLicense'
             label={driversLicenseLabel}
+            icon={<Icons.DriverLicense size='22px' />}
             checked={driversLicense}
             onChange={onChange}
           />
@@ -176,6 +186,7 @@ const UserAbout = ({
             id='notSmoking'
             name='notSmoking'
             label={notSmokingLabel}
+            icon={<Icons.NotSmoking size='22px' />}
             checked={notSmoking}
             onChange={onChange}
           />

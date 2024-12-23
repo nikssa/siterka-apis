@@ -14,11 +14,10 @@ import Icon from '@/app/assets/icons/Icon';
 import { Icons } from '@/app/assets/icons';
 import { toast } from 'react-toastify';
 import safeAwait from '@/utils/safeAwait';
+import { resizeImageAction } from '@/actions/actions';
 
 const UploadForm = ({ userId }: { userId: number }) => {
   const profilePhoto = usePhotoClient(userId);
-
-  console.log('profilePhoto', profilePhoto);
 
   const [image, setImage] = React.useState<File | null>(null);
   const [imageUrl, setImageUrl] = React.useState(profilePhoto?.url || '');
@@ -32,9 +31,11 @@ const UploadForm = ({ userId }: { userId: number }) => {
     }
   }, [profilePhoto]);
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    console.log('handleImageChange');
     const image = e.target.files?.[0];
     console.log('image', image);
+    console.log('image.name', image?.name);
 
     if (e.target.files && image) {
       console.log('image.size', image.size);
@@ -51,10 +52,13 @@ const UploadForm = ({ userId }: { userId: number }) => {
       const url = URL.createObjectURL(image);
       setImageUrl(url);
       // setProfileData({ ...profileData, photo: image });
+
+      const resizedImage = await resizeImageAction();
     }
   };
 
   const uploadForm = async (formData: FormData) => {
+    console.log('uploadForm');
     const userId = Number(formData.get('userId'));
     // const result = await uploadFormAction(formData);
 
@@ -64,13 +68,13 @@ const UploadForm = ({ userId }: { userId: number }) => {
     // });
 
     // const [error, response] ?= await fetch("https://arthur.place"); // new ?= operator ES proposal
-    const [error, result] = await safeAwait(
-      fetch('http://localhost:4000/api/upload', {
+    const [error, result] = await safeAwait({
+      promise: fetch('http://localhost:4000/api/upload', {
         method: 'POST',
         body: formData
       }),
-      (error) => console.error('Request failed:', error)
-    );
+      errorHandler: (error) => console.error('Request failed:', error)
+    });
 
     toast.success(`You uploaded a photo successfully. ${result.statusText}`);
     console.log('result from uploadForm', result);
@@ -83,23 +87,11 @@ const UploadForm = ({ userId }: { userId: number }) => {
     }
   };
 
-  console.log('imageUrl', imageUrl);
-
   return (
     <section>
       <div className='inner'>
         <div className='profile-photo'>
-          <form
-            action={uploadForm}
-            // onSubmit={async (e: FormEvent<HTMLFormElement>) => {
-            //   e.preventDefault();
-            //   console.log('e', (e.target as HTMLFormElement).elements[0]);
-            //   await fetch('/api/upload', {
-            //     method: 'POST',
-            //     body: image
-            //   });
-            // }}
-          >
+          <form action={uploadForm}>
             <input
               className='hidden'
               type='text'
@@ -122,27 +114,7 @@ const UploadForm = ({ userId }: { userId: number }) => {
                       deletePhoto(userId);
                     }}
                   />
-                  {/* <IconButton
-                    type='button'
-                    className='delete'
-                    icon={<Icons.Delete />}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setImageUrl('');
-                      deletePhoto(userId);
-                      //TODO: Delete image from db and from public/uploads folder
-                    }}
-                  /> */}
 
-                  {/* <div
-                    className='image__blur sitter-photo__blur'
-                    style={{
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundImage: `url(${imageUrl})`,
-                      width: '200px',
-                      height: '200px'
-                    }}></div> */}
                   <Image
                     src={imageUrl}
                     alt='Image preview of the user'

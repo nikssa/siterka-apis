@@ -18,13 +18,19 @@ const UserBirthday = ({
   setStep,
   className
 }: UserBirthdayProps) => {
+  const defaultDate = `${new Date().getFullYear() - 18}-${(
+    new Date().getMonth() + 1
+  )
+    .toString()
+    .padStart(2, '0')}-${new Date().getDate().toString().padStart(2, '0')}`;
+
   const birthday = birthDate && new Date(birthDate);
 
   const birthdayFormatted = birthday
     ? `${birthday.getFullYear()}-${(birthday.getMonth() + 1)
         .toString()
         .padStart(2, '0')}-${birthday.getDate().toString().padStart(2, '0')}`
-    : '';
+    : defaultDate;
 
   return (
     <section className={className}>
@@ -38,7 +44,7 @@ const UserBirthday = ({
             placeholder='Enter birth date'
             value={birthdayFormatted}
             min={'1900-01-01'}
-            max={'2006-10-01'}
+            max={defaultDate}
             onChange={onChange}
           />
 

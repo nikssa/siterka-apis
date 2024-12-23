@@ -39,26 +39,27 @@ const UserDescription = ({
 }: UserDescriptionProps) => {
   const userAge = calculateAge(birthDate as Date);
 
-  const defaultTitle = `Siterka ${firstName}, ${userAge}, ${city}, ${country}`;
-  const defaultDescription = `Pozdrav! Moje ime je ${firstName}. Tražim posao siterke. Imam ${experience} ${experienceTimeUnit} iskustva. ${
-    firstAid && 'Sertifikovan pružalac prve pomoći.'
-  } Živim u ${city}, ${country}. Javite se, očekujem Vašu poruku.`;
+  const defaultTitle =
+    title || `Siterka ${firstName}, ${userAge} years, ${city}, ${country}`;
+  const defaultDescription =
+    description ||
+    `Pozdrav! Moje ime je ${firstName}. Tražim posao siterke. Imam ${experience} ${experienceTimeUnit} iskustva. ${
+      firstAid ? 'Sertifikovan pružalac prve pomoći.' : ''
+    } Živim u ${city}, ${country}. Javite se, očekujem Vašu poruku.`;
 
   const userDescription = description ? description : defaultDescription;
   const userTitle = title ? title : defaultTitle;
 
   const postTitle =
-    userRole === 'Siterka'
+    userRole === 'sitter'
       ? 'Define title , describe your offerings and availability'
       : 'Define title , describe your demands and needs';
 
   const descriptionLabel =
-    userRole === 'Siterka'
-      ? 'Describe your offerings'
-      : 'Describe your demands';
+    userRole === 'sitter' ? 'Describe your offerings' : 'Describe your demands';
 
   const availabilityLabel =
-    userRole === 'Siterka'
+    userRole === 'sitter'
       ? 'Describe your availability'
       : "Describe how often you need siterka's services";
 

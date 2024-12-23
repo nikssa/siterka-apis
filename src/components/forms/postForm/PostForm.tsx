@@ -1,6 +1,12 @@
 'use client';
 
-import { ChildAge, Languages, PostDataProps, Role } from '@/types/types';
+import {
+  ChildAge,
+  Languages,
+  PostDataProps,
+  Role,
+  TimeUnits
+} from '@/types/types';
 import { calculateAge } from '@/utils/calculateAge';
 import { ChangeEvent, useState } from 'react';
 import { ChangeEventTypes } from '../profileForm/ProfileForm';
@@ -54,6 +60,16 @@ const PostForm = ({ userId, userRole, firstName, data }: PostFormProps) => {
         [Languages.french]: false,
         [Languages.italian]: false
       }
+    };
+  }
+
+  if (
+    !data?.experienceTimeUnit ||
+    Object.keys(data?.experienceTimeUnit).length === 0
+  ) {
+    newData = {
+      ...newData,
+      experienceTimeUnit: TimeUnits.years
     };
   }
 
@@ -124,8 +140,8 @@ const PostForm = ({ userId, userRole, firstName, data }: PostFormProps) => {
 
     if (result.status === 200) {
       // router.push('/');
-      toast.success(`You published a job successfully. ${result.statusText}`);
-      // TODO: redirect to public job page
+      toast.success(`You published a post successfully. ${result.statusText}`);
+      // TODO: redirect to public post page
     } else {
       toast.error(`${result.statusText}`);
     }
@@ -135,8 +151,8 @@ const PostForm = ({ userId, userRole, firstName, data }: PostFormProps) => {
     <>
       <div className='form-progress-steps'>
         {Array.from({ length: stepsTotal }).map((_, index) => {
-          console.log('step', step);
-          console.log('index', index);
+          // console.log('step', step);
+          // console.log('index', index);
           return (
             <div
               key={index}

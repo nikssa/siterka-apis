@@ -46,6 +46,8 @@ const UserExperience = ({
       ? 'How many children can you babysit?'
       : 'How many children siterka should babysit?';
 
+  console.log('experienceTimeUnit', experienceTimeUnit);
+
   return (
     <section className={className}>
       <div className='inner'>
@@ -56,7 +58,7 @@ const UserExperience = ({
             name='experience'
             label={experienceLabel}
             placeholder='Enter number of years or months'
-            value={experience}
+            value={experience || ''}
             min={0}
             required
             onChange={onChange}

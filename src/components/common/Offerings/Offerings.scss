@@ -1,0 +1,36 @@
+.offerings {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   justify-content: start;
+
+  .item {
+    // display: flex;
+    // flex-direction: column;
+    align-items: center;
+    margin: 0 10px 10px 0;
+
+    .circle {
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      width: 50px;
+
+      path {
+        fill: var(--color-pale-white);
+      }
+    }
+
+    &--label {
+      font-size: 1.6rem;
+      margin-left: 10px;
+      // overflow: hidden;
+      // text-align: center;
+      //   text-transform: uppercase;
+      // width: 50px;
+      // white-space: wrap;
+    }
+  }
+}

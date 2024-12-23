@@ -55,7 +55,7 @@ const UserContactDetails = ({
             name='country'
             label='Country'
             placeholder='Enter country'
-            value={country}
+            value={country || ''}
             onChange={onChange}
             required={true}
           />
@@ -64,7 +64,7 @@ const UserContactDetails = ({
             name='city'
             label='City'
             placeholder='Enter city'
-            value={city}
+            value={city || ''}
             onChange={onChange}
             required={true}
           />
@@ -73,7 +73,7 @@ const UserContactDetails = ({
             name='address'
             label='Address'
             placeholder='Enter address'
-            value={address}
+            value={address || ''}
             onChange={onChange}
           />
 

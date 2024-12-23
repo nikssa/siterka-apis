@@ -17,7 +17,8 @@ const SelectBox = ({
   label,
   required,
   options,
-  selected = TimeUnits.years,
+  // selected = TimeUnits.years,
+  selected,
   onChange
 }: SelectBoxProps) => {
   return (

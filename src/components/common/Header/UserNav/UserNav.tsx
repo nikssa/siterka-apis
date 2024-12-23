@@ -1,15 +1,14 @@
 'use client';
 
-import Avatar from '../../Avatar/Avatar';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Avatar from '../../Avatar/Avatar';
 
+import useHasProfileClient from '@/hooks/useHasProfileClient';
+import useIsAuthenticatedClient from '@/hooks/useIsAuthenticatedClient';
+import useOutsideClick from '@/hooks/useOutsideClick';
 import { deleteSession } from '@/utils/session';
 import { useRouter } from 'next/navigation';
-import useIsAuthenticatedClient from '@/hooks/useIsAuthenticatedClient';
-import useHasProfile from '@/hooks/useHasProfile';
-import useHasProfileClient from '@/hooks/useHasProfileClient';
-import useOutsideClick from '@/hooks/useOutsideClick';
 
 import './UserNav.scss';
 
@@ -62,7 +61,9 @@ export default function UserNav() {
     }
   }
 
-  return (
+  return isAuthenticated === null ? (
+    <div>Loading...</div>
+  ) : (
     <>
       {isAuthenticated ? (
         <ul
