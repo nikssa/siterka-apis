@@ -1,31 +1,79 @@
 .user-card {
-  section.card-header {
+  padding: 20px 0;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  &--image {
+    border-radius: 3px;
+    height: 180px;
+    min-width: 180px;
+    margin: 0 0 20px 0;
+    overflow: hidden;
+    position: relative;
+
     @media screen and (min-width: 768px) {
+      margin: 0 40px 30px 0;
+    }
+
+    .image__blur {
+      height: 180px;
+    }
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &--text {
+    h1 {
       display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      padding: 20px 0;
-    }
-    .card-header-image {
-      height: 250px;
-      position: relative;
+      margin: 0 0 5px 0;
+      line-height: 1;
+      > span {
+        margin-left: auto;
 
-      .image__blur {
-        height: 250px;
-      }
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        sup {
+          font-size: 0.5em;
+          font-weight: 400;
+        }
+
+        .slash {
+          font-weight: 400;
+        }
+
+        .earnings-rate {
+          font-size: 0.5em;
+          font-weight: 400;
+        }
       }
     }
 
-    .card-header-text {
-      padding-left: 20px;
-      h2 {
-      }
-      p {
+    > div {
+      color: var(--secondary-color);
+    }
+
+    .description {
+      margin: 10px 0 15px;
+    }
+
+    .offerings {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+
+      .item {
+        display: flex;
+        flex-direction: column;
+
+        &--label {
+          display: none;
+        }
       }
     }
   }
@@ -35,9 +83,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-filter: blur(9.8px);
-    filter: blur(9.8px);
+    filter: blur(10px);
     filter: progid:DXImageTransform.Microsoft.blur(pixelradius=9.8);
-    height: 190px;
+    height: 100%;
     width: 100%;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
   }
 }

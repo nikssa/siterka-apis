@@ -1,0 +1,63 @@
+.user-details {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  &--image-column {
+    // @media screen and (min-width: 768px) {
+    // }
+
+    padding-bottom: 30px;
+
+    .image {
+      border-radius: 5px;
+      margin: 0 auto;
+      overflow: hidden;
+      height: 200px;
+      width: 200px;
+
+      @media screen and (min-width: 768px) {
+        margin: auto;
+      }
+    }
+
+    button {
+      display: block;
+      margin: 20px auto 0;
+      width: 200px;
+
+      // @media screen and (min-width: 768px) {
+      //   width: 100%;
+      // }
+    }
+  }
+
+  &--data-column {
+    @media screen and (min-width: 768px) {
+      padding: 0 0 30px 30px;
+    }
+
+    .header {
+    }
+
+    .body {
+      .description {
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      hr {
+        border-top: 1px solid var(--border-color);
+        margin: 20px 0;
+      }
+    }
+
+    .offerings {
+      .item {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+}
