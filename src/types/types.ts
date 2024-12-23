@@ -51,6 +51,12 @@ export enum EarningsRate {
   MONTHLY = 'Monthly'
 }
 
+export enum Currency {
+  RSD = 'RSD',
+  USD = '$',
+  EUR = '€'
+}
+
 export type PhotoProps = {
   id?: number;
   url: string;
@@ -68,7 +74,7 @@ export type UserDataProps = {
   photo?: PhotoProps;
   createdAt?: Date;
   profile?: ProfileDataProps;
-  posts?: PostDataProps[];
+  post?: PostDataProps;
 };
 
 export type ProfileDataProps = {
@@ -130,6 +136,7 @@ export type PostDataProps = {
   otherLanguages?: string;
   earnings: number;
   earningsRate: EarningsRate;
+  currency: Currency;
   author?: UserDataProps;
   authorId?: number;
   profile?: ProfileDataProps;

@@ -6,9 +6,15 @@ import {
   Education,
   PrismaClient,
   TimeUnits,
-  Post
+  Post,
+  Currency
 } from '@prisma/client';
 import md5 from 'md5';
+
+import photo from '../../public/uploads/1728953084901_me.jpeg';
+
+// import sharp from 'sharp';
+const sharp = require('sharp');
 
 const prisma = new PrismaClient();
 
@@ -90,6 +96,7 @@ export async function postFormAction(formData: FormData) {
     otherLanguages: formData.get('otherLanguages') as string,
     earnings: Number(formData.get('earnings')),
     earningsRate: formData.get('earningsRate') as EarningsRate,
+    currency: formData.get('currency') as Currency,
     education: formData.get('education') as Education,
     sitterCourse: (formData.get('sitterCourse') as string) === 'on',
     firstAid: (formData.get('firstAid') as string) === 'on',
@@ -144,4 +151,12 @@ export async function uploadFormAction(formData: FormData) {
   });
   console.log('result from action', result);
   // return result;
+}
+
+export async function resizeImageAction() {
+  console.log('resizeImageAction', photo);
+
+  sharp('../../public/uploads/1728953084901_me.jpeg')
+    .resize(200, 200)
+    .toFile(`../../public/uploads/1728953084901_me_output.jpg`);
 }
