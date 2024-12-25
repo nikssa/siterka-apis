@@ -1,6 +1,5 @@
 import { Icons } from '@/app/assets/icons';
 import { UserDataProps } from '@/types/types';
-import { User } from '@prisma/client';
 
 import './Offerings.scss';
 
@@ -10,7 +9,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.firstAid && (
         <div className='item' title={`First Aid Certificate`}>
           <div className='circle'>
-            <Icons.FirstAid size='26px' />
+            <Icons.FirstAid size='22px' />
           </div>
           <div className='item--label'>First Aid Certificate</div>
         </div>
@@ -18,7 +17,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.sitterCourse && (
         <div className='item' title='Sitter Course'>
           <div className='circle'>
-            <Icons.SitterCourse size='26px' />
+            <Icons.SitterCourse size='22px' />
           </div>
           <div className='item--label'>Sitter Course</div>
         </div>
@@ -26,7 +25,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.pets && (
         <div className='item' title='I can work with pets present'>
           <div className='circle'>
-            <Icons.Pets size='26px' />
+            <Icons.Pets size='22px' />
           </div>
           <div className='item--label'>Pets</div>
         </div>
@@ -36,7 +35,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
           className='item'
           title='I can babysit children with the special needs'>
           <div className='circle'>
-            <Icons.SpecialNeeds size='26px' />
+            <Icons.SpecialNeeds size='22px' />
           </div>
           <div className='item--label'>Special Needs</div>
         </div>
@@ -44,7 +43,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.inOwnHouse && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.House size='26px' />
+            <Icons.House size='22px' />
           </div>
           <div className='item--label'>inOwnHouse</div>
         </div>
@@ -52,7 +51,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.cleaning && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.Cleaning size='26px' />
+            <Icons.Cleaning size='22px' />
           </div>
           <div className='item--label'>Cleaning</div>
         </div>
@@ -60,7 +59,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.cleaningChildOnly && !data?.post?.cleaning && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.CleaningChildren size='26px' />
+            <Icons.CleaningChildren size='22px' />
           </div>
           <div className='item--label'>CleaningChildren</div>
         </div>
@@ -68,7 +67,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.shopping && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.Shopping size='26px' />
+            <Icons.Shopping size='22px' />
           </div>
           <div className='item--label'>Shopping</div>
         </div>
@@ -76,7 +75,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.cooking && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.Cooking size='26px' />
+            <Icons.Cooking size='22px' />
           </div>
           <div className='item--label'>Cooking</div>
         </div>
@@ -84,7 +83,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.cookingChildOnly && !data?.post?.cooking && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.CookingChildren size='26px' />
+            <Icons.CookingChildren size='22px' />
           </div>
           <div className='item--label'>CookingChildren</div>
         </div>
@@ -92,7 +91,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.outWithChild && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.Outdoor size='26px' />
+            <Icons.Outdoor size='22px' />
           </div>
           <div className='item--label'>outWithChild</div>
         </div>
@@ -100,7 +99,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.car && data?.post?.driversLicense && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.Car size='26px' />
+            <Icons.Car size='22px' />
           </div>
           <div className='item--label'>Car</div>
         </div>
@@ -108,7 +107,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.driversLicense && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.DriverLicense size='26px' />
+            <Icons.DriverLicense size='22px' />
           </div>
           <div className='item--label'>DriverLicense</div>
         </div>
@@ -116,7 +115,7 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       {data?.post?.notSmoking && (
         <div className='item' title=''>
           <div className='circle'>
-            <Icons.NotSmoking size='26px' />
+            <Icons.NotSmoking />
           </div>
           <div className='item--label'>NotSmoking</div>
         </div>

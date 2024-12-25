@@ -1,6 +1,4 @@
 import UserCardDetails from '@/components/common/UserCardDetails/UserCardDetails';
-import { getPostByUserId } from '@/data-access/post';
-import { PostDataProps, UserDataProps } from '@/types/types';
 
 const SingleSitterPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -8,7 +6,13 @@ const SingleSitterPage = async ({ params }: { params: { id: string } }) => {
   const userData = await fetch(`http://localhost:4000/api/sitters/${id}`, {
     method: 'GET'
   });
+
+  console.log('status', userData.status);
+  console.log('ok', userData.ok);
+
   const user = await userData.json();
+
+  // TODO: Use user?.post?.title for SEO friendly URLs
 
   return (
     <section>

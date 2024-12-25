@@ -25,6 +25,7 @@ const UserDescription = ({
   title,
   description,
   birthDate,
+  address,
   city,
   country,
   experience,
@@ -39,16 +40,35 @@ const UserDescription = ({
 }: UserDescriptionProps) => {
   const userAge = calculateAge(birthDate as Date);
 
-  const defaultTitle =
+  const defaultSitterTitle =
     title || `Siterka ${firstName}, ${userAge} years, ${city}, ${country}`;
-  const defaultDescription =
+  const defaultSitterDescription =
     description ||
     `Pozdrav! Moje ime je ${firstName}. Tražim posao siterke. Imam ${experience} ${experienceTimeUnit} iskustva. ${
       firstAid ? 'Sertifikovan pružalac prve pomoći.' : ''
     } Živim u ${city}, ${country}. Javite se, očekujem Vašu poruku.`;
 
-  const userDescription = description ? description : defaultDescription;
-  const userTitle = title ? title : defaultTitle;
+  const defaultParentTitle =
+    title ||
+    `Roditelj ${firstName}, ${city}, ${country} ${
+      address ? `, ${address}` : ''
+    }`;
+  const defaultParentDescription =
+    description ||
+    `Pozdrav! Moje ime je ${firstName}. Tražim/o bebisiterku sa min ${experience} ${experienceTimeUnit} iskustva. ${
+      firstAid ? 'Želimo da ima položenu prvu pomoć.' : ''
+    } Živim/o u ${city}, ${country}. Javite se, očekujem/o Vašu poruku.`;
+
+  const userTitle = title
+    ? title
+    : userRole === 'sitter'
+    ? defaultSitterTitle
+    : defaultParentTitle;
+  const userDescription = description
+    ? description
+    : userRole === 'sitter'
+    ? defaultSitterDescription
+    : defaultParentDescription;
 
   const postTitle =
     userRole === 'sitter'

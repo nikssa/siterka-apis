@@ -1,12 +1,25 @@
-import { UserDataProps } from '@/types/types';
+import { EarningsRate, ProfileDataProps, UserDataProps } from '@/types/types';
 import { calculateAge } from '@/utils/calculateAge';
-import Image from 'next/image';
 import Offerings from '../Offerings/Offerings';
 import SimpleButton from '../SimpleButton/SimpleButton';
+import UserCardImage from '../UserCardImage/UserCardImage';
 import './UserCardDetails.scss';
 
 const UserCardDetails = ({ data }: { data: UserDataProps }) => {
+  // check if window viewport is greater than 768px
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+
   const age = calculateAge(data?.post?.birthDate as Date);
+
+  const earningsRate = {
+    [EarningsRate.HOURLY]: 'hour',
+    [EarningsRate.DAILY]: 'day',
+    [EarningsRate.WEEKLY]: 'week',
+    [EarningsRate.MONTHLY]: 'month'
+  }[data?.post?.earningsRate as EarningsRate];
+
+  const numberOfChildren = data?.post?.numberOfChildren || 1;
+  const child = numberOfChildren > 1 ? 'children' : 'child';
 
   if (!data) {
     return <h1>Sorry, user not found</h1>;
@@ -16,51 +29,63 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
     <div className='user-details'>
       <div className='user-details--image-column'>
         {data?.profile?.photo?.url ? (
-          <div className='image'>
-            <div
-              className='image__blur sitter-photo__blur'
-              style={{
-                background: `url(${data?.profile?.photo?.url})`
-              }}></div>
-            <Image
-              src={`/${data?.profile?.photo?.url}`}
-              alt={data?.post?.title as string}
-              // alt={data?.desc}
-              width={250}
-              height={250}
-              // loading='lazy'
-              // quality={40}
-              // placeholder='blur'
-              // blurDataURL={data?.url}
+          <>
+            <UserCardImage
+              userId={data?.id as number}
+              profile={data?.profile as ProfileDataProps}
+              isDesktop={isDesktop}
+              size={250}
             />
-          </div>
+          </>
         ) : (
           <></>
         )}
-        <SimpleButton primary label='Send message' />
+
+        <SimpleButton primary label='Send message' redirectLink='/login' />
       </div>
 
       <div className='user-details--data-column'>
         <div className='header'>
           <h1>
-            {data?.profile?.firstName} {data?.profile?.lastName}
-            <span className='user-type'>
-              {data?.post?.earnings} {data?.post?.currency} /{' '}
-              {data?.post?.earningsRate}
+            {data?.profile?.firstName} {data?.profile?.lastName.slice(0, 1)}
+            <span>
+              {data?.post?.earnings}{' '}
+              <sup className='currency'>{data?.post?.currency}</sup>
+              <span className='slash'>/</span>
+              <span className='earnings-rate'>{earningsRate}</span>
             </span>
           </h1>
+
           {!data?.post?.city || (
-            <span>
-              Babysitter ({age}) in {data?.post?.city}, {data?.post?.country}
-              {!data?.post?.address ? '' : ` - ${data?.post?.address}`}
-            </span>
+            <div>
+              Babysitter in {data?.post?.city}, {data?.post?.country}
+              {!data?.post?.address
+                ? ' - No address specified'
+                : ` - ${data?.post?.address}`}
+              <div>
+                {age} years | {data?.post?.experience}{' '}
+                {data?.post?.experienceTimeUnit} paid experience
+              </div>
+            </div>
           )}
-          {!data?.profile?.bio || <p>{data?.profile?.bio}</p>}
         </div>
 
         <div className='body'>
-          <h2>{data?.post?.title}</h2>
           <p className='description'>{data?.post?.description}</p>
+
+          <hr />
+
+          <h3>Contact Details</h3>
+          <p className='contact-details'>
+            Email:{' '}
+            {data?.post?.email ? (
+              <a href={`mailto:${data?.post?.email}`}>{data?.post?.email}</a>
+            ) : data.email ? (
+              <a href={`mailto:${data.email}`}>{data.email}</a>
+            ) : null}
+            <br />
+            Phone: <a href={`tel:${data?.post?.phone}`}>{data?.post?.phone}</a>
+          </p>
 
           <hr />
 
@@ -73,28 +98,31 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
           )}
 
           <h3>{data?.role === 'sitter' ? 'Offerings' : 'Requirements'}</h3>
-
           <Offerings data={data} />
 
           <p>
-            Hello! My name is {data?.profile?.firstName}. I will babysit your
-            child/children for {data?.post?.earnings} {data?.post?.currency}
-            per {data?.post?.earningsRate}. I am {age} years old. I live in{' '}
-            {data?.post?.city}, {data?.post?.country} nearby{' '}
-            {data?.post?.address}.
-            {data?.post?.address && ` I work in ${data?.post?.address}.`}
+            Hello! My name is {data?.profile?.firstName}. I will babysit your{' '}
+            {child}{' '}
+            {data?.post?.earnings && (
+              <>
+                for {data?.post?.earnings} {data?.post?.currency} per{' '}
+                {earningsRate}
+              </>
+            )}
+            . I am {age} years old. I live in {data?.post?.city},{' '}
+            {data?.post?.country}
+            {data?.post?.address && ` ${data?.post?.address} nearby`}.{' '}
+            {!data?.post?.education || (
+              <>I have a {data?.post?.education} education</>
+            )}{' '}
+            {!data?.post?.experience || (
+              <>
+                and {data?.post?.experience} {data?.post?.experienceTimeUnit} of
+                paid experience
+              </>
+            )}
+            .
           </p>
-
-          {!data?.post?.education || (
-            <p>I have a {data?.post?.education} education</p>
-          )}
-
-          {!data?.post?.experience || (
-            <p>
-              I have {data?.post?.experience} {data?.post?.experienceTimeUnit}{' '}
-              of experience
-            </p>
-          )}
         </div>
       </div>
     </div>

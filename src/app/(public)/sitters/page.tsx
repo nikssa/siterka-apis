@@ -5,6 +5,10 @@ const SittersPage = async function () {
   const usersData = await fetch('http://localhost:4000/api/sitters', {
     method: 'GET'
   });
+
+  console.log('status', usersData.status);
+  console.log('ok', usersData.ok);
+
   let sitters = await usersData.json();
   sitters = sitters.filter((sitter: UserDataProps) => sitter.post !== null);
 
@@ -22,7 +26,7 @@ const SittersPage = async function () {
     <>
       <section>
         <div className='inner'>
-          <h1>Looking for a sitter</h1>
+          <h1>Searching for a sitter</h1>
           {sitters &&
             sitters.map((sitter: UserDataProps) => (
               <UserCard key={sitter.id} data={sitter} />
