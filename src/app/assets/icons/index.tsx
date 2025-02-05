@@ -12,7 +12,6 @@ import DriverLicense from './DriverLicense';
 import FirstAid from './FirstAid';
 import House from './House';
 import Next from './Next';
-import NoSmoking from './NoSmoking';
 import NotSmoking from './NotSmoking';
 import Outdoor from './Outdoor';
 import Pets from './Pets';

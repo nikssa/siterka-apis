@@ -1,5 +1,7 @@
 'use client';
 
+import { postFormAction } from '@/actions/actions';
+import Input from '@/components/formElements/TextField/TextField';
 import {
   ChildAge,
   Languages,
@@ -7,8 +9,8 @@ import {
   Role,
   TimeUnits
 } from '@/types/types';
-import { calculateAge } from '@/utils/calculateAge';
 import { ChangeEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 import { ChangeEventTypes } from '../profileForm/ProfileForm';
 import UserContactDetails from './postFormSections/section1-contact/UserContactDetails';
 import UserExperience from './postFormSections/section2-experience/UserExperience';
@@ -17,10 +19,8 @@ import UserEducation from './postFormSections/section4-education/UserEducation';
 import UserAbout from './postFormSections/section5-about/UserAbout';
 import UserEarnings from './postFormSections/section6-earnings/UserEarnings';
 import UserDescription from './postFormSections/section7-description/UserDescription';
+
 import './PostForm.scss';
-import loginFormAction, { postFormAction } from '@/actions/actions';
-import Input from '@/components/formElements/TextField/TextField';
-import { toast } from 'react-toastify';
 
 type PostFormProps = {
   userId: string;

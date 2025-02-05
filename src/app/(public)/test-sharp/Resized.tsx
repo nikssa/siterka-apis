@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { resizeImageAction } from './resizeImageAction';
 import { ChangeEvent, useState } from 'react';
-import { on } from 'events';
+import { resizeImageAction } from './resizeImageAction';
 
 const Resized = () => {
   //   const resizedImage = await sharp(sourceImage).resize(300, 200).toBuffer();
