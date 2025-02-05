@@ -4,18 +4,16 @@ import './Footer.scss';
 const Footer = () => {
   return (
     <footer>
-      <p>Copyright &copy; 2024 All rights reserved by siterka.com™.</p>
-
-      <p className='mb-2'>
+      <p>
+        Copyright &copy; 2024 All rights reserved by siterka.com™. &nbsp;
         <Link href='https://siterka.com' target='_blank'>
           siterka.com
         </Link>
         ™ is a trademark of{' '}
         <Link href='https://milani.com' target='_blank'>
-          milani.com.
+          milani.com
         </Link>
-      </p>
-      <p>
+        . &nbsp;
         <Link href='https://siterka.com/terms/' target='_blank'>
           Terms of Service
         </Link>{' '}

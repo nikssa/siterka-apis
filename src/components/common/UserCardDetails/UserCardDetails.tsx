@@ -47,6 +47,11 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
       <div className='user-details--data-column'>
         <div className='header'>
           <h1>
+            {data?.role === 'admin'
+              ? 'Admin - '
+              : data?.role === 'sitter'
+              ? 'Babysitter - '
+              : 'Parent - '}
             {data?.profile?.firstName} {data?.profile?.lastName.slice(0, 1)}
             <span>
               {data?.post?.earnings}{' '}
@@ -73,7 +78,29 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
         <div className='body'>
           <p className='description'>{data?.post?.description}</p>
 
-          <hr />
+          <p className='highlighted'>
+            Hello! My name is {data?.profile?.firstName}. I will babysit your{' '}
+            {child}{' '}
+            {data?.post?.earnings && (
+              <>
+                for {data?.post?.earnings} {data?.post?.currency} per{' '}
+                {earningsRate}
+              </>
+            )}
+            . I am {age} years old. I live in {data?.post?.city},{' '}
+            {data?.post?.country}
+            {data?.post?.address && ` ${data?.post?.address} nearby`}.{' '}
+            {!data?.post?.education || (
+              <>I have a {data?.post?.education} education</>
+            )}{' '}
+            {!data?.post?.experience || (
+              <>
+                and {data?.post?.experience} {data?.post?.experienceTimeUnit} of
+                paid experience
+              </>
+            )}
+            .
+          </p>
 
           <h3>Contact Details</h3>
           <p className='contact-details'>
@@ -99,30 +126,6 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
 
           <h3>{data?.role === 'sitter' ? 'Offerings' : 'Requirements'}</h3>
           <Offerings data={data} />
-
-          <p>
-            Hello! My name is {data?.profile?.firstName}. I will babysit your{' '}
-            {child}{' '}
-            {data?.post?.earnings && (
-              <>
-                for {data?.post?.earnings} {data?.post?.currency} per{' '}
-                {earningsRate}
-              </>
-            )}
-            . I am {age} years old. I live in {data?.post?.city},{' '}
-            {data?.post?.country}
-            {data?.post?.address && ` ${data?.post?.address} nearby`}.{' '}
-            {!data?.post?.education || (
-              <>I have a {data?.post?.education} education</>
-            )}{' '}
-            {!data?.post?.experience || (
-              <>
-                and {data?.post?.experience} {data?.post?.experienceTimeUnit} of
-                paid experience
-              </>
-            )}
-            .
-          </p>
         </div>
       </div>
     </div>

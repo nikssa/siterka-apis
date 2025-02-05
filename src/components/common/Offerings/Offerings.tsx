@@ -8,7 +8,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
     <div className='offerings'>
       {data?.post?.firstAid && (
         <div className='item' title={`First Aid Certificate`}>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-first-aid)' }}>
             <Icons.FirstAid size='22px' />
           </div>
           <div className='item--label'>First Aid Certificate</div>
@@ -16,7 +18,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.sitterCourse && (
         <div className='item' title='Sitter Course'>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-sitter-course)' }}>
             <Icons.SitterCourse size='22px' />
           </div>
           <div className='item--label'>Sitter Course</div>
@@ -24,7 +28,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.pets && (
         <div className='item' title='I can work with pets present'>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-pets)' }}>
             <Icons.Pets size='22px' />
           </div>
           <div className='item--label'>Pets</div>
@@ -34,7 +40,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
         <div
           className='item'
           title='I can babysit children with the special needs'>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-special-needs)' }}>
             <Icons.SpecialNeeds size='22px' />
           </div>
           <div className='item--label'>Special Needs</div>
@@ -42,7 +50,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.inOwnHouse && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-in-own-house)' }}>
             <Icons.House size='22px' />
           </div>
           <div className='item--label'>inOwnHouse</div>
@@ -50,7 +60,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.cleaning && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-cleaning)' }}>
             <Icons.Cleaning size='22px' />
           </div>
           <div className='item--label'>Cleaning</div>
@@ -58,7 +70,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.cleaningChildOnly && !data?.post?.cleaning && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-cleaning-children)' }}>
             <Icons.CleaningChildren size='22px' />
           </div>
           <div className='item--label'>CleaningChildren</div>
@@ -66,7 +80,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.shopping && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-shopping)' }}>
             <Icons.Shopping size='22px' />
           </div>
           <div className='item--label'>Shopping</div>
@@ -74,7 +90,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.cooking && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-cooking)' }}>
             <Icons.Cooking size='22px' />
           </div>
           <div className='item--label'>Cooking</div>
@@ -82,7 +100,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.cookingChildOnly && !data?.post?.cooking && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-cooking-children)' }}>
             <Icons.CookingChildren size='22px' />
           </div>
           <div className='item--label'>CookingChildren</div>
@@ -90,7 +110,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.outWithChild && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-out-with-child)' }}>
             <Icons.Outdoor size='22px' />
           </div>
           <div className='item--label'>outWithChild</div>
@@ -98,7 +120,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.car && data?.post?.driversLicense && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-car)' }}>
             <Icons.Car size='22px' />
           </div>
           <div className='item--label'>Car</div>
@@ -106,7 +130,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.driversLicense && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-drivers-license)' }}>
             <Icons.DriverLicense size='22px' />
           </div>
           <div className='item--label'>DriverLicense</div>
@@ -114,7 +140,9 @@ const Offerings = ({ data }: { data: UserDataProps }) => {
       )}
       {data?.post?.notSmoking && (
         <div className='item' title=''>
-          <div className='circle'>
+          <div
+            className='circle'
+            style={{ backgroundColor: 'var(--offerings-not-smoking)' }}>
             <Icons.NotSmoking />
           </div>
           <div className='item--label'>NotSmoking</div>

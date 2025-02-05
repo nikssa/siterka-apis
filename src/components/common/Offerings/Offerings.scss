@@ -1,5 +1,5 @@
 .offerings {
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
 
   .item {
     align-items: center;
@@ -11,8 +11,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 40px;
-      width: 40px;
+      height: 50px;
+      width: 50px;
 
       path {
         fill: var(--color-pale-white);

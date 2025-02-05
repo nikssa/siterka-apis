@@ -7,6 +7,10 @@
   &--image-column {
     padding-bottom: 30px;
 
+    @media screen and (min-width: 768px) {
+      padding-bottom: 0;
+    }
+
     .user-card--image {
       height: 250px;
       min-width: 250px;
@@ -29,11 +33,11 @@
 
   &--data-column {
     @media screen and (min-width: 768px) {
-      padding: 0 0 30px 30px;
+      padding: 0 0 0 30px;
     }
 
     .header {
-      padding-bottom: 10px;
+      padding-bottom: 30px;
 
       h1 {
         display: flex;
@@ -70,10 +74,12 @@
       }
 
       .contact-details {
-        line-height: 1.3;
+        line-height: 1.8;
       }
 
       hr {
+        border-color: transparent;
+        // border-top: 1px solid rgb(68, 68, 68);
         border-top: 1px solid var(--border-color);
         margin: 20px 0;
       }
@@ -84,6 +90,19 @@
         display: flex;
         flex-direction: row;
       }
+    }
+
+    .highlighted {
+      border-width: 2px 0;
+      border-color: rgba(var(--primary-color-rgb), 0.95);
+      border-style: solid;
+      color: var(--primary-color);
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-style: italic;
+      font-weight: 600;
+      margin: 40px 0;
+      padding: 20px 10px;
     }
   }
 }

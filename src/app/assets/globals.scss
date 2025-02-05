@@ -4,6 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&family=Rum+Raisin&display=swap');
 
 :root {
+  --font-heading: 'Geist', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+
   --logo-color: #0a4226;
 
   --primary-color: #0a4226;
@@ -27,11 +30,28 @@
   --field-border-color: #d0d0d0;
   --field-border-radius: 4px;
 
+  --border-color: #eaeaea;
   --border-radius: 12px;
 
   --header-height: 80px;
 
   --color-pale-white: #eee;
+
+  // Offerings colors
+  --offerings-first-aid: #aa1c4e;
+  --offerings-sitter-course: #22a6f2;
+  --offerings-pets: #56322e;
+  --offerings-special-needs: #fe0163;
+  --offerings-in-own-house: #a9671a;
+  --offerings-cleaning: #415c6d;
+  --offerings-cleaning-children: #415c6d;
+  --offerings-shopping: #3c5c74;
+  --offerings-cooking: #f45105;
+  --offerings-cooking-children: #f45105;
+  --offerings-out-with-child: #2bdb24;
+  --offerings-car: #47474e;
+  --offerings-drivers-license: #64848c;
+  --offerings-not-smoking: #26323c;
 }
 
 /* :root {
