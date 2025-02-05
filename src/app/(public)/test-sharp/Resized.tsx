@@ -22,9 +22,13 @@ const Resized = () => {
     const url = image ? URL.createObjectURL(image) : '';
     setUrl(url);
     setFile(image!);
-    const buffer = Buffer.from(await image!.arrayBuffer());
-    console.log('buffer', buffer);
-    setBuffer(buffer);
+    // const buffer = Buffer.from(await image!.arrayBuffer());
+    // console.log('buffer', buffer);
+    // setBuffer(buffer);
+    const arrayBuffer = await image!.arrayBuffer();
+    console.log('arrayBuffer', arrayBuffer);
+    setBuffer(arrayBuffer);
+
     setName(image!.name);
   };
 

@@ -4,7 +4,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Input from '../formElements/TextField/TextField';
 import Link from 'next/link';
 import Button from '../formElements/Button/Button';
-import loginFormAction from '@/actions/actions';
+import loginFormAction from '@/app/actions/actions';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { createSession } from '@/utils/session';

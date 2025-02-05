@@ -11,7 +11,7 @@ import {
 } from '@prisma/client';
 import md5 from 'md5';
 
-import photo from '../../public/uploads/1728953084901_me.jpeg';
+import photo from '../../../public/uploads/1728953084901_me.jpeg';
 
 // import sharp from 'sharp';
 const sharp = require('sharp');
@@ -156,7 +156,7 @@ export async function uploadFormAction(formData: FormData) {
 export async function resizeImageAction() {
   console.log('resizeImageAction', photo);
 
-  sharp('../../public/uploads/1728953084901_me.jpeg')
+  sharp('../../../public/uploads/1728953084901_me.jpeg')
     .resize(200, 200)
-    .toFile(`../../public/uploads/1728953084901_me_output.jpg`);
+    .toFile(`../../../public/uploads/1728953084901_me_output.jpg`);
 }
