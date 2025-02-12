@@ -14,7 +14,7 @@ import Icon from '@/app/assets/icons/Icon';
 import { Icons } from '@/app/assets/icons';
 import { toast } from 'react-toastify';
 import safeAwait from '@/utils/safeAwait';
-import { resizeImageAction } from '@/app/actions/actions';
+import { resizeImageAction } from '@/actions/actions';
 
 const UploadForm = ({ userId }: { userId: number }) => {
   const profilePhoto = usePhotoClient(userId);

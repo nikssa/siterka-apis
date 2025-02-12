@@ -1,6 +1,6 @@
 'use client';
 
-import { postFormAction } from '@/app/actions/actions';
+import { postFormAction } from '@/actions/actions';
 import Input from '@/components/formElements/TextField/TextField';
 import {
   ChildAge,

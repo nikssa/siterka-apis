@@ -11,7 +11,7 @@ import {
 } from '@prisma/client';
 import md5 from 'md5';
 
-import photo from '../../../public/uploads/1728953084901_me.jpeg';
+import photo from '../../public/uploads/1728953084901_me.jpeg';
 
 // import sharp from 'sharp';
 const sharp = require('sharp');
