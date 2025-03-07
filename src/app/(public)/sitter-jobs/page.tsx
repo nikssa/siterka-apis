@@ -31,7 +31,7 @@ const SearchJobPage = async () => {
           <h1>Search for a sitter job</h1>
           {parents &&
             parents.map((parent: UserDataProps) => (
-              <UserCard key={parent.id} data={parent} />
+              <UserCard key={parent.id} data={parent} role='parent' />
             ))}
         </div>
       </section>

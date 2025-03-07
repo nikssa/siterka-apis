@@ -4,9 +4,10 @@ import { calculateAge } from '@/utils/calculateAge';
 import Link from 'next/link';
 import Offerings from '../Offerings/Offerings';
 import UserCardImage from '../UserCardImage/UserCardImage';
+
 import './UserCard.scss';
 
-const UserCard = ({ data }: { data: UserDataProps }) => {
+const UserCard = ({ data, role }: { data: UserDataProps; role: string }) => {
   const earningsRate = {
     [EarningsRate.HOURLY]: 'hr',
     [EarningsRate.DAILY]: 'day',
@@ -22,6 +23,20 @@ const UserCard = ({ data }: { data: UserDataProps }) => {
 
   return (
     <>
+      <button popoverTarget='popoverMenu'>Click me</button>
+      <div popover='' id='popoverMenu'>
+        <ul>
+          <li>
+            <a href='#'>Option 1</a>
+          </li>
+          <li>
+            <a href='#'>Option 2</a>
+          </li>
+          <li>
+            <a href='#'>Option 3</a>
+          </li>
+        </ul>
+      </div>
       <div className='user-card'>
         {data?.profile?.photo?.url ? (
           <>
@@ -37,29 +52,35 @@ const UserCard = ({ data }: { data: UserDataProps }) => {
         )}
         <div className='user-card--text'>
           <h1>
-            <Link href={`/sitters/${data?.id}`}>
+            <Link
+              href={`${role === 'sitter' ? '/sitters' : '/sitter-jobs'}/${
+                data?.id
+              }`}>
               {data?.profile?.firstName} {data?.profile?.lastName.slice(0, 1)}
             </Link>
-
-            <span>
-              {data?.post?.earnings}{' '}
-              <sup className='currency'>{data?.post?.currency}</sup>
-              <span className='slash'>/</span>
-              <span className='earnings-rate'>{earningsRate}</span>
-            </span>
+            {data?.post?.earnings && (
+              <span>
+                {data?.post?.earnings}{' '}
+                <sup className='currency'>{data?.post?.currency}</sup>
+                <span className='slash'>/</span>
+                <span className='earnings-rate'>{earningsRate}</span>
+              </span>
+            )}
           </h1>
 
           {!data?.post?.city || (
-            <div>
-              Babysitter in {data?.post?.city}, {data?.post?.country}
-              {!data?.post?.address
-                ? ' - No address specified'
-                : ` - ${data?.post?.address}`}
+            <>
+              <div>
+                {data?.post?.city}, {data?.post?.country}
+                {!data?.post?.address
+                  ? ' - No address specified'
+                  : ` - ${data?.post?.address}`}
+              </div>
               <div>
                 {age} years | {data?.post?.experience}{' '}
                 {data?.post?.experienceTimeUnit} paid experience
               </div>
-            </div>
+            </>
           )}
 
           <p className='description'>

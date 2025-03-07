@@ -5,7 +5,13 @@ import SimpleButton from '../SimpleButton/SimpleButton';
 import UserCardImage from '../UserCardImage/UserCardImage';
 import './UserCardDetails.scss';
 
-const UserCardDetails = ({ data }: { data: UserDataProps }) => {
+const UserCardDetails = ({
+  data,
+  role
+}: {
+  data: UserDataProps;
+  role: string;
+}) => {
   // check if window viewport is greater than 768px
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
 
@@ -24,6 +30,8 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
   if (!data) {
     return <h1>Sorry, user not found</h1>;
   }
+
+  console.log('role', role);
 
   return (
     <div className='user-details'>
@@ -47,31 +55,37 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
       <div className='user-details--data-column'>
         <div className='header'>
           <h1>
-            {data?.role === 'admin'
+            {role === 'admin'
               ? 'Admin - '
-              : data?.role === 'sitter'
+              : role === 'sitter'
               ? 'Babysitter - '
               : 'Parent - '}
             {data?.profile?.firstName} {data?.profile?.lastName.slice(0, 1)}
-            <span>
-              {data?.post?.earnings}{' '}
-              <sup className='currency'>{data?.post?.currency}</sup>
-              <span className='slash'>/</span>
-              <span className='earnings-rate'>{earningsRate}</span>
-            </span>
+            {role === 'sitter' && (
+              <span>
+                {data?.post?.earnings}{' '}
+                <sup className='currency'>{data?.post?.currency}</sup>
+                <span className='slash'>/</span>
+                <span className='earnings-rate'>{earningsRate}</span>
+              </span>
+            )}
           </h1>
 
           {!data?.post?.city || (
-            <div>
-              Babysitter in {data?.post?.city}, {data?.post?.country}
-              {!data?.post?.address
-                ? ' - No address specified'
-                : ` - ${data?.post?.address}`}
+            <>
               <div>
-                {age} years | {data?.post?.experience}{' '}
-                {data?.post?.experienceTimeUnit} paid experience
+                {data?.post?.city}, {data?.post?.country}
+                {!data?.post?.address
+                  ? ' - No address specified'
+                  : ` - ${data?.post?.address}`}
               </div>
-            </div>
+              {role === 'sitter' && (
+                <div>
+                  {age} years | {data?.post?.experience}{' '}
+                  {data?.post?.experienceTimeUnit} paid experience
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -124,7 +138,7 @@ const UserCardDetails = ({ data }: { data: UserDataProps }) => {
             </>
           )}
 
-          <h3>{data?.role === 'sitter' ? 'Offerings' : 'Requirements'}</h3>
+          <h3>{role === 'sitter' ? 'Offerings' : 'Requirements'}</h3>
           <Offerings data={data} />
         </div>
       </div>

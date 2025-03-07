@@ -17,7 +17,7 @@ const SingleSitterPage = async ({ params }: { params: { id: string } }) => {
   return (
     <section>
       <div className='inner'>
-        <UserCardDetails data={user} />
+        <UserCardDetails data={user} role='sitter' />
       </div>
     </section>
   );

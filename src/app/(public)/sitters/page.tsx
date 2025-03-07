@@ -29,7 +29,7 @@ const SittersPage = async function () {
           <h1>Searching for a sitter</h1>
           {sitters &&
             sitters.map((sitter: UserDataProps) => (
-              <UserCard key={sitter.id} data={sitter} />
+              <UserCard key={sitter.id} data={sitter} role='sitter' />
             ))}
         </div>
       </section>
