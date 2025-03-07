@@ -1,0 +1,82 @@
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: siterka
+      MYSQL_USER: siterka
+      MYSQL_PASSWORD: siterka
+      MYSQL_ROOT_PASSWORD: siterka
+    ports:
+      - 3306:3306
+    networks:
+      - prisma-network
+    volumes:
+      - siterka-mysql-data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'mysqladmin',
+          '--user=siterka',
+          '--password=siterka',
+          'ping',
+          '-h',
+          '127.0.0.1'
+        ]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  prisma-studio:
+    image: node:22-bullseye
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    command: npx prisma studio --port 5555 --browser none
+    ports:
+      - '5555:5555'
+    env_file:
+      - .env.production
+    networks:
+      - prisma-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+      # siterka:
+      #   condition: service_started
+
+  siterka:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: siterka
+    depends_on:
+      mysql:
+        # condition: service_healthy
+        condition: service_started
+      prisma-studio:
+        condition: service_started
+    ports:
+      - 4000:4000
+    # environment:
+    #   DATABASE_URL: 'mysql://siterka:siterka@mysql:3306/siterka'
+    #   NODE_ENV: development
+    env_file:
+      - .env.production
+    networks:
+      - prisma-network
+    # command: ['npm', 'run', 'dev']
+    command: ['sh', '-c', 'npm run db:deploy']
+
+volumes:
+  siterka-mysql-data:
+    driver: local
+
+networks:
+  prisma-network:
+    name: prisma-network
+    driver: bridge
+    # driver: overlay
+    # external: true

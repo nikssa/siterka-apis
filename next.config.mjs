@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
     // The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
     // domains: ['images.pexels.com', 'picsum.photos', 'localhost'],

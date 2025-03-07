@@ -6,7 +6,8 @@
     "dev": "next dev --port 4000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
