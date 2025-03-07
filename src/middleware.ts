@@ -8,14 +8,14 @@ export default async function middleware(req: NextRequest) {
   // 1. Check if route is protected
   const protectedRoutes = [
     '/users',
-    '/users/[userId]',
     '/profiles',
-    '/profiles/[userId]',
+    '/posts',
     '/add-post',
     '/edit-post'
   ];
   const currentPath = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.includes(currentPath);
+  const isProtectedRoute =
+    protectedRoutes.filter((route) => currentPath.startsWith(route)).length > 0;
 
   if (isProtectedRoute) {
     // 2. Check for valid session (JWT) - if user is logged in
