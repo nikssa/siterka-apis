@@ -68,7 +68,6 @@ services:
     networks:
       - prisma-network
     # command: ['npm', 'run', 'dev']
-    command: ['sh', '-c', 'npm run db:deploy']
 
 volumes:
   siterka-mysql-data:
