@@ -2,15 +2,51 @@
 
 Here are the Jest tests you can add to your existing Datatable test file to test the `data-testid` attributes functionality.
 
-## 1. Update Your Existing Mocks
+## How to Run Specific Tests
 
-First, add a spy for `setDomAttributes` to your existing mocks:
+### Run only the Datatable test file:
+```bash
+# Using npm
+npm test -- Datatable.test.js
 
+# Using yarn
+yarn test Datatable.test.js
+
+# Using jest directly
+npx jest Datatable.test.js
+```
+
+### Run only the "data-testid attributes" test suite:
+```bash
+# Using npm
+npm test -- --testNamePattern="data-testid attributes"
+
+# Using yarn  
+yarn test --testNamePattern="data-testid attributes"
+
+# Using jest directly
+npx jest --testNamePattern="data-testid attributes"
+```
+
+### Run a specific test by name:
+```bash
+# Run a specific test within the suite
+npm test -- --testNamePattern="should call setDomAttributes with correct data-testid"
+```
+
+### Run tests in watch mode (re-runs when files change):
+```bash
+npm test -- --watch Datatable.test.js
+```
+
+## Fix Your Current Test File
+
+Here's how to fix the ReferenceError in your current test file:
+
+**Replace this:**
 ```javascript
-// Add this spy before your existing mocks
-const setDomAttributesSpy = jest.fn(() => jest.fn());
+const mockSetDomAttributes = jest.fn(() => jest.fn());
 
-// Update your existing helpers mock to include the spy
 jest.mock('../helpers', () => ({
   addScanRatesToDeviceData: jest.fn(data => data),
   processScanRate: jest.fn(() => ({
@@ -18,8 +54,44 @@ jest.mock('../helpers', () => ({
     spanTime: 0,
     dataForGraph: {},
   })),
-  setDomAttributes: setDomAttributesSpy, // Add this line
+  setDomAttributes: mockSetDomAttributes, // This causes the error
 }));
+```
+
+**With this:**
+```javascript
+jest.mock('../helpers', () => ({
+  addScanRatesToDeviceData: jest.fn(data => data),
+  processScanRate: jest.fn(() => ({
+    scanRateData: [],
+    spanTime: 0,
+    dataForGraph: {},
+  })),
+  setDomAttributes: jest.fn(() => jest.fn()), // Create the spy directly here
+}));
+
+// Get a reference to the mocked function after the mock is created
+const mockSetDomAttributes = require('../helpers').setDomAttributes;
+```
+
+## 1. Update Your Existing Mocks
+
+First, add a spy for `setDomAttributes` to your existing mocks:
+
+```javascript
+// Create the spy inside the mock to avoid hoisting issues
+jest.mock('../helpers', () => ({
+  addScanRatesToDeviceData: jest.fn(data => data),
+  processScanRate: jest.fn(() => ({
+    scanRateData: [],
+    spanTime: 0,
+    dataForGraph: {},
+  })),
+  setDomAttributes: jest.fn(() => jest.fn()), // Create the spy directly here
+}));
+
+// Get a reference to the mocked function after the mock is created
+const mockSetDomAttributes = require('../helpers').setDomAttributes;
 ```
 
 ## 2. Add These Test Cases to Your Existing Describe Block
@@ -27,7 +99,7 @@ jest.mock('../helpers', () => ({
 ```javascript
 describe('data-testid attributes', () => {
   beforeEach(() => {
-    setDomAttributesSpy.mockClear();
+    mockSetDomAttributes.mockClear();
   });
 
   test('should call setDomAttributes with correct data-testid for each tab button', () => {
@@ -47,10 +119,10 @@ describe('data-testid attributes', () => {
       [{ 'data-testid': 'att-scanrate-tab' }],
     ];
 
-    expect(setDomAttributesSpy).toHaveBeenCalledTimes(expectedCalls.length);
+    expect(mockSetDomAttributes).toHaveBeenCalledTimes(expectedCalls.length);
     
     expectedCalls.forEach((expectedCall, index) => {
-      expect(setDomAttributesSpy).toHaveBeenNthCalledWith(index + 1, ...expectedCall);
+      expect(mockSetDomAttributes).toHaveBeenNthCalledWith(index + 1, ...expectedCall);
     });
   });
 
@@ -77,10 +149,10 @@ describe('data-testid attributes', () => {
       [{ 'data-testid': 'att-scanrate-tab' }],
     ];
 
-    expect(setDomAttributesSpy).toHaveBeenCalledTimes(expectedCallsWithoutDaily.length);
+    expect(mockSetDomAttributes).toHaveBeenCalledTimes(expectedCallsWithoutDaily.length);
     
     // Verify no call was made for daily tab
-    const dailyTabCall = setDomAttributesSpy.mock.calls.find(call => 
+    const dailyTabCall = mockSetDomAttributes.mock.calls.find(call => 
       call[0] && call[0]['data-testid'] === 'att-daily-tab'
     );
     expect(dailyTabCall).toBeUndefined();
@@ -100,14 +172,14 @@ describe('data-testid attributes', () => {
     container = shallow(<DatatableTest {...mockProps} />);
     
     // Verify setDomAttributes was called with the correct testids
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-event-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-entry-method-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-tickettype-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-maskqual-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-pricelevel-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-device-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-section-tab' });
-    expect(setDomAttributesSpy).toHaveBeenCalledWith({ 'data-testid': 'att-scanrate-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-event-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-entry-method-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-tickettype-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-maskqual-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-pricelevel-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-device-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-section-tab' });
+    expect(mockSetDomAttributes).toHaveBeenCalledWith({ 'data-testid': 'att-scanrate-tab' });
   });
 });
 ```
